@@ -1,0 +1,18 @@
+use LOCAL_DB;
+
+/*
+-- drop TABLE if exists USUARIO;
+CREATE TABLE USUARIO(
+	USU_RUC varchar(11) PRIMARY KEY,
+	USU_ENTIDAD varchar(30) NOT NULL,
+    USU_UBICACION varchar(40) NOT NULL,
+    USU_ROL_ENTIDAD varchar(20) NOT NULL,
+    
+    USU_NOMBRE varchar(30) NOT NULL,
+    USU_ROL_PERSONA varchar(20) NOT NULL,
+    USU_CORREO varchar(40) UNIQUE NOT NULL,
+    USU_CELULAR varchar(13),
+    USU_TELEFONO varchar(7),
+    USU_CONTRASENIA blob NOT NULL
+);
+*/
