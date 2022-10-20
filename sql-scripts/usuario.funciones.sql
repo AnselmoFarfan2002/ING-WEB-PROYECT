@@ -43,6 +43,6 @@ end;
 -- delete from USUARIO where USU_RUC = 01234567891;
 -- call post_usu_usuario('01234567891','TakanaSoft','Tacna','Desarrolladora','Anselmo Farfan','Jefe de Área','anselmofarfan2002@gmail.com','+51 984532631','','ASDasd123','unFzhzuOxruQMAjKavux59cF4');
 
-call get_usu_contrasenia('anselmofarfan2002@gmail.com','unFzhzuOxruQMAjKavux59cF4')
+-- call get_usu_contrasenia('anselmofarfan2002@gmail.com','unFzhzuOxruQMAjKavux59cF4')
 
 $$
