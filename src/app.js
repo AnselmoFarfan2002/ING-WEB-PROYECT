@@ -16,7 +16,7 @@ app.set( 'port', process.env.PORT || 8080 );
 app.use( express.json() );
 app.use( morgan('dev') );
 app.use( session({
-    secret: process.env.XRL9,
+    secret: process.env.XLR9,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,

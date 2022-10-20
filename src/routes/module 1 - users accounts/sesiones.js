@@ -2,11 +2,16 @@ const { Router } = require('express');
 const router = Router();
 
 const {
-    INICIAR_SESION
+    INICIAR_SESION, 
+    CERRAR_SESION,
+    RECUPERAR_CONTRASENIA
 } = require( '../../controllers/module 1 - users accounts/sesiones' )
 
 router.route('/inicio-sesion')
-.get( (req, res) => { res.send({msg: 'hola'}) } )
-.post( INICIAR_SESION );
+.post( INICIAR_SESION )
+.delete( CERRAR_SESION );
+
+router.route('/recuperar-contrasenia')
+.post( RECUPERAR_CONTRASENIA )
 
 module.exports = router;

@@ -1,24 +1,70 @@
 const mysqlConnection = require( '../../config/db-connection' );
+const postman = require ( '../../config/email-postman' );
+
 const controllers = {};
 
 controllers.INICIAR_SESION = (req, res) => {
-    if( req.session.open ) res.send( { msg: 'ur session is already open' } );
-    
-    let query;
-    query = mysqlConnection.format( 'SELECT validar_credenciales(?,?,?) as status', [req.body.email, req.body.pass, process.env.XRL8] );
+    if( req.session.open === true ) res.send( { msg: 'ur session is already open' } );
+    else {
+        let query;
+        query = mysqlConnection.format( 'SELECT validar_credenciales(?,?,?) as status', [req.body.email, req.body.pass, process.env.XLR8] );
 
-    mysqlConnection.query( query, (err, rows, ifield) => {
-        let msg = '';
+        mysqlConnection.query( query, (err, rows) => {
+            let msg = '';
 
-        switch( rows[0].status ) {
-            case -1: msg = 'Usuario no registrado.'; break;
-            case  0: msg = 'Contraseña incorrecta.'; break;
-            case  1: res.session.open = true; break;
-        }
-        
-        res.send({ status: rows[0].status, msg });
-    });
+            switch( rows[0].status ) {
+                case -1: msg = 'Usuario no registrado.'; break;
+                case  0: msg = 'Contraseña incorrecta.'; break;
+                case  1: req.session.open = true; msg = 'ur session has already been opened'; break;
+            } 
+
+            res.send({ status: rows[0].status, msg });
+        });
+    }
 }
 
+controllers.CERRAR_SESION = (req, res) => {
+    if( req.session.open === true ){
+        req.session.destroy();
+        res.send({ status: 1, msg: 'ur session is closed' });
+
+    } else res.send({ status: -1, msg: `no session open` });  
+}
+
+controllers.RECUPERAR_CONTRASENIA = (req, res) => {
+    let contentHTML;
+
+    mysqlConnection.query('call get_usu_contrasenia(?, ?)', [req.body.email, process.env.XLR8], (err, rows) => {
+        if( rows[0].length === 0 ) res.send({status: -1});
+        else {
+            contentHTML = `
+                <div style="width: 316px; height: 330px; background-color: #F6F6F6; border-color: #BEDCDF; border-width: 2px; border-style: solid;">
+                    <div style="padding-top: 24px">
+                        <p style="font-size: 24pt; margin: 0px; font-weight: bold; text-align: center; color: #30818A;">@ SOPORTE @</p>
+                    </div>
+
+                    <img src="https://www.nicepng.com/png/detail/404-4041054_ventas-png-funciones-de-las-ventas.png" style="height: 81px; width: 145px; padding-top: 16pt; padding-left: 86px;"> 
+
+                    <div style="margin-top: 21px; margin-left: 40px; width: 237px; height: 33px; background-color: #BEDCDF; border-radius: 10px; text-align: center; padding-top: 15px;">
+                        <b style="color: #30818A">Su contraseña es...</b>
+                    </div>
+
+                    <div style="margin-top: 15px; margin-left: 40px; width: 237px; height: 33px; background-color: #BEDCDF; border-radius: 10px; text-align: center; padding-top: 15px;">
+                        <b style="color: #30818A">${rows[0][0].pass}</b>
+                    </div>
+                </div>
+            `;
+
+            postman.sendMail({
+                from: "'Soporte app god' <soporte@takanasoft.tacna.shop>",
+                to: req.body.email,
+                subject: 'Olvide mi contraseña',
+                html: contentHTML
+            });
+
+            res.send({status: 1});
+        }
+    });
+}
 
 module.exports = controllers;
