@@ -12,6 +12,6 @@ router.route('/inicio-sesion')
 .delete( CERRAR_SESION );
 
 router.route('/recuperar-contrasenia')
-.post( RECUPERAR_CONTRASENIA )
+.post( RECUPERAR_CONTRASENIA );
 
 module.exports = router;

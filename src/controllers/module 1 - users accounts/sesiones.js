@@ -15,10 +15,23 @@ controllers.INICIAR_SESION = (req, res) => {
             switch( rows[0].status ) {
                 case -1: msg = 'Usuario no registrado.'; break;
                 case  0: msg = 'Contraseña incorrecta.'; break;
-                case  1: req.session.open = true; msg = 'ur session has already been opened'; break;
-            } 
+                case  1: 
+                    msg = 'ur session has already been opened'; 
+                    mysqlConnection.query('SELECT USU_RUC FROM USUARIO WHERE USU_CORREO = ?', req.body.email, 
+                        (err, rows) => new Promise((resolve, reject) => {
+                            if( err ) reject( err );
+                            else resolve( rows );
+                        }).then( data => {
+                            req.session.open = true; 
+                            req.session.email = req.body.email;
+                            req.session.ruc = data[0].USU_RUC;
 
-            res.send({ status: rows[0].status, msg });
+                            res.send({ status: rows[0].status, msg });
+
+                        }).catch( err => console.log(err) )
+                    );
+                break;
+            } 
         });
     }
 }
