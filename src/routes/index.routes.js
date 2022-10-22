@@ -9,6 +9,7 @@ app.use( express.static('public') );
 
 //module 1
 app.use( require('./module 1 - users accounts/sesiones.js') )
+app.use( require('./module 1 - users accounts/registro_cuenta.js') )
 app.use( require('./module 1 - users accounts/edit-info.js') )
 
 module.exports = app;

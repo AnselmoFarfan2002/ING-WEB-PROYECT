@@ -2,6 +2,7 @@ use LOCAL_DB;
 
 -- SET GLOBAL log_bin_trust_function_creators = 1;
 drop function if exists validar_credenciales;
+drop function if exists validar_registro;
 
 DELIMITER $$ 
 create function validar_credenciales( email varchar(40), pass varchar(16), keyword varchar(25) ) returns tinyint begin
@@ -15,6 +16,19 @@ create function validar_credenciales( email varchar(40), pass varchar(16), keywo
 		return -1;
     end if;
 end;
+
+DELIMITER $$ 
+create function validar_registro(email varchar(40), ruc varchar(11)) returns tinyint begin
+	-- failure: -1 
+    -- successful: 1
+    
+	if (select count(USU_RUC) from USUARIO where USU_RUC = ruc or UCASE(USU_CORREO) = UCASE(email)) > 0 then
+		return -1;
+	else 
+		return 1;
+    end if;
+end;
+ -- select validar_registro('jamesrod19@gmail.com','09876543121');
 
 /* ----------------------------------------------------------------------------------- */
 drop procedure if exists get_usu_contrasenia;
