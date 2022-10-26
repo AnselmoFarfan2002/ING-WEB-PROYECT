@@ -21,7 +21,7 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
                         req.body.celular,
                         req.body.telefono,
                         req.body.contrasenia,
-                        req.body.keyword
+                        process.env.XLR8
                     ]);
                 msg = 'Registro exitoso.';     
             break;

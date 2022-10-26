@@ -22,7 +22,7 @@ controllers.INICIAR_SESION = (req, res) => {
                             if( err ) reject( err );
                             else resolve( rows );
                         }).then( data => {
-                            req.session.open = true; 
+                            req.session.open = true;
                             req.session.email = req.body.email;
                             req.session.ruc = data[0].USU_RUC;
 
