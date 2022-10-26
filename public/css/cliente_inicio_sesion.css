@@ -1,0 +1,117 @@
+#sub_contenido{
+    width: 80%;
+    max-width: 600px;
+    height: 450px;
+    margin: 40px auto;
+    padding: 40px;
+    border: 1px solid #CFCFCF;
+    border-radius: 10px;
+    background-color: #EAEAEC;;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+}
+
+#logo{
+    width: 50%;
+    height: 30%;
+}
+
+.form{
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form input{
+    width: 100%;
+    height: 100%;
+    background: none;
+    color: #000;
+    padding-top: 5px;
+    border: none;
+    outline: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*CSS para el input de email*/
+.form .lbl-email{
+    pointer-events: none;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    margin-bottom: 28%;
+    width: 82%;
+    height: 30%;
+    border-bottom: 1px solid #000;
+    transform: translateX(10%);
+}
+.form .lbl-email:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 100%;
+    border-bottom:3px solid #FF5B00;
+    transform: translateX(-110%);
+}
+.text-email{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transition: all 0.3s ease;
+    color: #000;
+}
+.form input:focus + .lbl-email .text-email, .form input:valid + .lbl-email .text-email{
+    transform: translateY(-205%);
+    font-size: 14px;
+    color: #FF5B00;
+}
+.form input:focus + .lbl-email:after, .form input:valid + .lbl-email:after{
+    transform: translateX(0%);
+}
+
+/*CSS para el input de contraseña*/
+.form .lbl-pass{
+    pointer-events: none;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 13%;
+    position: absolute;
+    width: 82%;
+    height: 30%;
+    border-bottom: 1px solid #000;
+    transform: translateX(10%);
+}
+.form .lbl-pass:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 100%;
+    border-bottom:3px solid #FF5B00;
+    transform: translateX(-110%);
+}
+.text-pass{
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transition: all 0.3s ease;
+    color: #000;
+}
+.form input:focus + .lbl-pass .text-pass, .form input:valid + .lbl-pass .text-pass{
+    transform: translateY(-205%);
+    font-size: 14px;
+    color: #FF5B00
+}
+.form input:focus + .lbl-pass:after, .form input:valid + .lbl-pass:after{
+    transform: translateX(0%);
+}
+
+/*CSS para el botón*/
+.form button{
+    position: relative;
+}

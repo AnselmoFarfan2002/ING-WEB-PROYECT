@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio de sesión</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/cliente_inicio_sesion.css">  
+  </head>
+
+  <script src="https://kit.fontawesome.com/041123afa1.js" crossorigin="anonymous"></script>
+
+  <style type="text/css">
+		#contenido{
+			width: 100%;
+      height: 100vh;
+      display: flex;
+			justify-content: center;
+      align-items: center;
+		}
+
+		#formulario form{
+			width: 100%;
+		}
+	</style>
+
+  <body style="background: url('images/fondo.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
+    <div id="contenido" class="container text-center">
+      <div id="sub_contenido">
+
+        <div class="caja_centrada py-3 pb-4" id="titulo">
+          <p class="text-center fw-bold fs-1">Inicio de sesión</p>
+        </div>
+
+        <form class="form">
+          <br>
+          <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="inputEmail" required>
+              <label class="lbl-email">
+                <span class="text-email">
+                  Correo electrónico
+                </span>
+              </label>
+            </div>
+          </div><br>
+          
+          <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPass" required>
+              <label class="lbl-pass">
+                <span class="text-pass">
+                  Contraseña
+                </span>
+              </label>
+            </div>
+          </div><br>
+
+          <button type="submit" class="btn btn-danger">Iniciar sesión</button>
+        <!--  -->
+        </form>
+
+        <div class="mb-3 text-center pt-3">¿No tienes cuenta? <a href="" class="fw-bold text-muted" style="text-decoration: none;">Registrar cuenta</a></div>
+
+      </div>
+    </div>
+  </body>
+</html>
+

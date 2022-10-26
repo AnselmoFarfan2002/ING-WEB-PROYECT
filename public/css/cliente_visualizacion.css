@@ -1,0 +1,19 @@
+#sub_contenido{
+    width: 80%;
+    max-width: 500px;
+    height: 680px;
+    margin: 40px auto;
+    padding: 40px;
+    border: 1px solid #CFCFCF;
+    border-radius: 10px;
+    background-color: #EAEAEC;;
+    box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+}
+
+
+.form .foto{
+    width: 130px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}

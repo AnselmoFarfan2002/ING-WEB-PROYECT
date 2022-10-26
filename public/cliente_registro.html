@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/cliente_registro.css">  
+  </head>
+
+  <script src="https://kit.fontawesome.com/041123afa1.js" crossorigin="anonymous"></script>
+
+  <style type="text/css">
+    #contenido{
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    #formulario form{
+      width: 100%;
+    }
+  </style>
+  
+  <body style="background: url('images/fondo.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
+    <div id="contenido" class="container text-center">
+        <div id="sub_contenido">
+
+          <div class="caja_centrada py-3 pb-4" id="titulo">
+            <p class="text-center fw-bold fs-1">Registro de usuario</p>
+          </div>
+
+          <form class="form">
+            
+            <div class="mb-0">
+              <div class="row row-cols-1 row-cols-sm-2">
+                  <div class="col" id="grupo__name">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                              <label class="form-label">Nombres</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                          <input value="" id="inputName" name="inputName" type="text" class="form-control" placeholder="Jorge Mario" required>
+                          <div class="input-group-text">
+                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                          </div> 
+                          
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col" id="grupo__surname">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                          <label class="form-label">Apellidos</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                            <input value="" id="inputSurname" name="inputSurname" type="text" class="form-control" placeholder="Perez Lopez" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        
+            <div class="mb-0">
+              <div class="row row-cols-1 row-cols-sm-2">
+                  <div class="col" id="grupo__user">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                              <label class="form-label">Usuario</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                          <input value="" id="inputUser" name="inputUser" type="text" class="form-control" placeholder="Supermercados Peruanos S.A." required>
+                          <div class="input-group-text">
+                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                          </div> 
+                          
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col" id="grupo__ruc">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                          <label class="form-label">RUC</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                            <input value="" id="inputRuc" name="inputRuc" type="text" class="form-control" placeholder="20100070970" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="mb-0">
+              <div class="row row-cols-1 row-cols-sm-2">
+                  <div class="col" id="grupo__email">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                              <label class="form-label">Email</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                          <input value="" id="inputEmail" name="inputEmail" type="email" class="form-control" placeholder="jperezl@correo.com" required>
+                          <div class="input-group-text">
+                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                          </div> 
+                          
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col" id="grupo__cell">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                          <label class="form-label">Celular</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                            <input value="" id="inputCell" name="inputCell" type="text" class="form-control" placeholder="+51 999888777" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="mb-0">
+              <div class="row row-cols-1 row-cols-sm-2">
+                  <div class="col" id="grupo__pass">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                              <label class="form-label">Contraseña</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                          <input value="" id="inputPass" name="inputPass" type="password" class="form-control" placeholder="••••••••" required>
+                          
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col" id="grupo__pass2">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                          <label class="form-label">Confirmar contraseña</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                            <input value="" id="inputPass2" name="inputPass2" type="password" class="form-control" placeholder="••••••••" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="mb-0">
+              <div class="row row-cols-12">
+                  <div class="col" id="grupo__foto">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12">
+                              <label class="form-label">Foto de perfil</label>
+                          </div>
+                          <div class="input-group">
+                            <input type="file" class="form-control" id="inpuPhoto" aria-describedby="inputPhoto" aria-label="Upload">
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+
+            <div class="mb-3 text-center pt-3">¿Ya estás registrado? <a href="" class="fw-bold text-muted" style="text-decoration: none;">Inicia sesión</a></div>
+
+          </form>
+
+        <div class="caja_centrada d-flex justify-content-center" style="justify-content: center;">
+          <div class="form-check">
+            <input name="tyc" class="form-check-input" type="checkbox" id="defaultCheck1" required>
+            <label class="form-check-label" for="defaultCheck1">
+                Yo acepto la <a href="">política de privacidad</a> y <a href="">los terminos y condiciones</a>.
+            </label>
+          </div>
+        </div> <br>
+        
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+        <div class="caja_centrada d-flex justify-content-center">
+            <div class="g-recaptcha" data-sitekey="6LewoVQgAAAAAOLgERaAT1onYf6kT51gQ70BDjOi"></div>
+        </div> <br>
+        
+        <div class="caja_centrada d-flex justify-content-center">
+            <button id="registrarse" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Registrarse</button>
+        </div>
+
+        </div>    
+    </div>
+  </body>
+</html>
