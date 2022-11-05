@@ -1,18 +1,29 @@
 use LOCAL_DB;
 
 /*
+-- drop TABLE if exists EMPRESA;
+CREATE TABLE EMPRESA(
+	EMP_RUC varchar(11) PRIMARY KEY,
+	EMP_ENTIDAD varchar(30) NOT NULL,
+    EMP_UBICACION varchar(40) NOT NULL,
+    EMP_ROL_ENTIDAD varchar(20) NOT NULL,
+    EMP_FOTO varchar(200) NOT NULL
+);
+
 -- drop TABLE if exists USUARIO;
 CREATE TABLE USUARIO(
-	USU_RUC varchar(11) PRIMARY KEY,
-	USU_ENTIDAD varchar(30) NOT NULL,
-    USU_UBICACION varchar(40) NOT NULL,
-    USU_ROL_ENTIDAD varchar(20) NOT NULL,
+	USU_ID varchar(11) PRIMARY KEY,
+    USU_EMPRESA varchar(11),
+    foreign key(USU_EMPRESA) REFERENCES EMPRESA(EMP_RUC),
     
+	USU_TELEFONO varchar(7),
+	USU_CELULAR varchar(13),
     USU_NOMBRE varchar(30) NOT NULL,
-    USU_ROL_PERSONA varchar(20) NOT NULL,
+    USU_APELLIDO1 varchar(30) NOT NULL,
+    USU_APELLIDO2 varchar(30) NOT NULL,
+    USU_CARGO varchar(20) NOT NULL,
     USU_CORREO varchar(40) UNIQUE NOT NULL,
-    USU_CELULAR varchar(13),
-    USU_TELEFONO varchar(7),
-    USU_CONTRASENIA blob NOT NULL
+    USU_CONTRASENIA blob NOT NULL,
+    USU_FOTO varchar(200) NOT NULL
 );
 */
