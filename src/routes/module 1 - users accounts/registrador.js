@@ -3,9 +3,9 @@ const router = Router();
 
 const {
     REGISTRAR_CUENTA
-} = require( '../../controllers/module 1 - users accounts/registro_cuenta' )
+} = require( '../../controllers/module 1 - users accounts/registrador' )
 
-router.route('/registrar-cuenta')
+router.route( '/registrar-cuenta' )
 .get( (req, res) => { res.send({msg: 'Registre una nueva cuenta'}) } )
 .post( REGISTRAR_CUENTA );
 

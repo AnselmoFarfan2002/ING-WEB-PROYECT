@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 
-const multer = require('multer');
+const multer = require( 'multer' );
 const uploader = multer({ 
     storage:    multer.diskStorage({
                     destination: ( req, file, cb ) => { cb(null, 'public/images/profile-photos'); },
@@ -15,7 +15,7 @@ const {
     ACTUALIZAR_FOTO_PERFIL,
     ACTUALIZAR_DATOS,
     ACTUALIZAR_CONTRASENIA
-} = require( '../../controllers/module 1 - users accounts/edit-info' );
+} = require( '../../controllers/module 1 - users accounts/editor-datos' );
 
 router.route( '/usuario/editar-perfil' )
 .post( uploader.single('profile-photo'), ACTUALIZAR_FOTO_PERFIL )
