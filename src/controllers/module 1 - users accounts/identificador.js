@@ -9,30 +9,34 @@ controllers.INICIAR_SESION = (req, res) => {
         let query;
         query = mysqlConnection.format( 'SELECT validar_credenciales(?,?,?) as status', [req.body.email, req.body.pass, process.env.XLR8] );
 
-        mysqlConnection.query( query, (err, rows) => {
+        mysqlConnection.query( query, (err, rows) => new Promise((resolve, reject) => {
             let msg = '';
-
+            
             switch( rows[0].status ) {
-                case -1: msg = 'Usuario no registrado.'; break;
-                case  0: msg = 'Contraseña incorrecta.'; break;
+                case -1: msg = 'Usuario no registrado.'; reject({ msg, stauts: -1 }); break;
+                case  0: msg = 'Contraseña incorrecta.'; reject({ msg, stauts:  0 }); break;
                 case  1: 
                     msg = 'ur session has already been opened'; 
-                    mysqlConnection.query('SELECT USU_RUC FROM USUARIO WHERE USU_CORREO = ?', req.body.email, 
+                    mysqlConnection.query('SELECT USU_ID, USU_EMPRESA FROM USUARIO WHERE USU_CORREO = ?', req.body.email, 
                         (err, rows) => new Promise((resolve, reject) => {
+                            
                             if( err ) reject( err );
                             else resolve( rows );
                         }).then( data => {
                             req.session.open = true;
                             req.session.email = req.body.email;
-                            req.session.ruc = data[0].USU_RUC;
-
-                            res.send({ status: rows[0].status, msg });
-
+                            req.session.userId = data[0].USU_ID;
+                            req.session.empresa = data[0].USU_EMPRESA;
+                            
+                            resolve({ msg, stauts: 1 });
                         }).catch( err => console.log(err) )
                     );
                 break;
             } 
-        });
+
+        })
+        .then( msg => res.send( msg ) )
+        .catch( msg => res.send( msg ) ))
     }
 }
 

@@ -1,35 +1,49 @@
+const mysqlConnection = require("../../config/db-connection");
+
 const controllers = {}
 
-controllers.EDITAR_PUBLICACION = (req, res) => {
+controllers.EDITAR_DATOS_PUBLICACION = (req, res) => {
     if ( req.session.open === true ){
-        let query = 'call put_pub_publicacion(?,?,?,?,?,?,?,?,?,?)';
-
-        query = mysqlConnection.format( query, [ 
-            req.body.autor,
+        let query = mysqlConnection.format( 'call put_pub_publicacion(?,?,?,?,?,?)', [
+            req.params.codigo,
             req.body.titulo,
             req.body.descripcion,
-            req.body.tiempo,
-            req.body.fotos,
             req.body.precio,
             req.body.categoria,
-            req.body.tipo,
             req.body.negociable
         ]);
 
-        mysqlConnection.query( query, (err, rows) => {
-            if( err ) 
-                res.send({ 
-                    status: -1, 
-                    msg: 'Ha ocurrido un error al editar su publicación.' 
-                });
-            else
-                res.send({ 
-                    status: 1, 
-                    msg: 'Se ha editado su publicación de forma exitosa.' 
-                });
-        })
+        mysqlConnection.query(query, (err,rows) => new Promise((resolve, reject) => {
+            if( err ) reject({ msg: 'Ha ocurrido un error al editar la publicación.', status: -1, error: err });
+            else resolve({ msg: 'Edición exitosa.', status: 1 });
 
-    } else res.send( { msg: 'u need an open session to do that...', status: -1 } );
+        }).then( resultado => res.send( resultado ) )
+        .catch( resultado => {
+            res.send({ msg: resultado.msg, status: resultado.status });
+            console.log( resultado.error );
+        }))
+        
+    } else res.send( { msg: 'u need an open session to do that...', status: -1 } ); 
+}
+
+controllers.ALTERNAR_VISIBILIDAD_PUBLICACION = (req, res) => {
+    if ( req.session.open === true ){
+        let query = mysqlConnection.format( 'call put_pub_visible(?)', req.params.codigo );
+        mysqlConnection.query(query, (err,rows) => new Promise((resolve, reject) => {
+            if( err ) reject({ msg: 'Ha ocurrido un error al ocultar la publicación.', status: -1, error: err });
+            else resolve({ msg: 'Se ha cambiado la visibilidad de su publicación.', status: 1 });
+
+        }).then( resultado => res.send( resultado ) )
+        .catch( resultado => {
+            res.send({ msg: resultado.msg, status: resultado.status });
+            console.log( resultado.error );
+        }))
+        
+    } else res.send( { msg: 'u need an open session to do that...', status: -1 } ); 
+}
+
+controllers.ACTUALIZAR_FOTOS_PUBLICACION = (req, res) => {
+
 }
 
 module.exports = controllers;

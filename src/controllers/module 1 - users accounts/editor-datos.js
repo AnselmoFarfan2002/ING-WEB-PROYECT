@@ -7,24 +7,28 @@ controllers.ACTUALIZAR_FOTO_PERFIL = (req, res) => {
     else res.send( { msg: 'Su foto ha sido actualizada.', status: 1 } );
 }
 
+controllers.ACTUALIZAR_FOTO_EMPRESA = (req, res) => {
+    if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
+    else res.send( { msg: 'La foto de su empresa ha sido actualizada.', status: 1 } );
+}
+
 controllers.ACTUALIZAR_DATOS = (req, res) => {
     if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
     else{
-        mysqlConnection.query( 'call put_usu_usuario(?,?,?,?,?,?,?,?,?)', [
-            req.session.ruc,
-            req.body.entidad,
-            req.body.ubicacion,
-            req.body.role,
+        mysqlConnection.query( 'call put_usu_usuario(?,?,?,?,?,?,?,?)', [
             req.body.nombre,
-            req.body.rolp,
+            req.body.apellido1,
+            req.body.apellido2,
+            req.body.cargo,
             req.body.email,
+            req.session.userId,
             req.body.celular,
             req.body.telefono
         ], ( err ) => {
-            if( err ) res.send({ msg: err, status: -1 });
+            if( err ) res.send({ msg: 'Lo sentimos, ha ocurrido un error durante la edición.', status: -1 });
             else {
                 req.session.email = req.body.email;
-                res.send({ msg: 'data updated', status: 1 });
+                res.send({ msg: 'Sus datos han sido actualizados.', status: 1 });
             }
         })
     };
@@ -42,7 +46,7 @@ controllers.ACTUALIZAR_CONTRASENIA = (req, res) => {
             })
 
             .then( data => new Promise((resolve, reject) => {
-                mysqlConnection.query('call put_usu_contrasenia(?, ?, ?)', [req.session.email, req.body["new-pass"], process.env.XLR8 ], (err) =>{
+                mysqlConnection.query('call put_usu_contrasenia(?, ?, ?)', [req.session.userId, req.body["new-pass"], process.env.XLR8 ], (err) =>{
                     if ( err ) reject({ msg: 'Hubo un problema al actualizar la contraseña.', status: -1, error: err });
                     else resolve({ msg: 'Contraseña actualizada con éxito.', status: 1 });
                 });

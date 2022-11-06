@@ -17,8 +17,9 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
             /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,30}$/, //Patron para apellido paterno
             /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,30}$/, //Patron para apellido materno
 
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{4,20}$/, //Patron del cargo
+            /^\d{1,3}$/, //Patron del cargo
             /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, //Patron de correo 
+            /^\+[0-9]{2}$/, //Patron de codigo de celular
             /^\d{9}$/, //Patron de celular
             /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/ //Patron de contraseña
         ];
@@ -33,6 +34,7 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
             req.body.apellido2,
             req.body.cargo,
             req.body.correo,
+            req.body.celCod,
             req.body.celular,
             req.body.contrasenia
         ]
@@ -55,7 +57,7 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
                     req.body.entidad,
                     req.body.ubicacion,
                     req.body.rol_entidad,
-                    req.body.emp_foto
+                    'defaultBusiness.jpg'
                 ]);
 
                 mysqlConnection.query('call post_usu_usuario(?,?,?,?,?,?,?,?,?,?,?)',[ //Registra datos del usuario
@@ -65,11 +67,11 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
                     req.body.apellido2,
                     req.body.cargo,
                     req.body.correo,
-                    req.body.celular,
+                    req.body.celCod + ' ' + req.body.celular, // '+51' + ' ' + '123456789'
                     req.body.telefono,
                     req.body.contrasenia,
                     process.env.XLR8,
-                    req.body.usu_foto
+                    'defaultUser.jpg'
                 ]);
                 msg = 'Registro exitoso.';    
             break;
