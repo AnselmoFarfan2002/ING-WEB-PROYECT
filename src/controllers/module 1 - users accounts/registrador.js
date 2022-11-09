@@ -6,51 +6,9 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
 
     mysqlConnection.query(query, (err, rows, ifield)=>{
         let msg = ''; //Mensaje
-        var i = 0; //Indice
-        let validate = [
-            /^\d{11}$/, //Patron para RUC
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,30}$/, //Patron para entidad
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,40}$/, //Patron para ubicacion
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,20}$/, //Patron para rol de entidad
-
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,30}$/, //Patron para nombre
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,30}$/, //Patron para apellido paterno
-            /^[a-zA-ZÀ-ÿ\00f1\00d1]+(\s*[a-zA-ZÀ-ÿ\00f1\00d1]*)*[a-zA-ZÀ-ÿ\00f1\00d1]{2,30}$/, //Patron para apellido materno
-
-            /^\d{1,3}$/, //Patron del cargo
-            /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/, //Patron de correo 
-            /^\+[0-9]{2}$/, //Patron de codigo de celular
-            /^\d{9}$/, //Patron de celular
-            /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/ //Patron de contraseña
-        ];
-
-        let register_data = [ //Datos del registro
-            req.body.ruc,
-            req.body.entidad,
-            req.body.ubicacion,
-            req.body.rol_entidad,
-            req.body.nombre,
-            req.body.apellido1,
-            req.body.apellido2,
-            req.body.cargo,
-            req.body.correo,
-            req.body.celCod,
-            req.body.celular,
-            req.body.contrasenia
-        ]
-
-        while(i < register_data.length){ //Bucle para verificar si los campos cumplen con las expresiones regulares
-            if(validate[i].test(register_data[i])){ //Si el campo cumple con la expresion...
-                i = i + 1;
-            }else{
-                rows[0].status = 0;
-                i = register_data.length;
-            }
-        }
 
         switch(rows[0].status) {
-            case -1: msg = 'Parece que el negocio ha sido registrado...'; break;
-            case 0: msg = 'Ocurrio un error en los datos ingresados. Intentelo nuevamente.'; break;
+            case -1: msg = 'Parece que la empresa ha sido registrada...'; break;
             case 1: 
                 mysqlConnection.query('call post_emp_empresa(?,?,?,?,?)',[ //Registra datos de la empresa
                     req.body.ruc,
@@ -60,19 +18,26 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
                     'defaultBusiness.jpg'
                 ]);
 
-                mysqlConnection.query('call post_usu_usuario(?,?,?,?,?,?,?,?,?,?,?)',[ //Registra datos del usuario
-                    req.body.nombre,
-                    req.body.ruc,
-                    req.body.apellido1,
-                    req.body.apellido2,
-                    req.body.cargo,
-                    req.body.correo,
-                    req.body.celCod + ' ' + req.body.celular, // '+51' + ' ' + '123456789'
-                    req.body.telefono,
-                    req.body.contrasenia,
-                    process.env.XLR8,
-                    'defaultUser.jpg'
-                ]);
+                mysqlConnection.query('call post_car_cargo(?)',[req.body.cargo]); //Registra el cargo del usuario
+
+                mysqlConnection.query('select get_car_id() as cargo',(err, rows)=>{
+                    if(rows[0].cargo > 0){
+                        mysqlConnection.query('call post_usu_usuario(?,?,?,?,?,?,?,?,?,?,?)',[ //Registra datos del usuario
+                        req.body.nombre,
+                        req.body.ruc,
+                        req.body.apellido1,
+                        req.body.apellido2,
+                        rows[0].cargo,
+                        req.body.correo,
+                        req.body.celCod + ' ' + req.body.celular, // '+51' + ' ' + '123456789'
+                        req.body.telefono,
+                        req.body.contrasenia,
+                        process.env.XLR8,
+                        'defaultUser.jpg'
+                    ]);
+                    }
+                });
+
                 msg = 'Registro exitoso.';    
             break;
         };

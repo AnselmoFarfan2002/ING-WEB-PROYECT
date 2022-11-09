@@ -1,6 +1,5 @@
 use LOCAL_DB;
 
-/*
 -- drop TABLE if exists CATEGORIA;
 CREATE TABLE CATEGORIA(
 	CAT_ID tinyint unsigned zerofill auto_increment PRIMARY KEY,
@@ -60,5 +59,3 @@ INSERT INTO CATEGORIA (CAT_NOMBRE, CAT_SUPERIOR) VALUES
     ( 'Cereales y derivados', null ),
     ( 'Cereales', 25 ),
     ( 'Derivados', 25 );
-
-*/
