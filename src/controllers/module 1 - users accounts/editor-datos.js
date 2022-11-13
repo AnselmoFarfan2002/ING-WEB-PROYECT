@@ -3,13 +3,43 @@ const mysqlConnection = require( '../../config/db-connection' );
 const controllers = {};
 
 controllers.ACTUALIZAR_FOTO_PERFIL = (req, res) => {
-    if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
-    else res.send( { msg: 'Su foto ha sido actualizada.', status: 1 } );
+    if( req.session.open === false ) {
+        res.send( { msg: 'u must have an opened session', status: -1 } );
+    }
+    else {
+        mysqlConnection.query('UPDATE usuario SET USU_FOTO = ?',req.file.filename, (err,rows) => new Promise((resolve, reject) => { //Se llama al query
+            if(err){
+                reject({ msg: 'Ha ocurrido un error al editar la foto.', status: -1, error: err }); //En caso de error
+            }
+            else {
+                resolve({ msg: 'Edición exitosa.', status: 1 }); //Se realiza la edicion
+            }
+        })
+        .then( resp => res.send(resp) )
+        .catch( resp => {
+            res.send({ msg: resp.msg, status: resp.status });
+            console.log( resp.error );
+        }))
+    }
 }
 
 controllers.ACTUALIZAR_FOTO_EMPRESA = (req, res) => {
     if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
-    else res.send( { msg: 'La foto de su empresa ha sido actualizada.', status: 1 } );
+    else {
+        mysqlConnection.query('UPDATE empresa SET EMP_FOTO = ?',req.file.filename, (err,rows) => new Promise((resolve, reject) => { //Se llama al query
+            if(err){
+                reject({ msg: 'Ha ocurrido un error al editar la foto.', status: -1, error: err }); //En caso de error
+            }
+            else {
+                resolve({ msg: 'Edición exitosa.', status: 1 }); //Se realiza la edicion
+            }
+        })
+        .then( resp => res.send(resp) )
+        .catch( resp => {
+            res.send({ msg: resp.msg, status: resp.status });
+            console.log( resp.error );
+        }))
+    }
 }
 
 controllers.ACTUALIZAR_DATOS = (req, res) => {
