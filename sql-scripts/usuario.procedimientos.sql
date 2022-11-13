@@ -7,6 +7,8 @@ drop procedure if exists post_car_cargo;		-- registra un cargo
 drop procedure if exists post_usu_usuario;		-- registra un usuario
 drop procedure if exists put_usu_usuario;		-- actualiza datos de un usuario
 drop procedure if exists put_usu_contrasenia;	-- actualiza la contraseña de un usuario
+drop procedure if exists put_usu_photo;		-- actualiza foto de un usuario
+drop procedure if exists put_emp_photo;		-- actualiza foto de una empresa
 
 create procedure get_usu_contrasenia( email varchar(40), keyword varchar(25) ) begin
 	select cast( aes_decrypt( USU_CONTRASENIA, keyword ) as char ) as pass from USUARIO where USU_CORREO = email;
@@ -69,6 +71,14 @@ end;
 
 create procedure put_usu_contrasenia( userId int unsigned, pass varchar(16), keyword varchar(25) ) begin
 	UPDATE USUARIO SET USU_CONTRASENIA = aes_encrypt( pass, keyword ) WHERE USU_ID = userId;
+end;
+
+create procedure put_usu_photo( userId int unsigned, photo varchar(50) ) begin
+	UPDATE USUARIO SET USU_FOTO = photo WHERE USU_ID = userId;
+end;
+
+create procedure put_emp_photo( ruc varchar(11), photo varchar(50) ) begin
+	UPDATE EMPRESA SET EMP_FOTO = photo WHERE EMP_RUC = ruc;
 end;
 
 $$ 
