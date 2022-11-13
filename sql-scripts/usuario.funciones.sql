@@ -4,7 +4,7 @@ use LOCAL_DB;
 DELIMITER $$ 
 drop function if exists validar_credenciales;
 drop function if exists validar_registro;
-drop function if exists get_emp_ruc;
+drop function if exists get_car_id;
 
 create function validar_credenciales( email varchar(40), pass varchar(40), keyword varchar(25) ) returns tinyint begin
 	-- not found: -1 
@@ -34,8 +34,8 @@ create function validar_registro(email varchar(40), ruc varchar(11)) returns tin
 end;
  -- select validar_registro('jamesrod19@gmail.com','09876543121');
  
-create function get_emp_ruc() returns varchar(11) begin
-    return (select EMP_RUC FROM EMPRESA ORDER BY EMP_RUC DESC LIMIT 1);
+create function get_car_id() returns tinyint begin
+    return (select CAR_ID FROM CARGO ORDER BY CAR_ID DESC LIMIT 1);
 end;
 
 $$

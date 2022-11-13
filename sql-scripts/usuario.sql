@@ -11,7 +11,7 @@ CREATE TABLE EMPRESA(
 
 -- drop TABLE if exists CARGO;
 CREATE TABLE CARGO(
-	CAR_ID tinyint unsigned PRIMARY KEY,
+	CAR_ID tinyint unsigned auto_increment PRIMARY KEY,
 	CAR_NOMBRE varchar(20),
     CAR_COMUNIDAD bool DEFAULT 1
 );
@@ -37,4 +37,7 @@ CREATE TABLE USUARIO(
 -- BITACORA DE CAMBIOS
 /* 06-11-2022: 
 	- Se cambia el atributo USU_CARGO a tinyint, ahora hace referencia a otra tabla llamada cargo. 
-    - Se cambia el atributo USU_ID a int para el uso de auto_increment */
+    - Se cambia el atributo USU_ID a int para el uso de auto_increment 
+   
+   09-11-2022:
+	- Se agrega el atributo AUTO_INCREMENT a CAR_ID*/
