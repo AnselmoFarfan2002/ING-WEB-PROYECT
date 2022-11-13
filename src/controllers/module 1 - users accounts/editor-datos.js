@@ -3,13 +3,19 @@ const mysqlConnection = require( '../../config/db-connection' );
 const controllers = {};
 
 controllers.ACTUALIZAR_FOTO_PERFIL = (req, res) => {
-    if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
-    else res.send( { msg: 'Su foto ha sido actualizada.', status: 1 } );
+    if( req.session.open !== true ) res.send( { msg: 'u must have an opened session', status: -1 } );
+    else{
+        mysqlConnection.query('call put_usu_photo(?,?)', [req.session.userId, 'photo-' + req.session.userId + '.png'] );
+        res.send( { msg: 'Su foto ha sido actualizada.', status: 1 } );
+    } 
 }
 
 controllers.ACTUALIZAR_FOTO_EMPRESA = (req, res) => {
-    if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
-    else res.send( { msg: 'La foto de su empresa ha sido actualizada.', status: 1 } );
+    if( req.session.open !== true ) res.send( { msg: 'u must have an opened session', status: -1 } );
+    else {
+        mysqlConnection.query('call put_emp_photo(?,?)', [req.session.empresa, 'photo-' + req.session.empresa + '.png'] );
+        res.send( { msg: 'La foto de su empresa ha sido actualizada.', status: 1 } )
+    };
 }
 
 controllers.ACTUALIZAR_DATOS = (req, res) => {
