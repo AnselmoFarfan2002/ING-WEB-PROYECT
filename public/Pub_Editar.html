@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF‐8">
+    <meta name="viewport" content="width=device‐width, initial‐scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <header><nav><a href="Publicaciones.html" class="nav-link">Atras</a></nav>Editar Publicacion</header>
+</head>
+<body>
+    <div id="info">
+        <form id="Pub_reg" target="_blank" method="post">
+            <p>Seleccionar Publicacion a Editar:
+                <select id="PubSelect">
+                    <option>Publicacion 1</option>
+                    <option>Publicacion 2</option>
+                    <option>Publicacion 3</option>
+                    <option>Publicacion 4</option>
+                </select>
+                </p>
+             <p>Nombre de la Publicacion: <input id="PubNomb"></p>
+             <p>Precio(en soles): <input id="PubPrecio" type="number"></p>
+             <p>Descripcion: <input id="PubDesc"></p>
+             <p>Categoría: 
+                <select id="PubCat">
+                    <option>Carnes Rojas</option>
+                    <option>Carnes Blancas</option>
+                    <option>Huevos</option>
+                    <option>Embutidos</option>
+                    <option>Pescados</option>
+                    <option>Mariscos</option>
+                    <option>Vegetales</option>
+                    <option>Hortalizas</option>
+                    <option>Frutas Dulces y Semidulces</option>
+                    <option>Frutas Acidas y Semiacidas</option>
+                    <option>Leche</option>
+                    <option>Yogures</option>
+                    <option>Quesos</option>
+                    <option>Otros Lacteos o Derivados</option>
+                    <option>Legumbres</option>
+                    <option>Tuberculos</option>
+                    <option>Frutos Secos</option>
+                    <option>Cereales</option>
+                    <option>Derivados de Cereales</option>
+                </select>
+             </p>
+             <p>Negociabilidad:
+             <select id="PubNeg">
+                <option>Si</option>
+                <option>No</option>
+             </select>
+             </p>
+             <p>Foto de Publicacion: <input id="PubFoto" type="image"></p>
+             <p>Reestablecer la duración?:
+                <select id="PubDur">
+                    <option>Si</option>
+                    <option>No</option>
+                </select>
+                </p>
+<input type="submit" name="SubirPublicacion" value="Subir Publicacion" />
+           </form>
+    </div>   
+</body>
+</html>

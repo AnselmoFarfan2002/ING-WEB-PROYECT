@@ -1,19 +1,33 @@
 #sub_contenido{
-    width: 80%;
-    max-width: 500px;
-    height: 680px;
-    margin: 40px auto;
+    max-width: 800px;
+    height: 100%;
     padding: 40px;
-    border: 1px solid #CFCFCF;
-    border-radius: 10px;
-    background-color: #EAEAEC;;
-    box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+    margin-left: 40px;
 }
-
 
 .form .foto{
     width: 130px;
     height: 150px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/*Cabezera y Pie de página*/
+
+.form button{
+    background-color:#DB8015;
+    border-color: #DB8015;
+    width: 250px;
+}
+
+#header{
+    width: 100%;
+    height: 120px;
+    background-color: #DB8015;
+}
+
+#footer{
+    width: 100%;
+    height: 120px;
+    background-color: #DB8015;
 }

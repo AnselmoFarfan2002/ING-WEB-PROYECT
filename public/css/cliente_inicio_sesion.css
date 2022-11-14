@@ -1,20 +1,33 @@
 #sub_contenido{
     width: 80%;
-    max-width: 600px;
-    height: 450px;
+    max-width: 500px;
+    height: 650px;
     margin: 40px auto;
     padding: 40px;
-    border: 1px solid #CFCFCF;
+    border: 1px solid #FF6B00;
     border-radius: 10px;
-    background-color: #EAEAEC;;
     box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
 }
 
-#logo{
-    width: 50%;
-    height: 30%;
+#sub_contenido .foto{
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.form{
+    width: 80%;
+    margin: auto;
+}
+
+.form button{
+    background-color:#DB8015;
+    border-color: #DB8015;
+    width: 150px;
+}
+
+/*
 .form{
     width: 100%;
     max-width: 500px;
@@ -35,7 +48,6 @@
     margin-right: auto;
 }
 
-/*CSS para el input de email*/
 .form .lbl-email{
     pointer-events: none;
     bottom: 0;
@@ -73,7 +85,6 @@
     transform: translateX(0%);
 }
 
-/*CSS para el input de contraseña*/
 .form .lbl-pass{
     pointer-events: none;
     bottom: 0;
@@ -110,6 +121,8 @@
 .form input:focus + .lbl-pass:after, .form input:valid + .lbl-pass:after{
     transform: translateX(0%);
 }
+
+/*
 
 /*CSS para el botón*/
 .form button{
