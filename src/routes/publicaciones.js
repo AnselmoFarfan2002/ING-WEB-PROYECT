@@ -24,8 +24,6 @@ const {
     ACTUALIZAR_FOTOS_PUBLICACION
 } = require( '../controllers/module 2 - users posts/editor' );
 
-// MODULO 2 : CREADOR
-
 router.route( '/publicaciones' )
 .post( uploader.array('photos', 12), CREAR_PUBLICACION )    // MODULO 2 : CREADOR
 
@@ -33,9 +31,10 @@ router.route( '/publicaciones/:id' )
 .put( EDITAR_DATOS_PUBLICACION )        // MODULO 2 : EDITOR
 .delete( ELIMINAR_PUBLICACION )         // MODULO 2 : ELIMINADOR
 
+router.route( '/publicaciones/:id/tiempo' )      .put( REFRESCAR_PUBLICACION )               // MODULO 2 : REFRESCADOR
 router.route( '/publicaciones/:id/visibilidad' ) .patch( ALTERNAR_VISIBILIDAD_PUBLICACION )  // MODULO 2 : EDITOR
-router.route( '/publicaciones/:id/fotos' )       .patch( ACTUALIZAR_FOTOS_PUBLICACION )      // MODULO 2 : EDITOR
-router.route( '/publicaciones/:id/fotos' )       .put( REFRESCAR_PUBLICACION )               // MODULO 2 : REFRESCADOR
 
+router.route( '/publicaciones/:id/fotos' )      
+.patch( uploader.array('photos', 12), ACTUALIZAR_FOTOS_PUBLICACION )      // MODULO 2 : EDITOR
 
 module.exports = router;

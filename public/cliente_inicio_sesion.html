@@ -26,44 +26,72 @@
 		}
 	</style>
 
-  <body style="background: url('images/fondo.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
+  <body>
     <div id="contenido" class="container text-center">
       <div id="sub_contenido">
 
+        <div class="foto">
+          <img src='' name="photo" readonly>
+        </div>
+
         <div class="caja_centrada py-3 pb-4" id="titulo">
-          <p class="text-center fw-bold fs-1">Inicio de sesión</p>
+          <p class="text-center fw-bold fs-2">Iniciar sesión</p>
+          <p class="text-center text-secondary fw-bold fs-6">Introduce sus datos para iniciar sesión</p>
         </div>
 
         <form class="form">
-          <br>
-          <div class="row mb-3 d-flex justify-content-center">
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputEmail" required>
-              <label class="lbl-email">
-                <span class="text-email">
-                  Correo electrónico
-                </span>
-              </label>
-            </div>
-          </div><br>
-          
-          <div class="row mb-3 d-flex justify-content-center">
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPass" required>
-              <label class="lbl-pass">
-                <span class="text-pass">
-                  Contraseña
-                </span>
-              </label>
+
+          <div class="mb-0">
+            <div class="row row-cols-12">
+                <div class="col">
+                    <div class="mb-2" style="width:100%">
+                        <div class="col-12 col-lg-12 d-flex justify-content-left">
+                            <label class="form-label">Correo electrónico</label>
+                        </div>
+                        <div class="col-12 col-lg-12" style="display:flex">
+                        <input value="" id="inputEmail" name="inputEmail" type="email" class="form-control" placeholder="jperezl@gmai.com" required>                          
+                        </div>
+                    </div>
+                </div>
             </div>
           </div><br>
 
-          <button type="submit" class="btn btn-danger">Iniciar sesión</button>
+          <div class="mb-0">
+            <div class="row row-cols-12">
+                <div class="col">
+                    <div class="mb-2" style="width:100%">
+                        <div class="col-12 col-lg-12 d-flex justify-content-left">
+                            <label class="form-label">Contraseña</label>
+                        </div>
+                        <div class="col-12 col-lg-12" style="display:flex">
+                        <input value="" id="inputPass" name="inputPass" type="password" class="form-control" placeholder="••••••••" required>                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div> <a href="cliente_recuperacion_contrasena.html" class="fw-bold d-flex justify-content-left text-muted" style="text-decoration: none;">¿Olvidaste tu contraseña?</a></div>
+          <br><br><br>
+
+          <div class="mb-0">
+            <div class="row row-cols-1 row-cols-sm-2">
+                <div class="col">
+                    <div class="mb-2" style="width:100%">
+                      <div> <a href="cliente_registro.html" class="fw-bold d-flex justify-content-left" style="text-decoration: none; color: #DB8015;">Crear cuenta</a></div>
+                    </div>
+                </div>
+        
+                <div class="col">
+                  <div class="mb-2" style="width:100%">
+                    <a href="Base.html"  target="_blank">
+                      <button type="submit" class="btn btn-danger">Iniciar sesión</button>
+                     </a>
+                  </div>
+              </div>
+            </div>
+          </div>          
         <!--  -->
         </form>
-
-        <div class="mb-3 text-center pt-3">¿No tienes cuenta? <a href="" class="fw-bold text-muted" style="text-decoration: none;">Registrar cuenta</a></div>
-
       </div>
     </div>
   </body>

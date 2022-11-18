@@ -1,0 +1,34 @@
+#sub_contenido{
+    width: 80%;
+    max-width: 650px;
+    margin-top: 150px;
+    margin-left: 40px;
+    margin-bottom: 150px;
+    padding: 40px;
+}
+
+.for .caja_centrada{
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*Cabezera y Pie de página*/
+
+.form button{
+    background-color:#DB8015;
+    border-color: #DB8015;
+    width: 250px;
+}
+
+#header{
+    width: 100%;
+    height: 120px;
+    background-color: #DB8015;
+}
+
+#footer{
+    width: 100%;
+    height: 120px;
+    background-color: #DB8015;
+}

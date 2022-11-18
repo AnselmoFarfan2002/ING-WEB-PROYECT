@@ -11,38 +11,32 @@
   </head>
 
   <script src="https://kit.fontawesome.com/041123afa1.js" crossorigin="anonymous"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-  <style type="text/css">
-    #contenido{
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-    }
-    #formulario form{
-      width: 100%;
-    }
-  </style>
-  
-  <body style="background: url('images/fondo.jpg') no-repeat center center fixed; background-size: cover; min-height: 100vh;">
-    <div id="contenido" class="container text-center">
+  <body>
+    <div id="header">
+
+    </div>
+
+    <div id="contenido" class="d-flex justify-content-left">
         <div id="sub_contenido">
 
           <div class="caja_centrada py-3 pb-4" id="titulo">
-            <p class="text-center fw-bold fs-1">Registro de usuario</p>
+            <p class="text-start fw-bold fs-1">Crear una cuenta</p>
+            <p class="text-start text-secondary fw-bold fs-6" >Rellene todos los espacios de este formulario para crear una cuenta</p>
           </div>
 
-          <form class="form">
+          <form class="form" id="formulario_de_registro">
             
             <div class="mb-0">
               <div class="row row-cols-1 row-cols-sm-2">
-                  <div class="col" id="grupo__name">
+                  <div class="col" id="grupo__inputNameE">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                              <label class="form-label">Nombres</label>
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                              <label class="form-label">Nombre de la empresa</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                          <input value="" id="inputName" name="inputName" type="text" class="form-control" placeholder="Jorge Mario" required>
+                          <input value="" id="inputNameE" name="inputNameE" type="text" class="form-control" placeholder="Supermercados Peruanos S.A." required>
                           <div class="input-group-text">
                             <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
                           </div> 
@@ -51,9 +45,42 @@
                       </div>
                   </div>
           
-                  <div class="col" id="grupo__surname">
+                  <div class="col" id="grupo__inputName">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                          <label class="form-label">Nombre de contacto</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                            <input value="" id="inputName" name="inputName" type="text" class="form-control" placeholder="Jose Mariano" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
+                          </div>
+                      </div>
+                  </div>
+              </div>
+            </div>
+        
+            <div class="mb-0">
+              <div class="row row-cols-1 row-cols-sm-2">
+                  <div class="col" id="grupo__inputRuc">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                              <label class="form-label">RUC</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                          <input value="" id="inputRuc" name="inputRuc" type="text" class="form-control" placeholder="20100070970" required>
+                          <div class="input-group-text">
+                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                          </div> 
+                          
+                          </div>
+                      </div>
+                  </div>
+          
+                  <div class="col" id="grupo__inputSurname">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
                           <label class="form-label">Apellidos</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
@@ -66,31 +93,30 @@
                   </div>
               </div>
             </div>
-        
+
             <div class="mb-0">
               <div class="row row-cols-1 row-cols-sm-2">
-                  <div class="col" id="grupo__user">
+                  <div class="col" id="grupo__inputPhone">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                              <label class="form-label">Usuario</label>
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                              <label class="form-label">Teléfono</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                          <input value="" id="inputUser" name="inputUser" type="text" class="form-control" placeholder="Supermercados Peruanos S.A." required>
-                          <div class="input-group-text">
-                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
-                          </div> 
-                          
+                            <input value="" id="inputPhone" name="inputPhone" type="number" class="form-control" placeholder="+51 425687" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
                           </div>
                       </div>
                   </div>
           
-                  <div class="col" id="grupo__ruc">
+                  <div class="col" id="grupo__inputEmail">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                          <label class="form-label">RUC</label>
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                          <label class="form-label">Correo electrónico</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                            <input value="" id="inputRuc" name="inputRuc" type="text" class="form-control" placeholder="20100070970" required>
+                            <input value="" id="inputEmail" name="inputEmail" type="email" class="form-control" placeholder="jperezl@correo.com" required>
                             <div class="input-group-text">
                               <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
                             </div> 
@@ -102,24 +128,23 @@
 
             <div class="mb-0">
               <div class="row row-cols-1 row-cols-sm-2">
-                  <div class="col" id="grupo__email">
+                  <div class="col" id="grupo__inputLocation">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                              <label class="form-label">Email</label>
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                              <label class="form-label">Ubicación</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                          <input value="" id="inputEmail" name="inputEmail" type="email" class="form-control" placeholder="jperezl@correo.com" required>
-                          <div class="input-group-text">
-                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
-                          </div> 
-                          
+                            <input value="" id="inputLocation" name="inputLocation" type="text" class="form-control" placeholder="Los palotes escondidos 123" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
                           </div>
                       </div>
                   </div>
           
-                  <div class="col" id="grupo__cell">
+                  <div class="col" id="grupo__inputCell">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
                           <label class="form-label">Celular</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
@@ -135,22 +160,39 @@
 
             <div class="mb-0">
               <div class="row row-cols-1 row-cols-sm-2">
-                  <div class="col" id="grupo__pass">
+                  <div class="col" id="grupo__inputPass">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                              <label class="form-label">Contraseña</label>
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                            <label class="form-label">Contraseña</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                          <input value="" id="inputPass" name="inputPass" type="password" class="form-control" placeholder="••••••••" required>
-                          
+                            <input value="" id="inputPass" name="inputPass" type="password" class="form-control" placeholder="••••••••" required>
                           </div>
                       </div>
                   </div>
           
-                  <div class="col" id="grupo__pass2">
+                  <div class="col" id="grupo__inputPosition">
+                    <div class="mb-2" style="width:100%">
+                        <div class="col-12 col-lg-12 d-flex justify-content-left">
+                        <label class="form-label">Cargo</label>
+                        </div>
+                        <div class="col-12 col-lg-12" style="display:flex">
+                          <input value="" id="inputPosition" name="inputPosition" type="text" class="form-control" placeholder="Encargado de ventas y stock" required>
+                          <div class="input-group-text">
+                            <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                          </div> 
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-0">
+              <div class="row row-cols-1 row-cols-sm-2">
+                    <div class="col" id="grupo__inputPass2">
                       <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                          <label class="form-label">Confirmar contraseña</label>
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                            <label class="form-label">Confirmar contraseña</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
                             <input value="" id="inputPass2" name="inputPass2" type="password" class="form-control" placeholder="••••••••" required>
@@ -160,48 +202,41 @@
                           </div>
                       </div>
                   </div>
-              </div>
-            </div>
 
-            <div class="mb-0">
-              <div class="row row-cols-12">
-                  <div class="col" id="grupo__foto">
-                      <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12">
-                              <label class="form-label">Foto de perfil</label>
-                          </div>
-                          <div class="input-group">
-                            <input type="file" class="form-control" id="inpuPhoto" aria-describedby="inputPhoto" aria-label="Upload">
-                          </div>
-                      </div>
+                  <div class="col">
+                    <div class="caja_centrada d-flex justify-content-center">
+                      <div class="g-recaptcha" data-sitekey="6LewoVQgAAAAAOLgERaAT1onYf6kT51gQ70BDjOi"></div>
+                    </div> 
                   </div>
               </div>
             </div>
 
-            <div class="mb-3 text-center pt-3">¿Ya estás registrado? <a href="" class="fw-bold text-muted" style="text-decoration: none;">Inicia sesión</a></div>
+            <div class="mb-3 text-center pt-3">¿Ya estás registrado? <a href="cliente_inicio_sesion.html" class="fw-bold text-muted" style="text-decoration: none;">Inicia sesión</a></div>
+
+            <div class="caja_centrada d-flex justify-content-left">
+              <div class="form-check">
+                <input name="tyc" class="form-check-input" type="checkbox" id="defaultCheck1" required>
+                <label class="form-check-label" for="defaultCheck1">
+                  He leído y acepto la <a href="">política de privacidad</a> y <a href="">los terminos y condiciones</a>.
+                </label>
+              </div>
+            </div> <br>
+            
+            <div class="caja_centrada d-flex justify-content-left">
+                <button id="registrarse" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Registrarse</button>
+            </div>
 
           </form>
-
-        <div class="caja_centrada d-flex justify-content-center" style="justify-content: center;">
-          <div class="form-check">
-            <input name="tyc" class="form-check-input" type="checkbox" id="defaultCheck1" required>
-            <label class="form-check-label" for="defaultCheck1">
-                Yo acepto la <a href="">política de privacidad</a> y <a href="">los terminos y condiciones</a>.
-            </label>
-          </div>
-        </div> <br>
+        </div>   
+    </div>
         
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script src="js/validacion-registro.js" type="text/javascript"></script>
 
-        <div class="caja_centrada d-flex justify-content-center">
-            <div class="g-recaptcha" data-sitekey="6LewoVQgAAAAAOLgERaAT1onYf6kT51gQ70BDjOi"></div>
-        </div> <br>
-        
-        <div class="caja_centrada d-flex justify-content-center">
-            <button id="registrarse" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Registrarse</button>
-        </div>
+    <div id="footer">
 
-        </div>    
     </div>
   </body>
 </html>
+
+  
+

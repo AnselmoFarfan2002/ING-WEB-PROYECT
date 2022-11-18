@@ -3,6 +3,7 @@ USE local_db;
 drop procedure if exists post_pub_publicacion;
 drop procedure if exists put_pub_publicacion;
 drop procedure if exists put_pub_visible;
+drop procedure if exists put_pub_fotos;
 drop procedure if exists put_pub_fecha;
 drop procedure if exists delete_pub_publicacion;
 
@@ -46,6 +47,10 @@ create procedure put_pub_visible( id int unsigned ) begin
 	else 
 		UPDATE PUBLICACION SET PUBLI_VISIBLE = 0 WHERE PUBLI_ID = id; 
     end if;
+end;
+
+create procedure put_pub_fotos(id int unsigned, fotos varchar(361)) begin
+	UPDATE PUBLICACION SET PUBLI_FOTOS = fotos WHERE PUBLI_ID = id;
 end;
 
 create procedure delete_pub_publicacion( id int unsigned ) begin
