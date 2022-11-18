@@ -4,8 +4,8 @@ const controllers = {}
 
 controllers.ELIMINAR_PUBLICACION = (req, res) => {
     if ( req.session.open === true ){
-        let query = mysqlConnection.format( 'call delete_pub_publicacion(?)', req.params.codigo );
-
+        let query = mysqlConnection.format( 'call delete_pub_publicacion(?)', req.params.id );
+        
         mysqlConnection.query(query, (err,rows) => new Promise((resolve, reject) => {
             if( err ) reject({ msg: 'Ha ocurrido un error al eliminar la publicación.', status: -1, error: err });
             else resolve({ msg: 'Se ha eliminado la publicación.', status: 1 });

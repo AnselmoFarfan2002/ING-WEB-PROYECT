@@ -25,7 +25,7 @@ app.use( session({
 }));
 
 //routes
-app.use( require('./routes/index.routes') );
+app.use( require('./routes/_index.routes') );
 
 //starting server
 app.listen( app.get('port'), () => {

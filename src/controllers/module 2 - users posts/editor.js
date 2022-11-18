@@ -5,7 +5,7 @@ const controllers = {}
 controllers.EDITAR_DATOS_PUBLICACION = (req, res) => {
     if ( req.session.open === true ){
         let query = mysqlConnection.format( 'call put_pub_publicacion(?,?,?,?,?,?)', [
-            req.params.codigo,
+            req.params.id,
             req.body.titulo,
             req.body.descripcion,
             req.body.precio,
@@ -28,7 +28,7 @@ controllers.EDITAR_DATOS_PUBLICACION = (req, res) => {
 
 controllers.ALTERNAR_VISIBILIDAD_PUBLICACION = (req, res) => {
     if ( req.session.open === true ){
-        let query = mysqlConnection.format( 'call put_pub_visible(?)', req.params.codigo );
+        let query = mysqlConnection.format( 'call put_pub_visible(?)', req.params.id );
         mysqlConnection.query(query, (err,rows) => new Promise((resolve, reject) => {
             if( err ) reject({ msg: 'Ha ocurrido un error al ocultar la publicación.', status: -1, error: err });
             else resolve({ msg: 'Se ha cambiado la visibilidad de su publicación.', status: 1 });

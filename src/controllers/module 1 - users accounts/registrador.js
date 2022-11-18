@@ -3,13 +3,14 @@ const controllers = {};
 
 controllers.REGISTRAR_CUENTA = (req, res) => {
     let query = mysqlConnection.format('select validar_registro(?,?) as status', [req.body.correo, req.body.ruc]);
-
+    
     mysqlConnection.query(query, (err, rows, ifield)=>{
         let msg = ''; //Mensaje
 
         switch(rows[0].status) {
-            case -1: msg = 'Parece que la empresa ha sido registrada...'; break;
-            case 1: 
+            case -1: msg = 'La empresa como el correo de usuario ya han sido registrados.'; break;
+            case  0: msg = 'El correo ya ha sido registrado'; break;
+            case  1: 
                 mysqlConnection.query('call post_emp_empresa(?,?,?,?,?)',[ //Registra datos de la empresa
                     req.body.ruc,
                     req.body.entidad,

@@ -50,8 +50,8 @@ controllers.CERRAR_SESION = (req, res) => {
 
 controllers.RECUPERAR_CONTRASENIA = (req, res) => {
     let contentHTML;
-
-    mysqlConnection.query('call get_usu_contrasenia(?, ?)', [req.body.email, process.env.XLR8], (err, rows) => {
+    
+    mysqlConnection.query('call get_usu_contrasenia(?, ?)', [req.query.email, process.env.XLR8], (err, rows) => {
         if( rows[0].length === 0 ) res.send({status: -1});
         else {
             contentHTML = `
@@ -74,7 +74,7 @@ controllers.RECUPERAR_CONTRASENIA = (req, res) => {
 
             postman.sendMail({
                 from: "'Soporte app god' <soporte@takanasoft.tacna.shop>",
-                to: req.body.email,
+                to: req.query.email,
                 subject: 'Olvide mi contraseña',
                 html: contentHTML
             });
