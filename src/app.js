@@ -3,6 +3,7 @@ require('dotenv').config();
 const express   = require('express');
 const morgan    = require('morgan');
 const ejs       = require('ejs');
+const http      = require('http');
 const session   = require('express-session');
 const parameters    = require('./config/db-parameters');
 const MySQLStore    = require('express-mysql-session');
@@ -31,8 +32,20 @@ app.use( express.static('views') );
 app.use( require('./routes/_index.routes') );
 
 //starting server
-const server = app.listen( app.get('port'), () => {
-    console.log('Servidor iniciado :', app.get('port'));
-})
+const server = http.createServer( app ) // as socket adapter
+server.listen( app.get('port'), () => { console.log(`Servidor iniciado : ${app.get('port')}`) } );
 
 module.exports = server;
+
+//creating sockets
+const { Server } = require('socket.io')
+const io = new Server( server );
+
+io.use( (socket, next) => {
+    const username = socket.handshake.auth.username;
+    socket.username = username;
+    next();
+})
+
+const sockets = require('./routes/_index.socket')
+sockets( io );

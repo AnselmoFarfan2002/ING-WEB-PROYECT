@@ -1,9 +1,11 @@
-const socketIO  = require('socket.io');
-const server = require('../app');
-const io = socketIO( server );
+const iniciador = ( io ) => { io.on('connection', socket => {
+    console.log(socket.id, socket.handshake.auth.username);
 
-io.on('connection', () => {
-    console.log('new connection ')
-})
+    socket.on('client:message', data => {
+        console.log(socket.id);
+        console.log(data);
+    })
 
-module.exports = socketIO;
+})}
+
+module.exports = iniciador;

@@ -12,16 +12,15 @@ const uploader = multer({
     fileFilter: ( req, file, cb ) => { cb( null, file.mimetype.startsWith( 'image/' ) ); },
 });
 
-const {
-    ACTUALIZAR_FOTO_PERFIL,
-    ACTUALIZAR_DATOS
-} = require( '../controllers/module 1 - users accounts/editor-datos' );
-
-const { REGISTRAR_CUENTA } = require( '../controllers/module 1 - users accounts/registrador' )
+const m1 = {};
+m1.editor = require( '../controllers/module 1 - users accounts/editor-datos' )
+m1.registrador = require( '../controllers/module 1 - users accounts/registrador' )
+m1.consultor = require( '../controllers/module 1 - users accounts/consultor' )
 
 router.route( '/usuarios' )
-.post( REGISTRAR_CUENTA )   // MODULO 1 : REGISTRADOR
-.patch( uploader.single('profile-photo'), ACTUALIZAR_FOTO_PERFIL )  // MODULO 1 : EDITOR DATOS
-.put( ACTUALIZAR_DATOS );                                           // MODULO 1 : EDITOR DATOS
+.get( m1.consultor.OBTENER_DATOS )
+.post( m1.registrador.REGISTRAR_CUENTA )   
+.patch( uploader.single('profile-photo'), m1.editor.ACTUALIZAR_FOTO_PERFIL )  
+.put( m1.editor.ACTUALIZAR_DATOS );                                         
 
 module.exports = router;

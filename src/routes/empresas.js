@@ -12,9 +12,9 @@ const uploader_ = multer({
     fileFilter: ( req, file, cb ) => { cb( null, file.mimetype.startsWith( 'image/' ) ); },
 });
 
-const { ACTUALIZAR_FOTO_EMPRESA } = require( '../controllers/module 1 - users accounts/editor-datos' );
+const editor = require( '../controllers/module 1 - users accounts/editor-datos' );
 
 router.route( '/empresas' )
-.patch( uploader_.single('business-photo'), ACTUALIZAR_FOTO_EMPRESA )   // MODULO 1 : EDITOR DATOS
+.patch( uploader_.single('business-photo'), editor.ACTUALIZAR_FOTO_EMPRESA )   // MODULO 1 : EDITOR DATOS
 
 module.exports = router;

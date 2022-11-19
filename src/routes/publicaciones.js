@@ -14,27 +14,25 @@ const uploader = multer({
         ( req, file, cb ) => { cb( null, file.mimetype.startsWith( 'image/' ) ); },
 });
 
-const { CREAR_PUBLICACION } = require('../controllers/module 2 - users posts/creador');
-const { ELIMINAR_PUBLICACION } = require( '../controllers/module 2 - users posts/eliminador' );
-const { REFRESCAR_PUBLICACION } = require( '../controllers/module 2 - users posts/refrescador' );
-
-const {
-    EDITAR_DATOS_PUBLICACION,
-    ALTERNAR_VISIBILIDAD_PUBLICACION,
-    ACTUALIZAR_FOTOS_PUBLICACION
-} = require( '../controllers/module 2 - users posts/editor' );
+const m2 = {};
+m2.creador  = require('../controllers/module 2 - users posts/creador');
+m2.editor   = require( '../controllers/module 2 - users posts/editor' );
+m2.eliminador   = require( '../controllers/module 2 - users posts/eliminador' );
+m2.refrescador  = require( '../controllers/module 2 - users posts/refrescador' );
 
 router.route( '/publicaciones' )
-.post( uploader.array('photos', 12), CREAR_PUBLICACION )    // MODULO 2 : CREADOR
+//.get -> ?i=0&n=5 mirar generalemente varios de i->n
+.post( uploader.array('photos', 12), m2.creador.CREAR_PUBLICACION )  
 
 router.route( '/publicaciones/:id' )
-.put( EDITAR_DATOS_PUBLICACION )        // MODULO 2 : EDITOR
-.delete( ELIMINAR_PUBLICACION )         // MODULO 2 : ELIMINADOR
+// get -> mirar detalladamente 1
+.put( m2.editor.EDITAR_DATOS_PUBLICACION )        
+.delete( m2.eliminador.ELIMINAR_PUBLICACION )     
 
-router.route( '/publicaciones/:id/tiempo' )      .put( REFRESCAR_PUBLICACION )               // MODULO 2 : REFRESCADOR
-router.route( '/publicaciones/:id/visibilidad' ) .patch( ALTERNAR_VISIBILIDAD_PUBLICACION )  // MODULO 2 : EDITOR
+router.route( '/publicaciones/:id/tiempo' )      .put( m2.refrescador.REFRESCAR_PUBLICACION )          
+router.route( '/publicaciones/:id/visibilidad' ) .patch( m2.editor.ALTERNAR_VISIBILIDAD_PUBLICACION )  
 
 router.route( '/publicaciones/:id/fotos' )      
-.patch( uploader.array('photos', 12), ACTUALIZAR_FOTOS_PUBLICACION )      // MODULO 2 : EDITOR
+.patch( uploader.array('photos', 12), m2.editor.ACTUALIZAR_FOTOS_PUBLICACION )      
 
 module.exports = router;

@@ -8,6 +8,27 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
 		
+		const URL = "http://localhost";
+		const socket = io(URL, { autoConnect: false });
+
+		socket.onAny((event, ...args) => {
+		  console.log(event, args);
+		});
+
+		const mensajear = (b) => {
+			socket.emit('client:message', {msg: b});
+		};
+
+		fetch('/usuarios', {method: 'GET'})
+		.then( res => res.json() )
+		.then( res => {
+			const usuario = { ...res }
+			console.log(usuario);
+			socket.auth = {username: usuario.USU_NOMBRE};
+			console.log(socket.auth)
+			socket.connect();
+		})
+
 	</script>
 </body>
 </html>

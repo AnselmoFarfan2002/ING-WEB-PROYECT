@@ -1,18 +1,14 @@
 const { Router } = require('express');
 const router = Router();
 
-const { 
-    INICIAR_SESION, 
-    CERRAR_SESION,
-    RECUPERAR_CONTRASENIA
-} = require( '../controllers/module 1 - users accounts/identificador' )
-
-const { ACTUALIZAR_CONTRASENIA } = require('../controllers/module 1 - users accounts/editor-datos')
+const m1 = {}
+m1.identificador = require( '../controllers/module 1 - users accounts/identificador' )
+m1.editor = require('../controllers/module 1 - users accounts/editor-datos')
 
 router.route( '/sesiones' )
-.patch( ACTUALIZAR_CONTRASENIA )    // MODULO 1 : EDITOR DATOS
-.post( INICIAR_SESION )             // MODULO 1 : IDENTIFICADOR
-.delete( CERRAR_SESION )            // MODULO 1 : IDENTIFICADOR
-.get( RECUPERAR_CONTRASENIA )       // MODULO 1 : IDENTIFICADOR
+.patch( m1.editor.ACTUALIZAR_CONTRASENIA )  
+.post( m1.identificador.INICIAR_SESION )    
+.delete( m1.identificador.CERRAR_SESION )            
+.get( m1.identificador.RECUPERAR_CONTRASENIA )       
 
 module.exports = router;
