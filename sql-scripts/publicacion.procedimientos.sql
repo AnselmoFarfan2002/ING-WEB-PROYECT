@@ -6,6 +6,8 @@ drop procedure if exists put_pub_visible;
 drop procedure if exists put_pub_fotos;
 drop procedure if exists put_pub_fecha;
 drop procedure if exists delete_pub_publicacion;
+drop procedure if exists get_pub_publicacion;
+drop procedure if exists get_pub_publicaciones;
 
 DELIMITER $$
 
@@ -57,4 +59,17 @@ create procedure delete_pub_publicacion( id int unsigned ) begin
 	UPDATE PUBLICACION SET PUBLI_ACTIVA = 0 WHERE PUBLI_ID = id;
 end;
 
+create procedure get_pub_publicacion(pub_id int unsigned) begin
+	SELECT concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) AS PUBLI_AUTOR, PUBLI_FECHA, PUBLI_TITULO, PUBLI_TIEMPO, PUBLI_DESCRIPCION, PUBLI_PRECIO, PUBLI_FOTOS, CAT_NOMBRE AS PUBLI_CATEGORIA FROM PUBLICACION
+    JOIN USUARIO ON USU_ID = PUBLI_AUTOR
+    JOIN CATEGORIA ON PUBLI_CATEGORIA = CAT_ID
+    WHERE PUBLI_ID = pub_id;
+end;
+
+create procedure get_pub_publicaciones(lmt_inf int, lmt_sup int) begin
+	SELECT concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) AS PUBLI_AUTOR, PUBLI_FECHA, PUBLI_TITULO, PUBLI_PRECIO, PUBLI_FOTOS FROM PUBLICACION
+    JOIN USUARIO ON USU_ID = PUBLI_AUTOR
+    JOIN CATEGORIA ON PUBLI_CATEGORIA = CAT_ID
+    LIMIT lmt_inf, lmt_sup;
+end;
 $$

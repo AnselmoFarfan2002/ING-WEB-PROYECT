@@ -5,7 +5,7 @@ const router = Router();
 
 const uploader = multer({ 
     storage:    multer.diskStorage({
-                    destination: ( req, file, cb ) => { cb(null, 'public/images/profile-photos'); },
+                    destination: ( req, file, cb ) => { cb(null, 'views/images/profile-photos'); },
                     filename:    ( req, file, cb ) => { cb(null, 'photo-' + req.session.userId + '.png' ); },
                 }),
 

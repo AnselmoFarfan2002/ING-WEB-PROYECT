@@ -39,7 +39,7 @@
           <p class="text-center text-secondary fw-bold fs-6">Introduce sus datos para iniciar sesión</p>
         </div>
 
-        <form class="form">
+        <form action="sesiones" method="POST" class="form">
 
           <div class="mb-0">
             <div class="row row-cols-12">
@@ -84,7 +84,7 @@
                 <div class="col">
                   <div class="mb-2" style="width:100%">
                     <a href="Base.html"  target="_blank">
-                      <button type="submit" class="btn btn-danger">Iniciar sesión</button>
+                      <button id="buttonSubmit" type="submit" class="btn btn-danger">Iniciar sesión</button>
                      </a>
                   </div>
               </div>
@@ -97,3 +97,22 @@
   </body>
 </html>
 
+<script type="text/javascript">
+document.getElementById('buttonSubmit').addEventListener('click',login_adapter);
+
+function login_adapter(){
+  const data = {
+	  email: document.getElementById('inputEmail').value,
+	  pass: document.getElementById('inputPass').value
+  }
+  
+  fetch('/sesiones', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }).then(res=>res.json())
+  .then(data=>console.log(data))
+}
+</script>
