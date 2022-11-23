@@ -39,7 +39,7 @@
           <p class="text-center text-secondary fw-bold fs-6">Introduce sus datos para iniciar sesión</p>
         </div>
 
-        <form action="sesiones" method="POST" class="form">
+        <form method="post" class="form">
 
           <div class="mb-0">
             <div class="row row-cols-12">
@@ -70,22 +70,20 @@
                 </div>
             </div>
           </div>
-          <div> <a href="cliente_recuperacion_contrasena.html" class="fw-bold d-flex justify-content-left text-muted" style="text-decoration: none;">¿Olvidaste tu contraseña?</a></div>
+          <div> <a href="recuperar-contrasenia" class="fw-bold d-flex justify-content-left text-muted" style="text-decoration: none;">¿Olvidaste tu contraseña?</a></div>
           <br><br><br>
 
           <div class="mb-0">
             <div class="row row-cols-1 row-cols-sm-2">
                 <div class="col">
                     <div class="mb-2" style="width:100%">
-                      <div> <a href="cliente_registro.html" class="fw-bold d-flex justify-content-left" style="text-decoration: none; color: #DB8015;">Crear cuenta</a></div>
+                      <div> <a href="registrar-usuario" class="fw-bold d-flex justify-content-left" style="text-decoration: none; color: #DB8015;">Crear cuenta</a></div>
                     </div>
                 </div>
         
                 <div class="col">
                   <div class="mb-2" style="width:100%">
-                    <a href="Base.html"  target="_blank">
-                      <button id="buttonSubmit" type="submit" class="btn btn-danger">Iniciar sesión</button>
-                     </a>
+                    <button id="buttonSubmit" type="submit" class="btn btn-danger">Iniciar sesión</button>
                   </div>
               </div>
             </div>
@@ -98,21 +96,20 @@
 </html>
 
 <script type="text/javascript">
-document.getElementById('buttonSubmit').addEventListener('click',login_adapter);
+  document.getElementById('buttonSubmit').addEventListener('click',login);
 
-function login_adapter(){
-  const data = {
-	  email: document.getElementById('inputEmail').value,
-	  pass: document.getElementById('inputPass').value
-  }
-  
-  fetch('/sesiones', {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
+  function login(){
+    const data = {
+      email: document.getElementById('inputEmail').value,
+      pass: document.getElementById('inputPass').value
     }
-  }).then(res=>res.json())
-  .then(data=>console.log(data))
-}
+    
+    fetch('/sesiones', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    }).then(res=>res.json())
+  }
 </script>
