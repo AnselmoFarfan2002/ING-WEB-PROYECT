@@ -1,4 +1,5 @@
-const { Router } = require("express")
+const { Router } = require("express");
+const session = require("express-session");
 
 const router = Router();
 router.route('/inicio')
@@ -6,6 +7,5 @@ router.route('/inicio')
 
 router.route('/publicacion')
 .get( (req, res) => res.render('publicacion.ejs', { session: req.session.open, id: req.query.id }) );
-
 
 module.exports = router;
