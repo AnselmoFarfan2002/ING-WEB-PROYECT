@@ -1,0 +1,33 @@
+<ul class="nav justify-content-end">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="inicio">Inicio</a>
+    </li>
+    <% if(!session) { %>
+        <li class="nav-item">
+          <a class="nav-link" href="iniciar-sesion">Iniciar sesion</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="registrar-usuario">Registrarse</a>
+        </li>
+    <% } else { %> 
+      <li class="nav-item">
+        <a class="nav-link" href="mi-perfil">Perfil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="registrar-publicacion">Crear publicacion</a>
+      </li>
+      <li class="nav-item">
+        <a id="linkExit" class="nav-link" href="cerrar-sesion">Cerrar sesion</a>
+      </li>
+    <% } %>
+</ul>
+
+<script type="text/javascript">
+  document.getElementById('linkExit').addEventListener('click',logout);
+
+  function logout(){    
+    fetch('/sesiones', {
+      method: 'DELETE'
+    })
+  }
+</script>

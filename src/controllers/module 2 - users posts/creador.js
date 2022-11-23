@@ -7,12 +7,12 @@ controllers.CREAR_PUBLICACION = (req, res) => {
     if ( req.session.open === true ){
         let query = 'call post_pub_publicacion(?,?,?,?,?,?,?,?,?)';
 
-        req.body.fotos = [];
-        req.files.forEach(element => { req.body.fotos.push(element.filename) });
+        //req.body.fotos = [];
+        //req.files.forEach(element => { req.body.fotos.push(element.filename) });
         req.body.fotos = JSON.stringify( req.body.fotos );
 
         query = mysqlConnection.format( query, [ 
-            req.body.autor,
+            req.session.userId,
             req.body.titulo,
             req.body.descripcion,
             req.body.tiempo,

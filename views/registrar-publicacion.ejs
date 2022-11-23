@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF‐8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <%- include('base.ejs') %>
+
+    <div id="info">
+        <form class="form">
+             <p>Nombre de la Publicacion: <input id="PubNomb"></p>
+             <p>Precio(en soles): <input id="PubPrecio" type="number"></p>
+             <p>Tiempo: <input id="PubTiempo" type="number"></p>
+             <p>Descripcion: <input id="PubDesc"></p>
+             <p>Categoría: 
+                <select id="PubCat">
+                    <option value="1">Carnes Rojas</option>
+                    <option value="2">Carnes Blancas</option>
+                    <option value="3">Huevos</option>
+                    <option value="4">Embutidos</option>
+                    <option value="5">Pescados</option>
+                    <option value="6">Mariscos</option>
+                    <option value="7">Vegetales</option>
+                    <option value="8">Hortalizas</option>
+                    <option value="9">Frutas Dulces y Semidulces</option>
+                    <option value="10">Frutas Acidas y Semiacidas</option>
+                    <option value="11">Leche</option>
+                    <option value="12">Yogures</option>
+                    <option value="13">Quesos</option>
+                    <option value="14">Otros Lacteos o Derivados</option>
+                    <option value="15">Legumbres</option>
+                    <option value="16">Tuberculos</option>
+                    <option value="17">Frutos Secos</option>
+                    <option value="18">Cereales</option>
+                    <option value="19">Derivados de Cereales</option>
+                </select>
+             </p>
+             <p>Negociabilidad:
+            <select id="PubNeg">
+                <option value="1">Si</option>
+                <option value="0">No</option>
+            </select>
+            </p>
+             <p>Foto de Publicacion: <input id="PubFoto" type="file" multiple></p>
+             <button id="buttonSubmit" type="submit" class="btn btn-danger">Crear publicacion</button>
+           </form>
+    </div>   
+</body>
+</html>
+
+<script type="text/javascript">
+    document.getElementById('buttonSubmit').addEventListener('click',RegisterPub);
+  
+    function RegisterPub(){
+        let p = document.getElementById('PubFoto');
+        let photos = [];
+
+        for(let i=0;i<p.files.length;i++){
+            photos.push(p.files[i].name) //Guarda nombre de fotos
+        }
+
+        const data = {
+            titulo: document.getElementById('PubNomb').value,
+            descripcion: document.getElementById('PubDesc').value,
+            tiempo: document.getElementById('PubTiempo').value,
+            precio: document.getElementById('PubPrecio').value,
+            categoria: document.getElementById('PubCat').value,
+            tipo: '1',
+            negociable: document.getElementById('PubNeg').value,
+            fotos: photos
+        }
+
+        fetch('/publicaciones', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res=>res.json())
+        .then(data=>console.log(data))
+    }
+  </script>
