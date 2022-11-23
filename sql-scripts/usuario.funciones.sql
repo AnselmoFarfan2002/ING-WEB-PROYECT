@@ -23,14 +23,14 @@ create function validar_registro(email varchar(40), ruc varchar(11)) returns tin
     -- successful: 1
     
 	if (select count(USU_CORREO) from USUARIO where UCASE(USU_CORREO) = UCASE(email)) > 0 then
-		if (select count(EMP_RUC) from EMPRESA where EMP_RUC = ruc) > 0 then
-			return -1;
-		else 
-			return 0;
-		end if;
-	else
-		return 1;
-    end if;
+		return 0;
+	end if;
+    
+    if (select count(EMP_RUC) from EMPRESA where EMP_RUC = ruc) > 0 then
+		return -1;
+	end if;
+
+	return 1;
 end;
  -- select validar_registro('jamesrod19@gmail.com','09876543121');
  

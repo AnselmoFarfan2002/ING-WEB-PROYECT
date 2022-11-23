@@ -2,7 +2,7 @@ use LOCAL_DB;
 
 -- drop TABLE if exists CHAT;
 CREATE TABLE CHAT(
-	CHAT_ID varchar(11) PRIMARY KEY,
+	CHAT_ID int unsigned zerofill auto_increment PRIMARY KEY,
     CHAT_PUBLICACION int unsigned,
 	foreign key(CHAT_PUBLICACION) REFERENCES PUBLICACION(PUBLI_ID),
 
@@ -13,11 +13,13 @@ CREATE TABLE CHAT(
 
 -- drop TABLE if exists INTERACCION;
 CREATE TABLE INTERACCION(
-	INT_CHAT varchar(11) NOT NULL,
+	INT_CHAT int unsigned,
 	foreign key(INT_CHAT) REFERENCES CHAT(CHAT_ID),
     
     INT_USUARIO int unsigned NOT NULL,
 	foreign key(INT_USUARIO) REFERENCES USUARIO(USU_ID),
+
+	primary key(INT_CHAT, INT_USUARIO),
 
     INT_VISIBLE bool NOT NULL
 );

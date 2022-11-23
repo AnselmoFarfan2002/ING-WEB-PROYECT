@@ -8,7 +8,7 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
         let msg = ''; //Mensaje
 
         switch(rows[0].status) {
-            case -1: msg = 'La empresa como el correo de usuario ya han sido registrados.'; break;
+            case -1: msg = 'La empresa ya ha sido registrada.'; break;
             case  0: msg = 'El correo ya ha sido registrado'; break;
             case  1: 
                 mysqlConnection.query('call post_emp_empresa(?,?,?,?,?)',[ //Registra datos de la empresa
@@ -19,25 +19,19 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
                     'defaultBusiness.jpg'
                 ]);
 
-                mysqlConnection.query('call post_car_cargo(?)',[req.body.cargo]); //Registra el cargo del usuario
-
-                mysqlConnection.query('select get_car_id() as cargo',(err, rows)=>{
-                    if(rows[0].cargo > 0){
-                        mysqlConnection.query('call post_usu_usuario(?,?,?,?,?,?,?,?,?,?,?)',[ //Registra datos del usuario
-                        req.body.nombre,
-                        req.body.ruc,
-                        req.body.apellido1,
-                        req.body.apellido2,
-                        rows[0].cargo,
-                        req.body.correo,
-                        req.body.celCod + ' ' + req.body.celular, // '+51' + ' ' + '123456789'
-                        req.body.telefono,
-                        req.body.contrasenia,
-                        process.env.XLR8,
-                        'defaultUser.jpg'
-                    ]);
-                    }
-                });
+                mysqlConnection.query('call post_usu_usuario(?,?,?,?,?,?,?,?,?,?,?)',[ //Registra datos del usuario
+                    req.body.nombre,
+                    req.body.ruc,
+                    req.body.apellido1,
+                    req.body.apellido2,
+                    req.body.cargo,
+                    req.body.correo,
+                    req.body.celCod + ' ' + req.body.celular, // '+51' + ' ' + '123456789'
+                    req.body.telefono,
+                    req.body.contrasenia,
+                    process.env.XLR8,
+                    'defaultUser.jpg'
+                ]);
 
                 msg = 'Registro exitoso.';    
             break;

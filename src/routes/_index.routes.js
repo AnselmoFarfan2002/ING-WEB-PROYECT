@@ -10,4 +10,6 @@ app.use( require('./publicaciones') )
 app.use( require('./sesiones') )
 app.use( require('./interacciones') )
 
+app.use( require('./interfaces') )
+
 module.exports = app;

@@ -2,14 +2,15 @@ const mysqlConnection = require( '../../config/db-connection' );
 const controllers = {};
 
 controllers.OBTENER_DATOS_PUBLICACION = (req, res) => {
-    if( req.session.open === true ){
-        mysqlConnection.query('call get_pub_publicacion(?)', req.params.id, (err, rows) => {
+    if( req.query.id ){
+        console.log('asd')
+        mysqlConnection.query('call get_pub_publicacion(?)', req.query.id, (err, rows) => {
             if( err ) {
                 console.log(err); 
             }
             else res.send({...rows[0][0]})
         });
-    } else res.send({ msg: 'No ha iniciado sesion...', status: -1 })
+    } else controllers.LISTAR_PUBLICACION(req, res);
 }
 
 controllers.LISTAR_PUBLICACION = (req, res) => { 

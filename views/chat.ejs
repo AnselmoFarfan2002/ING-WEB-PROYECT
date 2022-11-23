@@ -7,27 +7,35 @@
 	<h1>HOLA </h1>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript">
-		
-		const URL = "http://localhost";
+		class mensaje {
+			Constructor(emisor, contenido, multimedia){
+				this.emisor = NULL,
+				this.contenido = NULL,
+				this.multimedia = [],
+				this.hora = ( new Date() ).toLocaleTimeString('en-US'),
+				this.fecha = ( new Date() ).toLocaleDateString('en-US')
+			}
+		};
+
+		const URL = "/";
 		const socket = io(URL, { autoConnect: false });
 
 		socket.onAny((event, ...args) => {
 		  console.log(event, args);
 		});
 
-		const mensajear = (b) => {
-			socket.emit('client:message', {msg: b});
-		};
-
+		
 		fetch('/usuarios', {method: 'GET'})
 		.then( res => res.json() )
 		.then( res => {
 			const usuario = { ...res }
-			console.log(usuario);
-			socket.auth = {username: usuario.USU_NOMBRE};
-			console.log(socket.auth)
+			socket.auth = {username: usuario.USU_CORREO};			
 			socket.connect();
 		})
+
+		const mensajear = (a,b) => {
+			socket.emit('client:message', {msg: b, to: a, from: socket.auth.usurname});
+		};
 
 	</script>
 </body>

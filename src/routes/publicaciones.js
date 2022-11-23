@@ -22,11 +22,10 @@ m2.eliminador   = require( '../controllers/module 2 - users posts/eliminador' );
 m2.refrescador  = require( '../controllers/module 2 - users posts/refrescador' );
 
 router.route( '/publicaciones' )
-.get( m2.consultor.LISTAR_PUBLICACION )
+.get( m2.consultor.OBTENER_DATOS_PUBLICACION )
 .post( uploader.array('photos', 12), m2.creador.CREAR_PUBLICACION )  
 
 router.route( '/publicaciones/:id' )
-.get( m2.consultor.OBTENER_DATOS_PUBLICACION )
 .put( m2.editor.EDITAR_DATOS_PUBLICACION )        
 .delete( m2.eliminador.ELIMINAR_PUBLICACION )     
 
