@@ -26,7 +26,7 @@
             <p class="text-start text-secondary fw-bold fs-6" >Rellene todos los espacios de este formulario para crear una cuenta</p>
           </div>
 
-          <form class="form" id="formulario_de_registro" method="POST">
+          <div class="form" id="formulario_de_registro" >
             
             <div class="mb-0">
               <div class="row row-cols-1 row-cols-sm-2">
@@ -78,6 +78,20 @@
         
             <div class="mb-0">
               <div class="row row-cols-1 row-cols-sm-2">
+                  <div class="col" id="grupo__inputSurname">
+                      <div class="mb-2" style="width:100%">
+                          <div class="col-12 col-lg-12 d-flex justify-content-left">
+                          <label class="form-label">Apellido Paterno</label>
+                          </div>
+                          <div class="col-12 col-lg-12" style="display:flex">
+                            <input value="" id="inputSurname1" name="inputSurname1" type="text" class="form-control" placeholder="Perez Lopez" required>
+                            <div class="input-group-text">
+                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
+                            </div> 
+                          </div>
+                      </div>
+                  </div>
+
                   <div class="col" id="grupo__inputRuc">
                       <div class="mb-2" style="width:100%">
                           <div class="col-12 col-lg-12 d-flex justify-content-left">
@@ -93,19 +107,6 @@
                       </div>
                   </div>
           
-                  <div class="col" id="grupo__inputSurname">
-                      <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12 d-flex justify-content-left">
-                          <label class="form-label">Apellido Paterno</label>
-                          </div>
-                          <div class="col-12 col-lg-12" style="display:flex">
-                            <input value="" id="inputSurname1" name="inputSurname1" type="text" class="form-control" placeholder="Perez Lopez" required>
-                            <div class="input-group-text">
-                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
-                            </div> 
-                          </div>
-                      </div>
-                  </div>
                   
                   <div class="col" id="grupo__inputSurname">
                     <div class="mb-2" style="width:100%">
@@ -131,7 +132,7 @@
                               <label class="form-label">Teléfono</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                            <input value="" id="inputPhone" name="inputPhone" type="number" class="form-control" placeholder="+51 425687" required>
+                            <input value="" id="inputPhone" name="inputPhone" type="number" class="form-control" placeholder="123456" required>
                             <div class="input-group-text">
                               <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
                             </div> 
@@ -170,20 +171,6 @@
                           </div>
                       </div>
                   </div>
-          
-                  <div class="col" id="grupo__inputCellCod">
-                      <div class="mb-2" style="width:100%">
-                          <div class="col-12 col-lg-12 d-flex justify-content-left">
-                          <label class="form-label">Codigo de celular</label>
-                          </div>
-                          <div class="col-12 col-lg-12" style="display:flex">
-                            <input value="" id="inputCellCod" name="inputCellCod" type="text" class="form-control" placeholder="+51 999888777" required>
-                            <div class="input-group-text">
-                              <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
-                            </div> 
-                          </div>
-                      </div>
-                  </div>
 
                   <div class="col" id="grupo__inputCell">
                       <div class="mb-2" style="width:100%">
@@ -191,7 +178,7 @@
                           <label class="form-label">Celular</label>
                           </div>
                           <div class="col-12 col-lg-12" style="display:flex">
-                            <input value="" id="inputCell" name="inputCell" type="text" class="form-control" placeholder="+51 999888777" required>
+                            <input value="" id="inputCell" name="inputCell" type="text" class="form-control" placeholder="999888777" required>
                             <div class="input-group-text">
                               <i class="formulario__validacion-estado fas fa-times-circle" style="margin:auto"></i>
                             </div> 
@@ -266,10 +253,10 @@
             </div> <br>
             
             <div class="caja_centrada d-flex justify-content-left">
-                <button id="registrarse" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Registrarse</button>
+                <button id="registrarse" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Registrarse</button>
             </div>
 
-          </form>
+          </div>
         </div>   
     </div>
         
@@ -283,7 +270,7 @@
   document.getElementById('registrarse').addEventListener('click',RegisterUsu);
 
   function RegisterUsu(){
-    const data = {
+    let data = {
       ruc: document.getElementById('inputRuc').value,
       entidad: document.getElementById('inputNameE').value,
       ubicacion: document.getElementById('inputLocation').value,
@@ -293,11 +280,13 @@
       apellido2: document.getElementById('inputSurname2').value,
       cargo: document.getElementById('inputPosition').value,
       correo: document.getElementById('inputEmail').value,
-      celCod: document.getElementById('inputCellCod').value,
+      celCod: '+51',
       celular: document.getElementById('inputCell').value,
       telefono: document.getElementById('inputPhone').value,
       contrasenia: document.getElementById('inputPass').value
     }
+
+    console.log(data)
     
     fetch('/usuarios', {
       method: 'POST',
@@ -306,7 +295,9 @@
         'Content-Type': 'application/json',
       }
     }).then(res=>res.json())
-    .then(data=>console.log(data))
+    .then(res=> {
+      if (res.status==1) window.location.href = "/iniciar-sesion";
+    } );
   }
 </script>
 

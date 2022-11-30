@@ -7,6 +7,7 @@ controllers.INICIAR_SESION = (req, res) => {
     if( req.session.open === true ) res.send( { msg: 'ur session is already open' } );
     else {
         let query;
+        console.log(req.body);
         query = mysqlConnection.format( 'SELECT validar_credenciales(?,?,?) as status', [req.body.email, req.body.pass, process.env.XLR8] );
 
         mysqlConnection.query( query, (err, rows) => new Promise((resolve, reject) => {
