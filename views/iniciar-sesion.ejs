@@ -39,7 +39,7 @@
           <p class="text-center text-secondary fw-bold fs-6">Introduce sus datos para iniciar sesión</p>
         </div>
 
-        <form method="post" class="form">
+        <div class="form">
 
           <div class="mb-0">
             <div class="row row-cols-12">
@@ -89,7 +89,7 @@
             </div>
           </div>          
         <!--  -->
-        </form>
+        </div>
       </div>
     </div>
   </body>
@@ -111,5 +111,8 @@
         'Content-Type': 'application/json',
       }
     }).then(res=>res.json())
+    .then(res =>{
+      console.log(res);
+    })
   }
 </script>

@@ -29,6 +29,7 @@
 		.then( res => res.json() )
 		.then( res => {
 			const usuario = { ...res }
+			console.log(usuario)
 			socket.auth = {username: usuario.USU_CORREO};			
 			socket.connect();
 		})
