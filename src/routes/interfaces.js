@@ -2,9 +2,8 @@ const { Router } = require("express");
 const session = require("express-session");
 
 const router = Router();
-
 router.route('/')
-.get( (req, res) => res.redirect('/inicio') )
+.get( (req, res) => res.redirect('/inicio') );
 
 router.route('/inicio')
 .get( (req, res) => res.render('publicaciones.ejs', { session: req.session.open }) )

@@ -9,8 +9,10 @@ controllers.CARGAR_COMUNICADOR = (req, res) => {
     } else res.redirect('/?login=false');
 }
 
-controllers.ENVIAR_MENSAJE = mensaje => {
-    socket.to( mensaje.to ).emit( 'server:message', {...mensaje} );
+controllers.ENVIAR_MENSAJE = socket => {
+    socket.on('client:message', mensaje => {
+        socket.to( mensaje.to ).emit( 'server:message', {...mensaje} );
+    });
 }
 
 module.exports = controllers;
