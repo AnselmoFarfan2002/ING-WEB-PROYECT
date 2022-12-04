@@ -41,26 +41,23 @@
 	    <li id="cate" class="list-group-item">A third item</li>
 	  </ul>
 	  <div class="card-body" >
-	    <a href="#" class="card-link">Enviar mensaje</a>
+	    <a href="mis-conversaciones" class="card-link">Enviar mensaje</a>
 	  </div>
 	</div>
 </body>
 
 <script type="text/javascript">
 	let publicacionID = parseInt('<%= id %>');
-
 	fetch(`/publicaciones?id=${publicacionID}`)
 	.then( res => res.json() )
 	.then( publicacion => {
 		publicacion.PUBLI_FOTOS = JSON.parse(publicacion.PUBLI_FOTOS);
-
 		document.querySelector('#titu').innerHTML = publicacion.PUBLI_TITULO;
 		document.querySelector('#desc').innerHTML = publicacion.PUBLI_DESCRIPCION;
 		document.querySelector('#auth').innerHTML = publicacion.PUBLI_AUTOR;
 		document.querySelector('#fech').innerHTML = publicacion.PUBLI_FECHA;
 		document.querySelector('#prec').innerHTML = publicacion.PUBLI_PRECIO;
 		document.querySelector('#cate').innerHTML = publicacion.PUBLI_CATEGORIA;
-
 		let fotos = "";
 		publicacion.PUBLI_FOTOS.forEach( foto => {
 			fotos += `
@@ -69,7 +66,6 @@
 			    </div>
 			`;
 		} );
-
 	    document.querySelector('#fotosPublicacion .carousel-inner').innerHTML += fotos;
 		document.querySelector('#fotosPublicacion .carousel-item').classList.add('active');
 	}); 
