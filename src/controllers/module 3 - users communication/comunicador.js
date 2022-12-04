@@ -15,4 +15,20 @@ controllers.ENVIAR_MENSAJE = socket => {
     });
 }
 
+controllers.LANZAR_CHAT = (req, res) => {
+    if( req.session.open === true ){
+        mysqlConnection.query('call get_idChat(?, ?)', [req.idPublicacion, req.idUsuario], (err, rows) => new Promise((resolve, reject) => {
+            if(err) reject({
+                msg:'Ha ocurrido un error, por favor inténtelo más tarde.', 
+                status: -1,
+                error: err
+            }); else resolve({
+                idChat: rows[0]
+            })
+            
+            console.log(rows[0])
+        }));
+    } else res.send({msg: 'Es necesaria una sesión para hacer eso.', status: -1});
+}
+
 module.exports = controllers;

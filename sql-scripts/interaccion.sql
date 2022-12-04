@@ -2,13 +2,12 @@ use LOCAL_DB;
 
 -- drop TABLE if exists CHAT;
 CREATE TABLE CHAT(
-	CHAT_ID int unsigned zerofill auto_increment PRIMARY KEY,
+	CHAT_ID bigint unsigned zerofill auto_increment PRIMARY KEY,
     CHAT_PUBLICACION int unsigned,
 	foreign key(CHAT_PUBLICACION) REFERENCES PUBLICACION(PUBLI_ID),
-
-    CHAT_FICHERO varchar(30) NOT NULL,
-    CHAT_ACTIVIDAD bool NOT NULL,
-    CHAT_VISIBILIDAD bool NOT NULL
+    
+    CHAT_ACTIVIDAD datetime,
+    CHAT_USUARIOS_ACTIVOS tinyint NOT NULL
 );
 
 -- drop TABLE if exists INTERACCION;
@@ -23,3 +22,10 @@ CREATE TABLE INTERACCION(
 
     INT_VISIBLE bool NOT NULL
 );
+
+-- BITACORA DE CAMBIOS
+/* 06-11-2022: 
+	- Se cambia el atributo CHAT_ACTIVIDAD a datetime, se encontraba mal implementado.
+    - Se cambie el nombre del atributo CHAT_VISIBILIDAD por CHAT_USUARIOS_ACTIVOS para mejor legibilidad
+    - Se elimina el atributo CHAT_FICHERO, el nombre es la combinación del idChat e idPublicacion, se elimina redundancia
+*/
