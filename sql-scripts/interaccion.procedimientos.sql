@@ -3,6 +3,7 @@ use local_db;
 drop procedure if exists get_idChat;
 drop procedure if exists post_chat_chat;
 drop procedure if exists post_interaccion_interaccion;
+drop procedure if exists put_interaccion_notificacion;
 
 DELIMITER $$
 create procedure get_idChat(idPublicacion int unsigned, idUsuario int unsigned) begin
@@ -25,6 +26,12 @@ $$
 DELIMITER $$
 create procedure post_interaccion_interaccion(idChat int unsigned, idUsuario int unsigned) begin
 	INSERT INTO INTERACCION VALUES (idChat, idUsuario, 1);
+end;
+$$
+
+DELIMITER $$
+create procedure put_interaccion_notificacion(idUsuarioReceptor int unsigned, idChat int unsigned) begin
+	UPDATE interaccion SET INT_NOTIFICACION = 1 WHERE INT_CHAT = idChat AND INT_USUARIO = idUsuarioReceptor;
 end;
 $$
 

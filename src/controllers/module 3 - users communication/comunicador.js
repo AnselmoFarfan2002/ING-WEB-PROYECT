@@ -5,8 +5,8 @@ controllers.CARGAR_COMUNICADOR = (req, res) => {
     if( req.session.open === true ){
         //creating sockets
         res.render('chat', { userId : req.session.userId });
-
-    } else res.redirect('/?login=false');
+    } 
+    else res.redirect('/?login=false');
 }
 
 controllers.ENVIAR_MENSAJE = socket => {
