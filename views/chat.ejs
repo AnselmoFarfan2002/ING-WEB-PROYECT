@@ -13,33 +13,8 @@
 	</div>
 
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
-	<script type="text/javascript">
-		class mensaje {
-			Constructor(emisor, contenido, multimedia){
-				this.emisor = NULL,
-				this.contenido = NULL,
-				this.multimedia = [],
-				this.hora = ( new Date() ).toLocaleTimeString('en-US'),
-				this.fecha = ( new Date() ).toLocaleDateString('en-US')
-			}
-		};
-
-		const URL = "/";
-		const socket = io(URL, { autoConnect: false });
-
-		socket.onAny((event, ...args) => {
-		  console.log(event, args);
-		});
-
-		fetch('/usuarios', {method: 'GET'})
-			.then( res => res.json() )
-			.then( res => {
-				const usuario = { ...res }
-				console.log(usuario)
-				socket.auth = {username: usuario.USU_CORREO};			
-				socket.connect();
-		})
-		
+	<script type="text/javascript" src="/js/chat/mensajes.js"></script>
+	<script type="text/javascript">		
 		btn = document.getElementById('button-addon2');
 		btn.addEventListener('click',function(){
 			a = "afarfanp@unjbg.edu.pe";

@@ -8,7 +8,7 @@ app.use( require('./empresas') )
 app.use( require('./usuarios') )
 app.use( require('./publicaciones') )
 app.use( require('./sesiones') )
-app.use( require('./interacciones') )
+app.use( require('./chats') )
 
 app.use( require('./interfaces') )
 

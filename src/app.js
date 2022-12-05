@@ -52,3 +52,5 @@ io.use( (socket, next) => {
 
 const sockets = require('./routes/_index.socket')
 sockets( io );
+
+module.exports = io;
