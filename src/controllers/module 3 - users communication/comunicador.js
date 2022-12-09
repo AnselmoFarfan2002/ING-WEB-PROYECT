@@ -12,27 +12,27 @@ controllers.CARGAR_COMUNICADOR = (req, res) => {
 
 controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
     let msgErr = {msg: 'Ha ocurrido un error, por favor inténtelo más tarde.', status: -1};
-    fs.readFile(`./chats/${req.reqBody.idChat}.txt`, (err, chat) => new Promise((resolve, reject) =>  {
+    fs.readFile(`./chats/${reqBody.idChat}.txt`, (err, chat) => new Promise((resolve, reject) =>  {
         if(err) reject({msgErr, error: err})
         else {
-            chat = JSON.parse(chat.toString);
+            chat = JSON.parse(chat.toString());
             chat.mensajes.push({
-                emisor: reqBody.emisor,
+                emisor: reqBody.emisor.id,
                 idPublicacion: reqBody.idPublicacion,
                 contenido: reqBody.contenido,
                 multimedia: reqBody.multimedia,
                 hora: reqBody.horaDia,
-                fecha: req.fecha
+                fecha: reqBody.fecha
             });
 
             chat.length ++;
-            
-            fs.writeFile('./src/database/json/' + fileName + '.json', JSON.stringify( documents ), (err) => {
+
+            fs.writeFile('./chats/' + reqBody.idChat + '.txt', JSON.stringify( chat ), (err) => {
                 if( err ) reject({ msgErr, error: err });
                 else resolve();
             });
         }
-    })).then( () => {
+    }).then( () => {
         socket.to( reqBody.emailUsuarioReceptor ).emit( 'server:launch:message', {
             idChat: reqBody.idChat,
             emisor: reqBody.emisor,
@@ -43,9 +43,9 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
 
         return {msg: 'Mensaje enviado', status: 1}
     }).catch( err => {
-        console.log(err.error);
+        console.log(err.error, err);
         return err.msgErr;
-    });
+    }));
 } else {
     socket.on('client:message', mensaje => {
         socket.to( mensaje.emailUsuarioReceptor ).emit( 'server:message', {
@@ -60,12 +60,12 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
 controllers.LANZAR_CHAT = (req, res) => {
     if( req.session.open === true ){
         let msgErr = {msg: 'Ha ocurrido un error, por favor inténtelo más tarde.', status: -1};
-
+        
         mysqlConnection.query('call get_idChat(?, ?)', [req.body.idPublicacion, req.body.emisor.id], 
             (err, rows) => new Promise((resolve, reject) => {
                 if(err) reject({msgErr, error: err});
-                else resolve({ filas: rows[0] }); 
-
+                else resolve(rows[0]); 
+                
             }).then( filas => new Promise((resolve, reject) => {
                 if(filas.length == 0) { 
                     mysqlConnection.query('call post_chat_chat(?)', req.body.idPublicacion, (err, rows) => new Promise((resolve, reject) => {
@@ -73,9 +73,9 @@ controllers.LANZAR_CHAT = (req, res) => {
                         else resolve(rows[0][0].idChat);
 
                     }).then( idChat => new Promise((resolve, reject) =>  {
-                        mysqlConnection.query('call post_inte_interaccion(?)', [idChat, req.body.emisor.id], err => {if(err) reject({msgErr, error: err});});
-                        mysqlConnection.query('call post_inte_interaccion(?)', [idChat, req.body.idUsuarioReceptor], err => {if(err) reject({msgErr, error: err});});
-                        
+                        mysqlConnection.query('call post_inte_interaccion(?,?,?)', [idChat, req.body.emisor.id, false], err => {if(err) reject({msgErr, error: err});});
+                        mysqlConnection.query('call post_inte_interaccion(?,?,?)', [idChat, req.body.idUsuarioReceptor, true], err => {if(err) reject({msgErr, error: err});});
+
                         fs.appendFile(`./chats/${idChat}.txt`, JSON.stringify({mensajes: [], length: 0}), (err) => {
                             if (err) reject({msgErr, error: err});
                             else resolve(idChat);
@@ -84,21 +84,21 @@ controllers.LANZAR_CHAT = (req, res) => {
                         respuesta = controllers.ENVIAR_MENSAJE(require('../../app'), {
                             idChat,
                             ...req.body,
-                            horaDia: (new Date()).toLocaleString().split(', ')[1],
-                            fecha: (new Date()).toLocaleString().split(', ')[0]
+                            horaDia: (new Date()).toLocaleString().split(' ')[1],
+                            fecha: (new Date()).toLocaleString().split(' ')[0]
                         })
                         resolve(respuesta);
 
                     }).catch( err => {
                         res.send(err.msgErr);
-                        console.log(err.error);
+                        console.log(err.error, err);
                     }))
                 } else {
                     respuesta = controllers.ENVIAR_MENSAJE(require('../../app'), {
                         idChat: filas[0].idChat,
                         ...req.body,
-                        horaDia: (new Date()).toLocaleString().split(', ')[1],
-                        fecha: (new Date()).toLocaleString().split(', ')[0]
+                        horaDia: (new Date()).toLocaleString().split(' ')[1],
+                        fecha: (new Date()).toLocaleString().split(' ')[0]
                     })
                     resolve(respuesta);
                 }

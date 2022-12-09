@@ -14,16 +14,32 @@ socket.onAny((event, ...args) => {
   console.log(event, args);
 });
 
+var usuario;
+var iniciarInteraccion;
 
 fetch('/usuarios', {method: 'GET'})
 .then( res => res.json() )
 .then( res => {
-	var usuario = { ...res }
-	console.log(usuario)
+	usuario = { ...res }
 	socket.auth = {username: usuario.USU_CORREO};			
 	socket.connect();
 
-	var mensajear = (a,b) => {
-		socket.emit('client:message', new mensaje(usuario, chatCode));
+	iniciarInteraccion = (idPublicacion, contenido) => {
+		fetch('/chats', {
+			method: 'POST',
+			body: JSON.stringify({
+				emisor: usuario,
+				idPublicacion,
+				idUsuarioReceptor: document.querySelector('#idau').innerHTML,
+				emailUsuarioReceptor: document.querySelector('#corr').innerHTMLL,
+				contenido,
+				multimedia: []
+			}),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		// .then( resHTTP => resHTTP.json() )
+		.then( resJSON => console.log(resJSON) );
 	};
 })

@@ -17,15 +17,15 @@ DELIMITER $$
 create procedure post_chat_chat(idPublicacion int unsigned) begin
 	SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
     START TRANSACTION;
-		INSERT INTO CHAT (CHAT_PUBLICACION, CHAT_ACTIVIDAD, CHAT_USUARIOS_ACTIVOS) VALUES (idPublicacion, NULL, 2);
+		INSERT INTO CHAT (CHAT_PUBLICACION, CHAT_ULTIMA_ACTIVIDAD, CHAT_USUARIOS_ACTIVOS) VALUES (idPublicacion, NULL, 2);
         SELECT MAX(CHAT_ID) as idChat FROM CHAT;
     COMMIT;
 end;
 $$
 
 DELIMITER $$
-create procedure post_inte_interaccion(idChat int unsigned, idUsuario int unsigned) begin
-	INSERT INTO INTERACCION VALUES (idChat, idUsuario, 1);
+create procedure post_inte_interaccion(idChat int unsigned, idUsuario int unsigned, notificacion bool) begin
+	INSERT INTO INTERACCION VALUES (idChat, idUsuario, 1, notificacion);
 end;
 $$
 

@@ -83,7 +83,7 @@ create procedure put_emp_photo( ruc varchar(11), photo varchar(50) ) begin
 end;
 
 create procedure get_usu_usuario( userId int unsigned ) begin
-	SELECT USU_ID, EMP_UBICACION, EMP_ENTIDAD, USU_EMPRESA, USU_TELEFONO, USU_CELULAR, USU_NOMBRE, USU_APELLIDO1, USU_APELLIDO2, CAR_NOMBRE as USU_CARGO, USU_CORREO, USU_FOTO FROM USUARIO 
+	SELECT USU_ID as id, EMP_UBICACION as ubicacionEmpresa, EMP_ENTIDAD as nombreEmpresa, USU_EMPRESA as rucEmpresa, USU_TELEFONO as telefono, USU_CELULAR as celular, USU_NOMBRE as nombre, USU_APELLIDO1 as apellido1, USU_APELLIDO2 as apellido2, CAR_NOMBRE as cargo, USU_CORREO as correo, USU_FOTO as foto FROM USUARIO 
     JOIN CARGO ON USU_CARGO = CAR_ID
     JOIN EMPRESA ON USU_EMPRESA = EMP_RUC WHERE USU_ID = userID;
 end;

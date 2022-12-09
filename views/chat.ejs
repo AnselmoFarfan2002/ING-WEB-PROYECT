@@ -8,26 +8,11 @@
 	<div class="container-fluid my-3">
 		<div class="input-group mb-3">
 			<input type="text" class="form-control" id="mensaje" placeholder="Escriba una mensaje" aria-label="Escriba un mensaje" aria-describedby="button-addon2">
-			<button class="btn btn-primary" type="button" id="button-addon2">Enviar</button>
+			<button class="btn btn-primary" type="button" id="button-addon2" onclick="mensajear()">Enviar</button>
 		</div>
 	</div>
 
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/chat/mensajes.js"></script>
-	<script type="text/javascript">		
-		btn = document.getElementById('button-addon2');
-		btn.addEventListener('click',function(){
-			a = "afarfanp@unjbg.edu.pe";
-			b = document.getElementById('mensaje').value;
-			output = document.getElementById('output')
-
-			socket.emit('client:message', {msg: b, to: a, from: socket.auth.usurname});
-		})
-
-		/*const mensajear = (a,b) => {
-			socket.emit('client:message', {msg: b, to: a, from: socket.auth.usurname});
-		};*/
-
-	</script>
 </body>
 </html>

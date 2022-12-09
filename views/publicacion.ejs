@@ -36,18 +36,58 @@
 	  </div>
 	  <ul class="list-group list-group-flush">
 	    <li id="auth" class="list-group-item">An item</li>
+	    <li id="corr" class="list-group-item d-none">An item</li>
+	    <li id="idau" class="list-group-item d-none">An item</li>
 	    <li id="fech" class="list-group-item">A second item</li>
 	    <li id="prec" class="list-group-item">A third item</li>
 	    <li id="cate" class="list-group-item">A third item</li>
 	  </ul>
 	  <div class="card-body" >
-	    <a href="mis-conversaciones" class="card-link">Enviar mensaje</a>
+	    <a class="card-link"  data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a>
+	  </div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+
+	      <div class="modal-body">
+			<div class="col-auto">
+				<label for="inputPassword2" class="visually-hidden">Password</label>
+				<input type="text" class="form-control" id="contenidoMensaje" >
+			</div>
+
+			<div class="col-auto">
+				<button class="btn btn-primary mb-3" id="iniciarInteraccionButton" onclick="sendMSG()">Enviar mensaje</button>
+			</div>
+	      </div>
+
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div>
 	  </div>
 	</div>
 </body>
 
+<% if(session) { %>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/js/chat/mensajes.js"></script>
+<% } %>
+
 <script type="text/javascript">
 	let publicacionID = parseInt('<%= id %>');
+	
+	const sendMSG = () => {
+		iniciarInteraccion(publicacionID, document.getElementById('contenidoMensaje').value);
+	}
+
 	fetch(`/publicaciones?id=${publicacionID}`)
 	.then( res => res.json() )
 	.then( publicacion => {
@@ -55,6 +95,8 @@
 		document.querySelector('#titu').innerHTML = publicacion.PUBLI_TITULO;
 		document.querySelector('#desc').innerHTML = publicacion.PUBLI_DESCRIPCION;
 		document.querySelector('#auth').innerHTML = publicacion.PUBLI_AUTOR;
+		document.querySelector('#corr').innerHTML = publicacion.PUBLI_EMAIL;
+		document.querySelector('#idau').innerHTML = publicacion.PUBLI_USUID;
 		document.querySelector('#fech').innerHTML = publicacion.PUBLI_FECHA;
 		document.querySelector('#prec').innerHTML = publicacion.PUBLI_PRECIO;
 		document.querySelector('#cate').innerHTML = publicacion.PUBLI_CATEGORIA;
