@@ -11,19 +11,19 @@
 </head>
 <body>
 	<%- include('base.ejs') %>	
-	<div class="container">
+	<div class="container-chat">
 		<div class="leftSide">
 			<div class="btn-functions">
 				<div class="d-grid gap-2 d-md-block">
-					<button class="btn btn-primary" type="button">Ordenes de ventas</button>
-					<button class="btn btn-primary" type="button">Ordenes de compras</button>
+					<button class="btn btn-primary" type="button">Ventas</button>
+					<button class="btn btn-primary" type="button">Compras</button>
 				</div>
 			</div>
 
 			<div class="chatlist">
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -38,7 +38,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -53,7 +53,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -68,7 +68,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -83,7 +83,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -98,7 +98,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -113,7 +113,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -128,7 +128,7 @@
 				</div>
 				<div class="block">
 					<div class="imgbox">
-						<img src="images/fondo.jpg" class="cover">
+						<img src="images/fondo.jpg">
 					</div>
 
 					<div class="details">
@@ -144,7 +144,11 @@
 			</div>
 		</div>
 
-		<div class="rigthSide">
+		<div id="mediumSide">
+			<div class="user-actions">
+				<i class="fa-solid fa-circle-info" id="button-info"></i>			
+			</div>
+
 			<div class="chatbox">
 				<div class="msg my-message">
 					<p>Hola, sigue el producto disponible?</p>
@@ -179,6 +183,30 @@
 				</div>
 			</div>
 		</div>
+
+		<div id="rightSide" class="text-center">
+			<div class="user-img">
+				<img src="images/fondo.jpg" class="img-fluid">
+			</div>
+
+			<div class="card border border-0">
+				<div class="card-body">
+					Nombre del usuario
+				</div>
+				<div class="card-body">
+					Correo del usuario
+				</div>
+				<div class="card-body">
+					Nombre de la empresa
+				</div>
+				<div class="card-body">
+					900120120
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
+
+<script src="js/chat-interface.js"></script>
+<script src="https://kit.fontawesome.com/b6dddbbb98.js" crossorigin="anonymous"></script>
