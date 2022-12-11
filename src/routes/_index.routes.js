@@ -9,6 +9,7 @@ app.use( require('./usuarios') )
 app.use( require('./publicaciones') )
 app.use( require('./sesiones') )
 app.use( require('./chats') )
+app.use( require('./interacciones') )
 
 app.use( require('./interfaces') )
 

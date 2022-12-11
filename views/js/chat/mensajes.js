@@ -16,6 +16,7 @@ socket.onAny((event, ...args) => {
 
 var usuario;
 var iniciarInteraccion;
+var enviarMensaje;
 
 fetch('/usuarios', {method: 'GET'})
 .then( res => res.json() )
@@ -42,4 +43,8 @@ fetch('/usuarios', {method: 'GET'})
 		// .then( resHTTP => resHTTP.json() )
 		.then( resJSON => console.log(resJSON) );
 	};
-})
+});
+
+enviarMensaje = () => {
+	
+}
