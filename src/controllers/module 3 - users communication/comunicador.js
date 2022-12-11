@@ -18,7 +18,6 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
             chat = JSON.parse(chat.toString());
             chat.mensajes.push({
                 emisor: reqBody.emisor.id,
-                idPublicacion: reqBody.idPublicacion,
                 contenido: reqBody.contenido,
                 multimedia: reqBody.multimedia,
                 hora: reqBody.horaDia,
@@ -49,8 +48,7 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
 } else {
     socket.on('client:message', mensaje => {
         socket.to( mensaje.emailUsuarioReceptor ).emit( 'server:message', {
-            idEmisor: mensaje.idEmisor,
-            idPublicacion: mensaje.idPublicacion,
+            idChat: mensaje.idChat,
             contenido: mensaje.contenido,
             multimedia: mensaje.multimedia
         });

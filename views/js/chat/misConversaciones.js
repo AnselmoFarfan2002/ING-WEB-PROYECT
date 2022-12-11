@@ -5,6 +5,7 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	resJSON.chats.forEach(chat => {
 		aux = document.createElement('div');
 		aux.classList.add('block');
+		aux.setAttribute('id', `idChat-${chat.idChat}`);
 		aux.setAttribute('onclick',`mostrarChat('${chat.idChat}')`);
 
 		aux.innerHTML = `
@@ -21,14 +22,14 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 					<p>
 					  ${chat.contacto.nombre}
 					</p>
+					<div class="d-none correoContacto">${chat.contacto.correo}</div>
+					<div class="d-none idPublicacion">${chat.idPublicacion}</div>
 				</div>
 			</div>
 		`;
 
 		cajaChats.appendChild(aux);
 	})
-		
-	console.log(resJSON);
 });
 
 const mostrarChat = idChat => {
@@ -38,7 +39,11 @@ const mostrarChat = idChat => {
 		nodo.classList.add('d-none');
 	});
 
-	if ( document.getElementById(`idChat-${idChat}`) === null ) {
+	if ( document.querySelector(`#chatsBoxes #idChat-${idChat}`) === null ) {
+		document.querySelector('#botonEnviar').removeAttribute('onclick');
+		document.querySelector('#botonEnviar').setAttribute('disabled','true')
+		document.querySelector('#contenidoMensaje').setAttribute('disabled','true')
+
 		// CREACION DE CAJA DE CHAT
 		aux = document.createElement('div');
 		aux.classList.add('chatbox');
@@ -108,8 +113,15 @@ const mostrarChat = idChat => {
 					</div>
 				`
 			});
-			console.log(resJSON)
+
+			document.querySelector('#botonEnviar').removeAttribute('disabled')
+			document.querySelector('#contenidoMensaje').removeAttribute('disabled')
+			document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
+				'${document.querySelector(`.chatlist #idChat-${idChat} .correoContacto`).innerHTML}',
+				 ${idChat}
+			)`);
 		});
-	} else document.getElementById(`idChat-${idChat}`).classList.remove('d-none');
+
+	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
 }
 

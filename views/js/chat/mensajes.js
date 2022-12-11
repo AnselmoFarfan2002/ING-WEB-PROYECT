@@ -10,10 +10,6 @@ class mensaje {
 const URL = "/";
 const socket = io(URL, { autoConnect: false });
 
-socket.onAny((event, ...args) => {
-  console.log(event, args);
-});
-
 var usuario;
 var iniciarInteraccion;
 var enviarMensaje;
@@ -22,7 +18,7 @@ fetch('/usuarios', {method: 'GET'})
 .then( res => res.json() )
 .then( res => {
 	usuario = { ...res }
-	socket.auth = {username: usuario.USU_CORREO};			
+	socket.auth = {username: usuario.correo};	
 	socket.connect();
 
 	iniciarInteraccion = (idPublicacion, contenido) => {
@@ -45,6 +41,26 @@ fetch('/usuarios', {method: 'GET'})
 	};
 });
 
-enviarMensaje = () => {
-	
+enviarMensaje = (emailUsuarioReceptor, idChat) => {
+	socket.emit( 'client:message', {
+		idEmisor: usuario.id,
+		idChat,
+		emailUsuarioReceptor,
+		contenido: document.querySelector('#contenidoMensaje').value,
+		multimedia: []
+	})
 }
+
+socket.on('server:message', mensaje => {
+	console.log(mensaje);
+	let aux = document.createElement('div');
+	aux.classList.add('msg');
+	aux.classList.add('frnd-message');
+	aux.innerHTML =  `
+		<p class="placeholder-glow">
+		  ${mensaje.contenido}
+		</p>
+	`;
+
+	document.querySelector(`#chatsBoxes #idChat-${mensaje.idChat}`).appendChild(aux);
+})

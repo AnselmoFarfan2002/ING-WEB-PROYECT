@@ -26,7 +26,8 @@ controllers.CARGAR_CHATS_DE_USUARIO = (req, res) => {
                                     ultimoMensaje: chat.mensajes[chat.length - 1], 
                                     contacto: {
                                         foto: rows[0][0].foto,
-                                        nombre: rows[0][0].contacto
+                                        nombre: rows[0][0].contacto,
+                                        correo: rows[0][0].correo
                                     }
                                 }
 
@@ -51,7 +52,6 @@ controllers.DAR_CHAT = (req, res) => {
         mysqlConnection.query('SELECT chatPolice(?,?) as acceso', [req.session.userId, req.params.idChat], (err, rows) => {
             if(err) res.send({msg: 'Ha ocurrido un error en su solicitud', status: -1})
             else {
-                console.log(rows)
                 if(rows[0].acceso) {
                     fs.readFile('./chats/' + req.params.idChat + '.txt', (err, chat) => {
                         if(err) res.send({msg: 'Ha ocurrido un error en su solicitud', status: -1})

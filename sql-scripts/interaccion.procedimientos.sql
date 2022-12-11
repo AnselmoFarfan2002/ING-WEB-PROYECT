@@ -48,7 +48,7 @@ end; $$
 
 DELIMITER $$
 create procedure get_inte_usuario(idUsuarioNoDeseado int unsigned, idChat int unsigned) begin
-	SELECT concat_ws(" ", USU_NOMBRE, USU_APELLIDO1, USU_APELLIDO2) AS contacto, USU_FOTO as foto FROM INTERACCION JOIN USUARIO ON USU_ID = INT_USUARIO WHERE idChat = INT_CHAT AND INT_USUARIO != idUsuarioNoDeseado;
+	SELECT concat_ws(" ", USU_NOMBRE, USU_APELLIDO1, USU_APELLIDO2) AS contacto, USU_FOTO as foto, USU_CORREO AS correo FROM INTERACCION JOIN USUARIO ON USU_ID = INT_USUARIO WHERE idChat = INT_CHAT AND INT_USUARIO != idUsuarioNoDeseado;
 end;
 $$
 
