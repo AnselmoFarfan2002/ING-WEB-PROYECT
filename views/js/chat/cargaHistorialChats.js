@@ -1,4 +1,4 @@
-var cajaChats = document.querySelector('.chatlist');
+var cajaChats = document.querySelector('#chatListVenta');
 
 fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	let aux;
@@ -9,19 +9,18 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		aux.setAttribute('onclick',`mostrarChat('${chat.idChat}')`);
 
 		aux.innerHTML = `
-			<div class="imgbox">
-				<img src="images/posts-photos/${chat.fotos}" class="cover">
+			<div class="imgChat">
+				<img src="images/posts-photos/${chat.fotos}" class="userProduct">
+				<img src="images/profile-photos/${chat.contacto.foto}" class="userRequest">
 			</div>
 
-			<div class="details">
-				<div class="listHead">
-					<h4>${chat.titulo}</h4>
-					<p class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</p>
+			<div class="msgChat">
+				<div class="titleChat">
+					<b><span>${chat.titulo}</span></b>
+					<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
 				</div>
-				<div class="owner-product" style="width: 150px">
-					<p>
-					  ${chat.contacto.nombre}
-					</p>
+				<div class="usernameChat">
+					<span>${chat.contacto.nombre}</span>
 					<div class="d-none correoContacto">${chat.contacto.correo}</div>
 					<div class="d-none idPublicacion">${chat.idPublicacion}</div>
 				</div>
@@ -33,8 +32,14 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 });
 
 const mostrarChat = idChat => {
+	// oculta aviso inicial
+	const mainBox = document.getElementById('contentChat1');
+	const mainBoxChat = document.getElementById('contentChat2');
+	mainBox.classList.add('d-none');
+	mainBoxChat.classList.add('d-block');
+	mainBoxChat.classList.remove('d-none');
 	// oculta todos los chats
-	document.querySelectorAll('#chatsBoxes .chatbox').forEach( nodo => {
+	document.querySelectorAll('#chatsBoxes .chatBox').forEach( nodo => {
 		nodo.classList.remove('d-none');
 		nodo.classList.add('d-none');
 	});
@@ -46,7 +51,7 @@ const mostrarChat = idChat => {
 
 		// CREACION DE CAJA DE CHAT
 		aux = document.createElement('div');
-		aux.classList.add('chatbox');
+		aux.classList.add('chatBox');
 		aux.setAttribute('id', `idChat-${idChat}`);
 
 		aux.innerHTML = `
@@ -67,7 +72,6 @@ const mostrarChat = idChat => {
 				  <span class="placeholder col-12">CARGANDO - CARGANDO </span>
 				</p>
 			</div>
-
 
 			<div class="msg frnd-message">
 				<p class="placeholder-glow">
@@ -100,13 +104,13 @@ const mostrarChat = idChat => {
 			aux.innerHTML = '';
 			resJSON.chat.mensajes.forEach( mensaje => {
 				if (mensaje.emisor != usuario.id) aux.innerHTML +=  `
-					<div class="msg frnd-message">
+					<div class="msg my-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
 						</p>
 					</div>
 				`; else aux.innerHTML +=  `
-					<div class="msg my-message">
+					<div class="msg frnd-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
 						</p>
@@ -117,7 +121,7 @@ const mostrarChat = idChat => {
 			document.querySelector('#botonEnviar').removeAttribute('disabled')
 			document.querySelector('#contenidoMensaje').removeAttribute('disabled')
 			document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
-				'${document.querySelector(`.chatlist #idChat-${idChat} .correoContacto`).innerHTML}',
+				'${document.querySelector(`.chatList #idChat-${idChat} .correoContacto`).innerHTML}',
 				 ${idChat}
 			)`);
 		});
@@ -125,3 +129,6 @@ const mostrarChat = idChat => {
 	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
 }
 
+const datosUsuario = idUsuario => {
+
+}
