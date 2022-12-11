@@ -107,12 +107,14 @@ const mostrarChat = idChat => {
 					<div class="msg my-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
+						  <br><span>${mensaje.hora}</span>
 						</p>
 					</div>
 				`; else aux.innerHTML +=  `
 					<div class="msg frnd-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
+						  <br><span>${mensaje.hora}</span>
 						</p>
 					</div>
 				`
