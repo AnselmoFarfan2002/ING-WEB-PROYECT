@@ -42,25 +42,43 @@ fetch('/usuarios', {method: 'GET'})
 });
 
 enviarMensaje = (emailUsuarioReceptor, idChat) => {
+	let inputMsg = document.querySelector('#contenidoMensaje');
 	socket.emit( 'client:message', {
 		idEmisor: usuario.id,
 		idChat,
 		emailUsuarioReceptor,
-		contenido: document.querySelector('#contenidoMensaje').value,
+		contenido: inputMsg.value,
 		multimedia: []
 	})
-}
 
-socket.on('server:message', mensaje => {
-	console.log(mensaje);
 	let aux = document.createElement('div');
 	aux.classList.add('msg');
-	aux.classList.add('frnd-message');
+	aux.classList.add('my-message');
 	aux.innerHTML =  `
 		<p class="placeholder-glow">
-		  ${mensaje.contenido}
+		  ${inputMsg.value}
 		</p>
 	`;
 
-	document.querySelector(`#chatsBoxes #idChat-${mensaje.idChat}`).appendChild(aux);
+	inputMsg.value = '';
+	inputMsg.focus();
+
+	document.querySelector(`#chatsBoxes #idChat-${idChat}`).appendChild(aux);
+}
+
+socket.on('server:message', mensaje => {
+	chat = document.querySelector(`#chatsBoxes #idChat-${mensaje.idChat}`);
+	if (chat === null) notificar(mensaje.idChat);
+	else {
+		aux = document.createElement('div');
+		aux.classList.add('msg');
+		aux.classList.add('frnd-message');
+		aux.innerHTML =  `
+			<p class="placeholder-glow">
+			  ${mensaje.contenido}
+			</p>
+		`;
+
+		chat.appendChild(aux);
+	}
 })

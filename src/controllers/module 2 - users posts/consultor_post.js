@@ -3,7 +3,6 @@ const controllers = {};
 
 controllers.OBTENER_DATOS_PUBLICACION = (req, res) => {
     if( req.query.id ){
-        console.log('asd')
         mysqlConnection.query('call get_pub_publicacion(?)', req.query.id, (err, rows) => {
             if( err ) {
                 console.log(err); 
