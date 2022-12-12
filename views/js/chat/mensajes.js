@@ -28,7 +28,7 @@ fetch('/usuarios', {method: 'GET'})
 				emisor: usuario,
 				idPublicacion,
 				idUsuarioReceptor: document.querySelector('#idau').innerHTML,
-				emailUsuarioReceptor: document.querySelector('#corr').innerHTMLL,
+				emailUsuarioReceptor: document.querySelector('#corr').innerHTML,
 				contenido,
 				multimedia: []
 			}),
@@ -82,3 +82,5 @@ socket.on('server:message', mensaje => {
 		chat.appendChild(aux);
 	}
 })
+
+socket.on('server:launch:chat', pushHeadChat)
