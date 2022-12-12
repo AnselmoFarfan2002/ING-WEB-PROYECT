@@ -29,17 +29,10 @@ const indexarChat = chat => {
 	return aux;
 }
 
-const pushBackChat = chat => {
-	cajaChats.appendChild( indexarChat(chat) );
-}
+const pushBackChat = chat => { cajaChats.appendChild( indexarChat(chat) ); }
+const pushHeadChat = chat => { cajaChats.insertBefore( indexarChat(chat), cajaChats.querySelector('.block') ); }
 
-const pushHeadChat = chat => {
-	cajaChats.insertBefore( indexarChat(chat), cajaChats.querySelector('.block') );
-}
-
-const notificar = idChat => {
-	console.log('Se ha notificado al chat ...', idChat)
-}
+const notificar = idChat => { console.log('Se ha notificado al chat ...', idChat) }
 
 document.querySelector('#contenidoMensaje').addEventListener('keydown', tecla => {
 	if (tecla.keyCode === 13) document.getElementById('botonEnviar').click();

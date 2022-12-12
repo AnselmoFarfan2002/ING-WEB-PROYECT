@@ -69,8 +69,7 @@ enviarMensaje = (emailUsuarioReceptor, idChat) => {
 
 socket.on('server:message', mensaje => {
 	chat = document.querySelector(`#chatsBoxes #idChat-${mensaje.idChat}`);
-	if (chat === null) notificar(mensaje.idChat);
-	else {
+	if (chat !== null) {
 		aux = document.createElement('div');
 		aux.classList.add('msg');
 		aux.classList.add('frnd-message');
@@ -83,6 +82,8 @@ socket.on('server:message', mensaje => {
 
 		chat.appendChild(aux);
 	}
+
+	notificar(mensaje.idChat);
 })
 
 socket.on('server:launch:chat', pushHeadChat)

@@ -107,7 +107,16 @@ const mostrarChat = idChat => {
 			)`);
 		});
 
-	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
+	} else {
+		document.querySelector('#botonEnviar').removeAttribute('disabled')
+		document.querySelector('#contenidoMensaje').removeAttribute('disabled')
+		document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
+			'${document.querySelector(`.chatList #idChat-${idChat} .correoContacto`).innerHTML}',
+			 ${idChat}
+		)`);
+			
+		document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none')
+	}; 
 }
 
 const datosUsuario = idUsuario => {
