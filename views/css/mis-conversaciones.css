@@ -17,96 +17,121 @@ body {
 /*-----------LISTA DE CHATS-----------*/
 .container-chat .leftSide{
     position: relative;
-    width: 25%;
-    background: #F4F6FA;
+    width: 30%;
+    background: #fff;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
-.chatlist{
+.headerleftSide{
     position: relative;
-    height: calc(100% - 60px);
+    background: #D7DBE7;
+    width: 100%;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    height: 60px;
+}
+.chatList{
+    position: relative;
+    height: calc(100%-60px);
     overflow-y: auto;
 }
-.chatlist::-webkit-scrollbar {
+.time{
+    font-size: 13px;
+}
+.notifyChat{
+    display: block;
+    width: auto;
+    float: right;
+    background-color: #0765f1;
+    color: #fff;
+    padding: 0 8px;
+    border-radius: 20px;
+}
+.content {
+    display: none;
+}
+.content-active{
+    display: block;
+}
+.chatList::-webkit-scrollbar {
     width: 10px;
 }
-
-.chatlist::-webkit-scrollbar-track {
+.chatList::-webkit-scrollbar-track {
     background-color: #D9D9D9;
 }
 
-.chatlist::-webkit-scrollbar-thumb {
+.chatList::-webkit-scrollbar-thumb {
     background-color: #758DB0;
 }
-.chatlist .block{
+.chatList .block{
+    position: relative;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    width: 100%;
     padding: 10px 10px;
-    cursor: pointer;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
-.chatlist .block:hover{
+.chatList .block:hover{
+    transition: all 200ms linear;
+    cursor: pointer;
     background: #B9BECF;
 }
-.chatlist .block .imgbox{
+.chatList .block .imgChat{
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
     position: relative;
-    width: 100px;
-    height: 80px;
-    overflow: hidden;
     border-radius: 50%;
-    margin-right: 15px;
 }
-.chatlist .block .imgbox img{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.chatlist .block .details{
+.chatList .block .imgChat .userProduct{
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
     position: relative;
-    padding: 10px 10px;
-    width: 70%;
+    border-radius: 50%;
 }
-.chatlist .block .details .listHead{
+.chatList .block .userRequest{
+    position: absolute;
+    display: block;
+    width: 50%;
+    height: 50%;
+    background-color: #ADADAD;
+    bottom: 0;
+    right: 0;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+.chatList .block .msgChat {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.chatList .block .msgChat .titleChat{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2px;
 }
-.chatlist .block .details .listHead h4{
-    font-size: 1.1em;
-    font-weight: 600;
+.chatList .block .msgChat span {
+    display: block;
 }
-.chatlist .block .details .listHead .time{
-    font-size: 0.75em;
-}
-.owner-product{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.owner-product p{
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    font-size: 0.9em;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-/*-----------MENSAJES-----------*/
+/*----------MENSAJES----------*/
 .container-chat #mediumSide{
     position: relative;
-    width: 75%;
-    background-color: #fff;
+    width: 70%;
+    background: #fff;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 #mediumSide.active{
     width: 50%;
 }
-.container-chat #mediumSide .user-actions{
+.container-chat #mediumSide::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.headermediumSide{
     display: flex;
     justify-content: right;
     align-items: center;
@@ -115,28 +140,28 @@ body {
     width: 100%;
     height: 60px;
     background: #D7DBE7;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
 }
-#mediumSide .user-actions i{
-    font-size: 30px;
+.headermediumSide i{
+    font-size: 28px;
     color: #758DB0;
     cursor: pointer;
 }
-.chatbox{
-    position: relative;
+.chatBox{
+    position: absolute;
     width: 100%;
     height: calc(100% - 120px);
     padding: 15px;
+    background-color: #fff;
     overflow-y: auto;
 }
-.chatbox::-webkit-scrollbar {
+.chatBox::-webkit-scrollbar {
     width: 10px;
 }
-.chatbox::-webkit-scrollbar-track {
+.chatBox::-webkit-scrollbar-track {
     background-color: #D9D9D9;
 }
-
-.chatbox::-webkit-scrollbar-thumb {
+.chatBox::-webkit-scrollbar-thumb {
     background-color: #758DB0;
 }
 .msg{
@@ -145,64 +170,71 @@ body {
     width: 100%;
     margin: 5px 0;
 }
+.msg p span{
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;
+    opacity: 0.5;
+}
 .msg p{
     position: relative;
     right: 0;
     text-align: right;
     max-width: 65%;
     padding: 12px;
-    background: #C5CED7;
     border-radius: 10px;
     font-size: 0.9em;
 }
 .my-message{
     justify-content: flex-start;
 }
+.my-message p{
+    background: #C7D6E8;
+}
 .frnd-message{
     justify-content: flex-end;
 }
 .frnd-message p{
+    background: #A3BDDC;
     text-align: left;
 }
-/*-----------CAJA DE BOTONES-----------*/
-.btn-functions{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+.chatInput{
+    background: #D7DBE7;
+    position: absolute;
     width: 100%;
     height: 60px;
-    background: #D7DBE7;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
-}
-/*-----------INPUT DE CHAT-----------*/
-.chat-input{
-    background: #D7DBE7;
-    position: relative;
-    width: 100%;
-    height: 60px;
+    bottom: 0px;
     padding: 15px;
 }
-/*----------INFO DE USUARIO----------*/
+/*----------INICIO DE INTERFAZ----------*/
+#mediumSide .mainBox{
+    width: 100%;
+    height: 100%;
+    background: #fff;
+}
+.mainBox .mainText i{
+    font-size: 50px;
+}
+/*----------INFORMACION DE USUARIO----------*/
 .container-chat #rightSide{
     position: fixed;
     background: #fff;
     right: -900px;
-    width: 25%;
+    width: 20%;
     height: 100%;
 }
 #rightSide.active{
     right: 0px;
 }
-#rightSide .user-img{
+#rightSide .userImg{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 40%;
 }
-#rightSide .user-img img{
-    width: 70%;
-    height: 90%;
+#rightSide .userImg img{
+    width: 80%;
+    height: 80%;
     padding: 10px;
     border-radius: 50%;
 }

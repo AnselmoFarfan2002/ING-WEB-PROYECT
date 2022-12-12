@@ -4,8 +4,14 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 });
 
 const mostrarChat = idChat => {
+	// oculta aviso inicial
+	const mainBox = document.getElementById('contentChat1');
+	const mainBoxChat = document.getElementById('contentChat2');
+	mainBox.classList.add('d-none');
+	mainBoxChat.classList.add('d-block');
+	mainBoxChat.classList.remove('d-none');
 	// oculta todos los chats
-	document.querySelectorAll('#chatsBoxes .chatbox').forEach( nodo => {
+	document.querySelectorAll('#chatsBoxes .chatBox').forEach( nodo => {
 		nodo.classList.remove('d-none');
 		nodo.classList.add('d-none');
 	});
@@ -19,7 +25,7 @@ const mostrarChat = idChat => {
 
 		// CREACION DE CAJA DE CHAT
 		aux = document.createElement('div');
-		aux.classList.add('chatbox');
+		aux.classList.add('chatBox');
 		aux.setAttribute('id', `idChat-${idChat}`);
 
 		aux.innerHTML = `
@@ -40,7 +46,6 @@ const mostrarChat = idChat => {
 				  <span class="placeholder col-12">CARGANDO - CARGANDO </span>
 				</p>
 			</div>
-
 
 			<div class="msg frnd-message">
 				<p class="placeholder-glow">
@@ -75,15 +80,17 @@ const mostrarChat = idChat => {
 			aux.innerHTML = '';
 			resJSON.chat.mensajes.forEach( mensaje => {
 				if (mensaje.emisor != usuario.id) aux.innerHTML +=  `
-					<div class="msg frnd-message">
-						<p class="placeholder-glow">
-						  ${mensaje.contenido}
-						</p>
-					</div>
-				`; else aux.innerHTML +=  `
 					<div class="msg my-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
+						  <br><span>${mensaje.hora}</span>
+						</p>
+					</div>
+				`; else aux.innerHTML +=  `
+					<div class="msg frnd-message">
+						<p class="placeholder-glow">
+						  ${mensaje.contenido}
+						  <br><span>${mensaje.hora}</span>
 						</p>
 					</div>
 				`
@@ -92,7 +99,7 @@ const mostrarChat = idChat => {
 			document.querySelector('#botonEnviar').removeAttribute('disabled')
 			document.querySelector('#contenidoMensaje').removeAttribute('disabled')
 			document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
-				'${document.querySelector(`.chatlist #idChat-${idChat} .correoContacto`).innerHTML}',
+				'${document.querySelector(`.chatList #idChat-${idChat} .correoContacto`).innerHTML}',
 				 ${idChat}
 			)`);
 		});
@@ -100,3 +107,6 @@ const mostrarChat = idChat => {
 	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
 }
 
+const datosUsuario = idUsuario => {
+
+}
