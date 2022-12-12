@@ -57,6 +57,7 @@ enviarMensaje = (emailUsuarioReceptor, idChat) => {
 	aux.innerHTML =  `
 		<p class="placeholder-glow">
 		  ${inputMsg.value}
+		  <br><span>${(new Date()).toLocaleTimeString()}</span>
 		</p>
 	`;
 
@@ -76,6 +77,7 @@ socket.on('server:message', mensaje => {
 		aux.innerHTML =  `
 			<p class="placeholder-glow">
 			  ${mensaje.contenido}
+			  <br><span>${(new Date(mensaje.fecha)).toLocaleTimeString()}</span>
 			</p>
 		`;
 

@@ -78,19 +78,22 @@ const mostrarChat = idChat => {
 
 		fetch(`/chats/${idChat}`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 			aux.innerHTML = '';
+
 			resJSON.chat.mensajes.forEach( mensaje => {
+				fecha = new Date(mensaje.fecha);
+
 				if (mensaje.emisor != usuario.id) aux.innerHTML +=  `
-					<div class="msg my-message">
-						<p class="placeholder-glow">
-						  ${mensaje.contenido}
-						  <br><span>${mensaje.hora}</span>
-						</p>
-					</div>
-				`; else aux.innerHTML +=  `
 					<div class="msg frnd-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
-						  <br><span>${mensaje.hora}</span>
+						  <br><span>${fecha.toLocaleTimeString()}</span>
+						</p>
+					</div>
+				`; else aux.innerHTML +=  `
+					<div class="msg my-message">
+						<p class="placeholder-glow">
+						  ${mensaje.contenido}
+						  <br><span>${fecha.toLocaleTimeString()}</span>
 						</p>
 					</div>
 				`

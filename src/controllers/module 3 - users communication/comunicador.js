@@ -18,8 +18,7 @@ controllers.GUARDAR_MENSAJE = (idChat, mensaje) => new Promise((resolve, reject)
             chat = JSON.parse(chat.toString());
             chat.mensajes.push({
                 ...mensaje,
-                hora: (new Date()).toLocaleString().split(' ')[1],
-                fecha: (new Date()).toLocaleString().split(' ')[0]
+                fecha: (new Date())
             });
 
             chat.length ++;
@@ -50,14 +49,16 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
                 socket.to( reqBody.emailUsuarioReceptor ).emit( 'server:message', {
                     idChat: reqBody.idChat,
                     contenido: reqBody.contenido,
-                    multimedia: reqBody.multimedia
+                    multimedia: reqBody.multimedia,
+                    fecha: (new Date())
                 });
             });
         } else {
             socket.to( reqBody.emailUsuarioReceptor ).emit( 'server:message', {
                 idChat: reqBody.idChat,
                 contenido: reqBody.contenido,
-                multimedia: reqBody.multimedia
+                multimedia: reqBody.multimedia,
+                fecha: (new Date())
             });
         }
 
@@ -77,7 +78,8 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
             socket.to( mensaje.emailUsuarioReceptor ).emit( 'server:message', {
                 idChat: mensaje.idChat,
                 contenido: mensaje.contenido,
-                multimedia: mensaje.multimedia
+                multimedia: mensaje.multimedia,
+                fecha: (new Date())
             });
         }).catch( error => {console.log(error)} );  
     });

@@ -1,4 +1,4 @@
-var cajaChats = document.querySelector('.chatlist');
+var cajaChats = document.querySelector('#chatListVenta');
 
 const indexarChat = chat => {
 	aux = document.createElement('div');
@@ -8,19 +8,18 @@ const indexarChat = chat => {
 
 	fecha = new Date(chat.ultimaActividad);
 	aux.innerHTML = `
-		<div class="imgbox">
-			<img src="images/posts-photos/${chat.fotos}" class="cover">
+		<div class="imgChat">
+			<img src="images/posts-photos/${chat.fotos}" class="userProduct">
+			<img src="images/profile-photos/${chat.contacto.foto}" class="userRequest">
 		</div>
 
-		<div class="details">
-			<div class="listHead">
-				<h4>${chat.titulo}</h4>
+		<div class="msgChat">
+			<div class="titleChat">
+				<b><span>${chat.titulo}</span></b>
 				<p class="time">${fecha.toLocaleDateString()} - ${fecha.toLocaleTimeString().slice(0,5)}</p>
 			</div>
-			<div class="owner-product" style="width: 150px">
-				<p>
-				  ${chat.contacto.nombre}
-				</p>
+			<div class="usernameChat">
+				<span>${chat.contacto.nombre}</span>
 				<div class="d-none correoContacto">${chat.contacto.correo}</div>
 				<div class="d-none idPublicacion">${chat.idPublicacion}</div>
 			</div>

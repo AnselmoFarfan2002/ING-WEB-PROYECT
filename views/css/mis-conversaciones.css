@@ -186,13 +186,13 @@ body {
     font-size: 0.9em;
 }
 .my-message{
-    justify-content: flex-start;
+    justify-content: flex-end;
 }
 .my-message p{
     background: #C7D6E8;
 }
 .frnd-message{
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 .frnd-message p{
     background: #A3BDDC;
