@@ -9,7 +9,7 @@ controllers.toogleChat = (idUser, idChat, visible) => new Promise((resolve, reje
     })
 })
 
-controllers.MOSTRAR_OCULTAR_CHAT = (req, res) => {
+controllers.OCULTAR_CHAT = (req, res) => {
     if(req.session.open === true){
         toogleChat(req.session.userId, req.params.idChat, req.params.visible)
         .then( msg => res.send(msg) )
