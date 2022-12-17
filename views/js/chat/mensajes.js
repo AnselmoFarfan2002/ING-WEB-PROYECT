@@ -28,7 +28,7 @@ fetch('/usuarios', {method: 'GET'})
 				emisor: usuario,
 				idPublicacion,
 				idUsuarioReceptor: document.querySelector('#idau').innerHTML,
-				emailUsuarioReceptor: document.querySelector('#corr').innerHTML,
+				emailUsuarioReceptor: document.querySelector('#corr').innerHTMLL,
 				contenido,
 				multimedia: []
 			}),
@@ -57,7 +57,6 @@ enviarMensaje = (emailUsuarioReceptor, idChat) => {
 	aux.innerHTML =  `
 		<p class="placeholder-glow">
 		  ${inputMsg.value}
-		  <br><span>${(new Date()).toLocaleTimeString()}</span>
 		</p>
 	`;
 
@@ -69,21 +68,17 @@ enviarMensaje = (emailUsuarioReceptor, idChat) => {
 
 socket.on('server:message', mensaje => {
 	chat = document.querySelector(`#chatsBoxes #idChat-${mensaje.idChat}`);
-	if (chat !== null) {
+	if (chat === null) notificar(mensaje.idChat);
+	else {
 		aux = document.createElement('div');
 		aux.classList.add('msg');
 		aux.classList.add('frnd-message');
 		aux.innerHTML =  `
 			<p class="placeholder-glow">
 			  ${mensaje.contenido}
-			  <br><span>${(new Date(mensaje.fecha)).toLocaleTimeString()}</span>
 			</p>
 		`;
 
 		chat.appendChild(aux);
 	}
-
-	notificar(mensaje.idChat);
 })
-
-socket.on('server:launch:chat', pushHeadChat)

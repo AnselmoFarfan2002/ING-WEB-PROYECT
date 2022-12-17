@@ -15,9 +15,9 @@
 	<%- include('base.ejs') %>	
 	<div class="container-chat">
 		<div class="leftSide">
-			<div class="headerleftSide d-flex align-items-center justify-content-evenly">
-				<button class="option option-active btn btn-primary" type="button" id="botonTab1">Ventas</button>
-				<button class="option btn btn-primary" type="button" id="botonTab2">Compras</button>
+			<div class="headerleftSide">
+				<div class="option option-active" id="botonTab1">Ventas</div>
+				<div class="option" id="botonTab2">Compras</div>
 			</div>
 
 			<div class="chatList">
@@ -54,24 +54,7 @@
 		</div>
 
 		<div id="rightSide" class="text-center">
-			<div class="userImg">
-				<img src="images/fondo.jpg" class="img-fluid">
-			</div>
-
-			<div class="card border border-0">
-				<div class="card-body">
-					Nombre del usuario
-				</div>
-				<div class="card-body">
-					Correo del usuario
-				</div>
-				<div class="card-body">
-					Nombre de la empresa
-				</div>
-				<div class="card-body">
-					900120120
-				</div>
-			</div>
+			<!--aqui va la informacion del usuario-->
 		</div>
 	</div>
 </body>
@@ -82,4 +65,4 @@
 <script type="text/javascript" src="/js/chat/cargaHistorialChats.js"></script>
 </html>
 
-<script src="js/chat-interface.js"></script>
+<script src="/js/chat-interface.js"></script>

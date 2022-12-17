@@ -19,7 +19,8 @@ controllers.GUARDAR_MENSAJE = (idChat, mensaje) => new Promise((resolve, reject)
             chat = JSON.parse(chat.toString());
             chat.mensajes.push({
                 ...mensaje,
-                fecha: (new Date())
+                hora: (new Date()).toLocaleString().split(' ')[1],
+                fecha: (new Date()).toLocaleString().split(' ')[0]
             });
 
             chat.length ++;
@@ -79,12 +80,10 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
             contenido: mensaje.contenido,
             multimedia: mensaje.multimedia
         }).then( () => {
-            mysqlConnection.query('call put_inte_notificacion_true(?,?)', [mensaje.idEmisor, mensaje.idChat]);
             socket.to( mensaje.emailUsuarioReceptor ).emit( 'server:message', {
                 idChat: mensaje.idChat,
                 contenido: mensaje.contenido,
-                multimedia: mensaje.multimedia,
-                fecha: (new Date())
+                multimedia: mensaje.multimedia
             });
 
             toogleChat(mensaje.idUsuarioReceptor, mensaje.idChat, true);
@@ -96,7 +95,7 @@ controllers.LANZAR_CHAT = (req, res) => {
     if( req.session.open === true ){
         let msgErr = {msg: 'Ha ocurrido un error, por favor inténtelo más tarde.', status: -1};
         
-        mysqlConnection.query('call get_inte_idChat(?, ?)', [req.body.idPublicacion, req.body.emisor.id], 
+        mysqlConnection.query('call get_idChat(?, ?)', [req.body.idPublicacion, req.body.emisor.id], 
             (err, rows) => new Promise((resolve, reject) => {
                 if(err) reject({msgErr, error: err});
                 else resolve(rows[0]); 
@@ -116,10 +115,8 @@ controllers.LANZAR_CHAT = (req, res) => {
                             else resolve(idChat);
                         });
                     })).then( idChat => {
-                        req.body.emisor.nombre = `${req.body.emisor.nombre} ${req.body.emisor.apellido1} ${req.body.emisor.apellido2}`
                         respuesta = controllers.ENVIAR_MENSAJE(require('../../app'), {
                             idChat,
-                            needLaunch: true,
                             ...req.body
                         })
                         resolve(respuesta);
@@ -131,7 +128,6 @@ controllers.LANZAR_CHAT = (req, res) => {
                 } else {
                     respuesta = controllers.ENVIAR_MENSAJE(require('../../app'), {
                         idChat: filas[0].idChat,
-                        needLaunch: false,
                         ...req.body
                     })
                     resolve(respuesta);

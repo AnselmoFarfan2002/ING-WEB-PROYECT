@@ -1,9 +1,67 @@
+var cajaChats = document.querySelector('#chatListVenta');
+
 fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	let aux;
-	resJSON.chats.forEach(pushBackChat)
+	resJSON.chats.forEach(chat => {
+		aux = document.createElement('div');
+		aux.classList.add('block');
+		aux.setAttribute('id', `idChat-${chat.idChat}`);
+		aux.setAttribute('onclick',`mostrarChat('${chat.idChat}')`);
+
+		aux.innerHTML = `
+			<div class="imgChat">
+				<img src="images/posts-photos/${chat.fotos}" class="userProduct">
+				<img src="images/profile-photos/${chat.contacto.foto}" class="userRequest">
+			</div>
+
+			<div class="msgChat">
+				<div class="titleChat">
+					<b><span>${chat.titulo}</span></b>
+					<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
+				</div>
+				<div class="usernameChat">
+					<span>${chat.contacto.nombre}</span>
+					<div class="userIcon d-grid gap-1 d-md-flex justify-content-md-end">
+						<span class="notifyChat badge text-bg-primary d-none" id="notifyChat-${chat.idChat}">${chat.notificacion}</span>
+
+						<i id="optionsChat-${chat.idChat}" class="optionsChat d-none fa-solid fa-caret-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
+						<ul class="dropdown-menu">
+							<li><div class="dropdown-item" id="deleteChat-${chat.idChat}">Eliminar chat</div></li>
+						</ul>
+					</div>
+					<div class="d-none correoContacto">${chat.contacto.correo}</div>
+					<div class="d-none idPublicacion">${chat.idPublicacion}</div>
+				</div>
+			</div>
+		`;
+
+		cajaChats.appendChild(aux);
+
+		/*-----------NOTIFICACION DE CHAT-----------*/
+		const notifyObj = document.querySelector(`#notifyChat-${chat.idChat}`);
+		if(chat.notificacion == 1){
+			notifyObj.classList.remove('d-none');
+		}
+		/*-----------MOSTRAR OPCIONES-----------*/
+		const optionsBtn = document.querySelector(`#optionsChat-${chat.idChat}`);
+		aux.addEventListener("mouseover", function (){
+			optionsBtn.classList.remove('d-none');
+			optionsBtn.classList.add('d-block');
+		});
+		aux.addEventListener("mouseout", function (){
+			optionsBtn.classList.add('d-none');
+			optionsBtn.classList.remove('d-block');
+		});
+		/*-----------ELIMINAR CHAT-----------*/
+		const deleteBtn = document.querySelector(`#deleteChat-${chat.idChat}`);
+		deleteBtn.addEventListener("click", function (){
+			console.log('Eliminado');
+		});
+	})
 });
 
 const mostrarChat = idChat => {
+	datosUsuario(idChat);
 	// oculta aviso inicial
 	const mainBox = document.getElementById('contentChat1');
 	const mainBoxChat = document.getElementById('contentChat2');
@@ -15,8 +73,6 @@ const mostrarChat = idChat => {
 		nodo.classList.remove('d-none');
 		nodo.classList.add('d-none');
 	});
-
-	socket.emit('client:notification:check', {idChat, idUsuario: usuario.id});
 
 	if ( document.querySelector(`#chatsBoxes #idChat-${idChat}`) === null ) {
 		document.querySelector('#botonEnviar').removeAttribute('onclick');
@@ -72,33 +128,28 @@ const mostrarChat = idChat => {
 			</div>
 		`
 
-		aux.addEventListener('click', () => socket.emit('client:notification:check', {idChat, idUsuario: usuario.id}) );
-		
 		document.getElementById('chatsBoxes').appendChild(aux);
 
 		fetch(`/chats/${idChat}`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 			aux.innerHTML = '';
-
 			resJSON.chat.mensajes.forEach( mensaje => {
-				fecha = new Date(mensaje.fecha);
-
 				if (mensaje.emisor != usuario.id) aux.innerHTML +=  `
-					<div class="msg frnd-message">
-						<p class="placeholder-glow">
-						  ${mensaje.contenido}
-						  <br><span>${fecha.toLocaleTimeString()}</span>
-						</p>
-					</div>
-				`; else aux.innerHTML +=  `
 					<div class="msg my-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
-						  <br><span>${fecha.toLocaleTimeString()}</span>
+						  <br><span>${mensaje.hora}</span>
+						</p>
+					</div>
+				`; else aux.innerHTML +=  `
+					<div class="msg frnd-message">
+						<p class="placeholder-glow">
+						  ${mensaje.contenido}
+						  <br><span>${mensaje.hora}</span>
 						</p>
 					</div>
 				`
 			});
-
+			aux.scrollTop = aux.scrollHeight;
 			document.querySelector('#botonEnviar').removeAttribute('disabled')
 			document.querySelector('#contenidoMensaje').removeAttribute('disabled')
 			document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
@@ -107,18 +158,29 @@ const mostrarChat = idChat => {
 			)`);
 		});
 
-	} else {
-		document.querySelector('#botonEnviar').removeAttribute('disabled')
-		document.querySelector('#contenidoMensaje').removeAttribute('disabled')
-		document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
-			'${document.querySelector(`.chatList #idChat-${idChat} .correoContacto`).innerHTML}',
-			 ${idChat}
-		)`);
-			
-		document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none')
-	}; 
+	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
 }
 
+var userInfo = document.querySelector('#rightSide');
 const datosUsuario = idUsuario => {
+	fetch(`/info-usuario/${idUsuario}`).then( response => response.json()).then( data => {
+		userInfo.innerHTML = `
+			<div class="headerrightSide d-flex align-items-center justify-content-evenly">
+				<span>Informacion del usuario</span>
+			</div>
 
+			<div class="userImg">
+				<img src="images/profile-photos/${data.datos.foto}" class="img-fluid">
+			</div>
+
+			<div class="card border border-0">
+				<div class="card-body">
+					${data.datos.contacto}
+				</div>
+				<div class="card-body">
+					${data.datos.correo}
+				</div>
+			</div>
+		`; 
+	});
 }

@@ -1,0 +1,1 @@
+{"mensajes":[{"emisor":"0000000003","contenido":"mensaje de prueba","multimedia":[],"hora":"10:06:18","fecha":"2022-12-15"},{"emisor":"0000000002","contenido":"nop","multimedia":[],"hora":"10:06:52","fecha":"2022-12-15"}],"length":2}

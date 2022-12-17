@@ -47,6 +47,16 @@ controllers.CARGAR_CHATS_DE_USUARIO = (req, res) => {
     }else res.send({msg: 'None session open', status: -1})
 }
 
+controllers.DAR_INFO_USUARIO = (req,res) => {
+    mysqlConnection.query('call get_inte_usuario(?,?)', [req.session.userId, req.params.idChat], (err, rows) => {
+        if(err) reject({msgErr, err});
+        else {
+            if( err ) console.log(err);
+            else {res.send({datos: rows[0][0]})}
+        };
+    });
+}
+
 controllers.DAR_CHAT = (req, res) => {
     if(req.session.open === true){
         mysqlConnection.query('SELECT chatPolice(?,?) as acceso', [req.session.userId, req.params.idChat], (err, rows) => {

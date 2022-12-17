@@ -7,20 +7,20 @@ let choose = 1;
 
 const changeContent = () =>{
     choose == 1 ?(
-        btn1.classList.value = 'option option-active btn btn-primary',
+        btn1.classList.value = 'option option-active',
         list1.classList.value = 'content content-active'
     )
     :(
-        btn1.classList.value = 'option btn btn-primary',
+        btn1.classList.value = 'option',
         list1.classList.value = 'content'
     )
 
     choose == 2 ?(
-        btn2.classList.value = 'option option-active btn btn-primary',
+        btn2.classList.value = 'option option-active',
         list2.classList.value = 'content content-active'
     )
     :(
-        btn2.classList.value = 'option btn btn-primary',
+        btn2.classList.value = 'option',
         list2.classList.value = 'content'
     )
 }
