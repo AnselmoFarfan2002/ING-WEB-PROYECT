@@ -9,6 +9,7 @@ drop procedure if exists get_inte_interaccion;
 drop procedure if exists get_inte_usuario;
 drop procedure if exists put_inte_notificacion_true;
 drop procedure if exists put_inte_notificacion_false;
+drop procedure if exists put_inte_visible;
 
 DELIMITER $$
 create procedure get_inte_idChat(idPublicacion int unsigned, idUsuario int unsigned) begin
@@ -51,7 +52,7 @@ end; $$
 
 DELIMITER $$
 create procedure get_inte_interaccion(idUsuario int unsigned, idChat int unsigned) begin
-	SELECT INT_CHAT AS idChat, INT_NOTIFICACION AS notificacion, CHAT_PUBLICACION AS idPublicacion, PUBLI_TITULO AS titulo, PUBLI_FOTOS AS fotos, CHAT_ULTIMA_ACTIVIDAD AS ultimaActividad 
+	SELECT INT_CHAT AS idChat, INT_NOTIFICACION AS notificacion, CHAT_PUBLICACION AS idPublicacion, PUBLI_TITULO AS titulo, PUBLI_FOTOS AS fotos, CHAT_ULTIMA_ACTIVIDAD AS ultimaActividad, PUBLI_TIPO AS origenTipo, PUBLI_AUTOR AS idAutor
     FROM INTERACCION JOIN CHAT ON CHAT_ID = INT_CHAT JOIN PUBLICACION ON PUBLI_ID = CHAT_PUBLICACION
     WHERE (INT_VISIBLE = 1 OR INT_NOTIFICACION = 1) AND INT_USUARIO = idUsuario AND INT_CHAT = idChat
     ORDER BY CHAT_ULTIMA_ACTIVIDAD DESC;
@@ -74,4 +75,10 @@ create procedure put_inte_notificacion_false(idUsuarioObjetivo int unsigned, idC
 	UPDATE INTERACCION SET INT_NOTIFICACION = false WHERE INT_CHAT = idChat AND INT_USUARIO = idUsuarioObjetivo;
 end;
 $$
--- CALL get_idChat(1, 1);
+
+DELIMITER $$ 
+create procedure put_inte_visible(idUsuario int unsigned, idChat int unsigned, estado boolean) begin
+	UPDATE INTERACCION SET INT_VISIBLE = estado WHERE INT_CHAT = idChat AND INT_USUARIO = idUsuario;
+    UPDATE CHAT SET CHAT_USUARIOS_ACTIVOS = 1 + estado WHERE CHAT_ID = idChat;
+end;
+$$

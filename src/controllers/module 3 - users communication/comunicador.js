@@ -1,5 +1,6 @@
 const fs = require('fs');
 const mysqlConnection = require("../../config/db-connection");
+const { toogleChat } = require('./editor');
 const controllers = {}
 
 controllers.CARGAR_COMUNICADOR = (req, res) => {
@@ -46,12 +47,15 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
                     ...rows[0][0]
                 });
 
-                socket.to( reqBody.emailUsuarioReceptor ).emit( 'server:message', {
-                    idChat: reqBody.idChat,
-                    contenido: reqBody.contenido,
-                    multimedia: reqBody.multimedia,
-                    fecha: (new Date())
-                });
+                mysqlConnection.query('call get_usu_usuario_byEmail(?)', reqBody.emailUsuarioReceptor, (err, usuarioAttrs) => {
+                    if(err) console.log(err);
+                    else {
+                        socket.to( reqBody.emisor.correo ).emit( 'server:launch:chat', {
+                            contacto: {correo: usuarioAttrs[0][0].correo, foto: usuarioAttrs[0][0].foto, nombre: `${usuarioAttrs[0][0].nombre} ${usuarioAttrs[0][0].apellido1} ${usuarioAttrs[0][0].apellido2}`},
+                            ...rows[0][0]
+                        });
+                    }
+                })                
             });
         } else {
             socket.to( reqBody.emailUsuarioReceptor ).emit( 'server:message', {
@@ -62,6 +66,7 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
             });
         }
 
+        toogleChat(reqBody.idUsuarioReceptor, reqBody.idChat, true);
         return {msg: 'Mensaje enviado', status: 1}
     }).catch( err => {
         console.log(err.error, err);
@@ -81,6 +86,8 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
                 multimedia: mensaje.multimedia,
                 fecha: (new Date())
             });
+
+            toogleChat(mensaje.idUsuarioReceptor, mensaje.idChat, true);
         }).catch( error => {console.log(error)} );  
     });
 }}

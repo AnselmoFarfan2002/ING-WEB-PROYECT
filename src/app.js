@@ -35,7 +35,7 @@ app.use( require('./routes/_index.routes') );
 const server = http.createServer( app ) // as socket adapter
 server.listen( app.get('port'), () => { console.log(`Servidor iniciado : ${app.get('port')}`) } );
 
-module.exports = server;
+// module.exports = server;
 
 //creating sockets
 const { Server } = require('socket.io')
