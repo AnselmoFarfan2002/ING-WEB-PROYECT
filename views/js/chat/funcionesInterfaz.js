@@ -1,5 +1,11 @@
 const notificar = idChat => {
-	console.log('Se ha notificado al chat ...', idChat)
+	/*-----------NUEVA NOTIFICACION-----------*/
+	const notifyObj = document.querySelector(`#notifyChat-${idChat}`);
+	socket.emit( 'client:notification:new', {
+		idUsuario: usuario.id,
+		idChat,
+	})
+	notifyObj.classList.remove('d-none');
 }
 
 document.querySelector('#contenidoMensaje').addEventListener('keydown', tecla => {

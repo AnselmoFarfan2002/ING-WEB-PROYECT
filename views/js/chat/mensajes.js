@@ -78,6 +78,7 @@ socket.on('server:message', mensaje => {
 			  ${mensaje.contenido}
 			</p>
 		`;
+		notificar(mensaje.idChat);
 
 		chat.appendChild(aux);
 	}

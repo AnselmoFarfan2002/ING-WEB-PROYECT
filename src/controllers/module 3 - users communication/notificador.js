@@ -7,4 +7,10 @@ controllers.MARCAR_COMO_LEIDO = socket => {
     })
 }
 
+controllers.NUEVA_NOTIFICACION = socket => {
+    socket.on('client:notification:new', req => {
+        mysqlConnection.query('call put_inte_notificacion_true(?,?)', [req.idUsuario, req.idChat]);
+    })
+}
+
 module.exports = controllers;

@@ -22,11 +22,11 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 				<div class="usernameChat">
 					<span>${chat.contacto.nombre}</span>
 					<div class="userIcon d-grid gap-1 d-md-flex justify-content-md-end">
-						<span class="notifyChat badge text-bg-primary d-none" id="notifyChat-${chat.idChat}">${chat.notificacion}</span>
+						<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
 
 						<i id="optionsChat-${chat.idChat}" class="optionsChat d-none fa-solid fa-caret-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
 						<ul class="dropdown-menu">
-							<li><div class="dropdown-item" id="deleteChat-${chat.idChat}">Eliminar chat</div></li>
+							<li><div class="dropdown-item" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</div></li>
 						</ul>
 					</div>
 					<div class="d-none correoContacto">${chat.contacto.correo}</div>
@@ -52,15 +52,18 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 			optionsBtn.classList.add('d-none');
 			optionsBtn.classList.remove('d-block');
 		});
-		/*-----------ELIMINAR CHAT-----------*/
-		const deleteBtn = document.querySelector(`#deleteChat-${chat.idChat}`);
-		deleteBtn.addEventListener("click", function (){
-			console.log('Eliminado');
-		});
 	})
 });
 
 const mostrarChat = idChat => {
+	/*-----------MARCAR COMO LEIDO-----------*/
+	const notifyObj = document.querySelector(`#notifyChat-${idChat}`);
+	socket.emit( 'client:notification:check', {
+		idUsuario: usuario.id,
+		idChat,
+	});
+	notifyObj.classList.add('d-none');
+	/*-----------MOSTRAR DATOS DE USUARIO-----------*/
 	datosUsuario(idChat);
 	// oculta aviso inicial
 	const mainBox = document.getElementById('contentChat1');
@@ -159,6 +162,16 @@ const mostrarChat = idChat => {
 		});
 
 	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
+}
+
+const ocultarChat = idChat => {
+	const hideBlock = document.querySelector(`#idChat-${idChat}`);
+	fetch(`/interacciones/chat/${idChat}/visible/${0}`,{  
+		method: "PATCH",
+	}) 
+	.then(response => response.json())  
+	.then(data => console.log(data),);
+	hideBlock.classList.add('d-none');
 }
 
 var userInfo = document.querySelector('#rightSide');

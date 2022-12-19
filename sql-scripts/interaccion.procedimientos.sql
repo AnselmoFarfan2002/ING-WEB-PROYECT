@@ -66,7 +66,7 @@ $$
 
 DELIMITER $$
 create procedure put_inte_notificacion_true(idUsuarioEmisor int unsigned, idChat int unsigned) begin
-	UPDATE INTERACCION SET INT_NOTIFICACION = true WHERE INT_CHAT = idChat AND INT_USUARIO != idUsuarioEmisor;
+	UPDATE INTERACCION SET INT_NOTIFICACION = true WHERE INT_CHAT = idChat AND INT_USUARIO = idUsuarioEmisor;
 end;
 $$
 
