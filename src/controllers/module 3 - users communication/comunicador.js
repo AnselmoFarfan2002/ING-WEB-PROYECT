@@ -56,7 +56,7 @@ controllers.ENVIAR_MENSAJE = (socket, reqBody) => { if(reqBody) {
                             ...rows[0][0]
                         });
                     }
-                })                
+                })
             });
         } else {
             socket.to( reqBody.emailUsuarioReceptor ).emit( 'server:message', {

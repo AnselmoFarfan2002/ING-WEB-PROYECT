@@ -10,7 +10,6 @@ drop procedure if exists get_pub_publicacion;
 drop procedure if exists get_pub_publicaciones;
 
 DELIMITER $$
-
 create procedure post_pub_publicacion( 
 	autor int unsigned,
     titulo varchar(100),
