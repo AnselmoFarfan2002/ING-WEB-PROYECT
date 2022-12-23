@@ -39,6 +39,7 @@ $$
 DELIMITER $$
 create procedure put_inte_interaccion(idUsuarioReceptor int unsigned, idChat int unsigned) begin
 	UPDATE interaccion SET INT_NOTIFICACION = 1 WHERE INT_CHAT = idChat AND INT_USUARIO = idUsuarioReceptor;
+    UPDATE CHAT SET CHAT_ULTIMA_ACTIVIDAD = now() WHERE CHAT_ID = idChat;
 end;
 $$
 

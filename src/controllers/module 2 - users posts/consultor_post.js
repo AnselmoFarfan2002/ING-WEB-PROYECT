@@ -13,9 +13,6 @@ controllers.OBTENER_DATOS_PUBLICACION = (req, res) => {
 }
 
 controllers.LISTAR_PUBLICACION = (req, res) => { 
-    let i = req.query.i;
-    let n = req.query.n;
-
     let userQuery = `SELECT 
         PUBLI_ID AS id, 
         concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) AS autor, 
