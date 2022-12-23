@@ -1,7 +1,6 @@
 const { Router } = require("express");
-const session = require("express-session");
-
 const router = Router();
+
 router.route('/')
 .get( (req, res) => {res.redirect('/inicio');} );
 
@@ -29,4 +28,5 @@ router.route('/mi-perfil')
 
 router.route('/recuperar-contrasenia')
 .get( (req,res) => req.session.open === true ? res.redirect('/inicio') : res.render('recuperar-contrasenia.ejs', {session: false}))
+
 module.exports = router;
