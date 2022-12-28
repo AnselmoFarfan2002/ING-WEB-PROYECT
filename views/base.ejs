@@ -4,8 +4,9 @@
     </li>
     <% if(!session) { %>
         <li class="nav-item">
-          <a class="nav-link" href="iniciar-sesion">Iniciar sesion</a>
+          <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Iniciar sesion</a>
         </li>
+
         <li class="nav-item">
             <a class="nav-link" href="registrar-usuario">Registrarse</a>
         </li>
@@ -22,12 +23,6 @@
     <% } %>
 </ul>
 
-<script type="text/javascript">
-  document.getElementById('linkExit').addEventListener('click',logout);
-
-  function logout(){    
-    fetch('/sesiones', {
-      method: 'DELETE'
-    })
-  }
-</script>
+<% if(!session) { %>
+  <%- include('./parts/login.ejs') %>  
+<% } %>
