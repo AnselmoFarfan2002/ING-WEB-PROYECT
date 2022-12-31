@@ -9,15 +9,15 @@
 	<script src="https://kit.fontawesome.com/b6dddbbb98.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" type="text/css" href="css/mis-conversaciones.css">
 
-	<title>Mis conversaciones</title>
+	<title>Mis conversaciones | S4O</title>
 </head>
 <body>
 	<%- include('base.ejs') %>	
 	<div class="container-chat">
 		<div class="leftSide">
 			<div class="headerleftSide">
-				<div class="option option-active" id="botonTab1">Ventas</div>
-				<div class="option" id="botonTab2">Compras</div>
+				<div class="option option-active" id="botonTab1">Mis ventas</div>
+				<div class="option" id="botonTab2">Mis compras</div>
 			</div>
 
 			<div class="chatList">
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<div id="mediumSide">
 			<div class="mainBox text-center d-flex align-items-center justify-content-center" id="contentChat1">
 				<div class="mainText">
@@ -37,23 +37,21 @@
 					<p>Envie y reciba mensajes sobre sus ordenes de venta o de compras</p>
 				</div>
 			</div>
-			<div class="mainBoxchat d-none" id="contentChat2">
+			<div class="mainBoxchat d-none">
 				<div class="headermediumSide">
-					<i class="fa-solid fa-circle-info" id="button-info"></i>
+					<i class="fa-solid fa-circle-info" alt="Mostrar informacion del usuario" id="button-info"></i>
 				</div>
 				<div class="tab-content" id="chatsBoxes">
 					<!-- aquí se generan los contenidos de los chats -->
 				</div>
 				<div class="chatInput">
-					<div class="input-group mb-3">
-						<input type="text" class="form-control" placeholder="Escriba un mensaje" aria-label="Recipient's username" aria-describedby="botonEnviar" id="contenidoMensaje">
-						<button class="btn btn-primary" type="button" id="botonEnviar">Enviar</button>
-					</div>
+					<input type="text" class="form-control mx-1" placeholder="Escriba un mensaje" aria-label="Recipient's username" aria-describedby="botonEnviar" id="contenidoMensaje">
+					<button class="btn btn-primary rounded-circle mx-3" type="button" id="botonEnviar"><i class="fa-solid fa-chevron-right"></i></button>
 				</div>	
 			</div>		
 		</div>
 
-		<div id="rightSide" class="text-center">
+		<div class="infoUsuario text-center">
 			<!--aqui va la informacion del usuario-->
 		</div>
 	</div>
