@@ -1,4 +1,5 @@
 var cajaChats = document.querySelector('#chatListVenta');
+var cajaChatsC = document.querySelector('#chatListCompra');
 
 fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	let aux;
@@ -6,44 +7,73 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		aux = document.createElement('div');
 		aux.classList.add('block');
 		aux.setAttribute('id', `idChat-${chat.idChat}`);
-		aux.setAttribute('onclick',`mostrarChat('${chat.idChat}')`);
 
-		aux.innerHTML = `
-			<div class="imgChat">
-				<img src="images/posts-photos/${chat.fotos}" class="userProduct">
-				<img src="images/profile-photos/${chat.contacto.foto}" class="userRequest">
-			</div>
-
-			<div class="msgChat">
-				<div class="titleChat">
-					<b><span>${chat.titulo}</span></b>
-					<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
-				</div>
-				<div class="usernameChat">
-					<span>${chat.contacto.nombre}</span>
-					<div class="userIcon d-grid gap-1 d-md-flex justify-content-md-end">
-						<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
-
-						<i id="optionsChat-${chat.idChat}" class="optionsChat d-none fa-solid fa-caret-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
-						<ul class="dropdown-menu">
-							<li><div class="dropdown-item" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</div></li>
-						</ul>
+		if(usuario.id == chat.idAutor){
+			aux.innerHTML = `
+				<div class="infoBlock" onclick="mostrarChat('${chat.idChat}')">
+					<div class="imgChat">
+						<img src="images/posts-photos/${chat.fotos}" class="userProduct">
+						<img src="images/profile-photos/${chat.contacto.foto}" class="userRequest">
 					</div>
-					<div class="d-none correoContacto">${chat.contacto.correo}</div>
-					<div class="d-none idPublicacion">${chat.idPublicacion}</div>
+
+					<div class="msgChat">
+						<div class="titleChat">
+							<b><span>${chat.titulo}</span></b>
+							<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
+						</div>
+						<div class="usernameChat">
+							<span>${chat.contacto.nombre}</span>
+							<div class="d-none correoContacto">${chat.contacto.correo}</div>
+							<div class="d-none idPublicacion">${chat.idPublicacion}</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		`;
+				<div class="userInfo btn-group dropup">
+					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
+					<i id="optionsChat-${chat.idChat}" class="optionsChat fa-solid fa-chevron-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
+					<ul class="dropdown-menu dropdown-menu-lg-end">
+						<li><button class="dropdown-item" type="button" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</button></li>
+					</ul>
+				</div>
+			`;
+			cajaChats.appendChild(aux);
+		}else{
+			aux.innerHTML = `
+				<div class="infoBlock" onclick="mostrarChat('${chat.idChat}')">
+					<div class="imgChat">
+						<img src="images/posts-photos/${chat.fotos}" class="userProduct">
+						<img src="images/profile-photos/${chat.contacto.foto}" class="userRequest">
+					</div>
 
-		cajaChats.appendChild(aux);
-
-		/*-----------NOTIFICACION DE CHAT-----------*/
+					<div class="msgChat">
+						<div class="titleChat">
+							<b><span>${chat.titulo}</span></b>
+							<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
+						</div>
+						<div class="usernameChat">
+							<span>${chat.contacto.nombre}</span>
+							<div class="d-none correoContacto">${chat.contacto.correo}</div>
+							<div class="d-none idPublicacion">${chat.idPublicacion}</div>
+						</div>
+					</div>
+				</div>
+				<div class="userInfo btn-group dropup">
+					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
+					<i id="optionsChat-${chat.idChat}" class="optionsChat fa-solid fa-chevron-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
+					<ul class="dropdown-menu dropdown-menu-lg-end">
+						<li><button class="dropdown-item" type="button" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</button></li>
+					</ul>
+				</div>
+			`;
+			cajaChatsC.appendChild(aux);
+		}
+		//-----------NOTIFICACION DE CHAT-----------
 		const notifyObj = document.querySelector(`#notifyChat-${chat.idChat}`);
 		if(chat.notificacion == 1){
 			notifyObj.classList.remove('d-none');
 		}
-		/*-----------MOSTRAR OPCIONES-----------*/
-		const optionsBtn = document.querySelector(`#optionsChat-${chat.idChat}`);
+		//-----------MOSTRAR OPCIONES-----------
+		/*const optionsBtn = document.querySelector(`#optionsChat-${chat.idChat}`);
 		aux.addEventListener("mouseover", function (){
 			optionsBtn.classList.remove('d-none');
 			optionsBtn.classList.add('d-block');
@@ -51,7 +81,7 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		aux.addEventListener("mouseout", function (){
 			optionsBtn.classList.add('d-none');
 			optionsBtn.classList.remove('d-block');
-		});
+		});*/
 	})
 });
 
@@ -63,13 +93,13 @@ const mostrarChat = idChat => {
 		idChat,
 	});
 	notifyObj.classList.add('d-none');
-	/*-----------MOSTRAR DATOS DE USUARIO-----------*/
+	/*-----------CARGAR DATOS DE USUARIO-----------*/
 	datosUsuario(idChat);
 	// oculta aviso inicial
-	const mainBox = document.getElementById('contentChat1');
-	const mainBoxChat = document.getElementById('contentChat2');
+	const mainBox = document.querySelector('.mainBox');
+	const mainBoxChat = document.querySelector('.mainBoxchat');
+	mainBoxChat.setAttribute('id', `contentChat2-${idChat}`);
 	mainBox.classList.add('d-none');
-	mainBoxChat.classList.add('d-block');
 	mainBoxChat.classList.remove('d-none');
 	// oculta todos los chats
 	document.querySelectorAll('#chatsBoxes .chatBox').forEach( nodo => {
@@ -164,22 +194,14 @@ const mostrarChat = idChat => {
 	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
 }
 
-const ocultarChat = idChat => {
-	const hideBlock = document.querySelector(`#idChat-${idChat}`);
-	fetch(`/interacciones/chat/${idChat}/visible/${0}`,{  
-		method: "PATCH",
-	}) 
-	.then(response => response.json())  
-	.then(data => console.log(data),);
-	hideBlock.classList.add('d-none');
-}
-
-var userInfo = document.querySelector('#rightSide');
+var userInfo = document.querySelector('.infoUsuario');
 const datosUsuario = idUsuario => {
 	fetch(`/info-usuario/${idUsuario}`).then( response => response.json()).then( data => {
+		userInfo.setAttribute("id",`idBox-${idUsuario}`);
 		userInfo.innerHTML = `
 			<div class="headerrightSide d-flex align-items-center justify-content-evenly">
 				<span>Informacion del usuario</span>
+				<span><i id="closeInfo" class="fa-solid fa-xmark"></i></span>
 			</div>
 
 			<div class="userImg">
@@ -194,6 +216,28 @@ const datosUsuario = idUsuario => {
 					${data.datos.correo}
 				</div>
 			</div>
+
+			<div class="deleteChat">
+				<button type="button" class="btn btn-outline-danger" onclick="ocultarChat(${idUsuario})">Eliminar chat</button>
+			</div>
 		`; 
 	});
+}
+
+const ocultarChat = idChat => {
+	const hideBlock = document.querySelector(`#idChat-${idChat}`);
+	const showMainSection = document.querySelector('#contentChat1');
+	const hideMediumSection = document.getElementById(`contentChat2-${idChat}`);
+	const hideMedium = document.getElementById('mediumSide');
+	const hiderightSide = document.getElementById(`idBox-${idChat}`);
+	fetch(`/interacciones/chat/${idChat}/visible/${0}`,{  
+		method: "PATCH",
+	}) 
+	.then(response => response.json())  
+	.then(data => console.log(data))
+	hideBlock.classList.add('d-none');
+	hiderightSide.classList.remove('active');
+	hideMediumSection.classList.add('d-none');
+	hideMedium.classList.remove('active');
+	showMainSection.classList.remove('d-none');
 }

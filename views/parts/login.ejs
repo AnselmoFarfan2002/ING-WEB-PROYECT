@@ -1,0 +1,40 @@
+<!-- Modal -->
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Identificarse</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="correo" placeholder="name@example.com">
+          <label for="correo">Correo electrónico</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="pass" placeholder="Password">
+          <label for="pass">Contraseña</label>
+        </div>
+
+        <div class="form-text text-danger" id="respuesta"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="iniciarSesion()">Iniciar sesión</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  const iniciarSesion = () => {
+    fetch('/sesiones', {
+      method: 'POST',
+      body: JSON.stringify({ 
+        email: document.querySelector('#correo').value,
+        pass: document.querySelector('#pass').value  
+      }),
+      headers: { 'Content-Type': 'application/json' }
+    }).then( resHTTP => resHTTP.json() ).then( resJSON => {document.getElementById('respuesta').innerHTML = resJSON.msg;})
+  }
+</script>

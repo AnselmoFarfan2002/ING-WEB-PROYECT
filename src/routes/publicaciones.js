@@ -15,7 +15,7 @@ const uploader = multer({
 });
 
 const m2 = {};
-m2.consultor = require('../controllers/module 2 - users posts/consultor_post');
+m2.consultor = require('../controllers/module 2 - users posts/consultor');
 m2.creador  = require('../controllers/module 2 - users posts/creador');
 m2.editor   = require( '../controllers/module 2 - users posts/editor' );
 m2.eliminador   = require( '../controllers/module 2 - users posts/eliminador' );

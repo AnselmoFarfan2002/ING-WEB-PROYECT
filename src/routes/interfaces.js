@@ -11,7 +11,7 @@ router.route('/publicacion')
 .get( (req, res) => res.render('publicacion.ejs', { session: req.session.open, id: req.query.id}) );
 
 router.route('/iniciar-sesion')
-.get( (req,res) =>  res.render('iniciar-sesion-ejemplo.ejs', {session: req.session.open}))
+.get( (req,res) =>  res.render('iniciar-sesion.ejs', {session: req.session.open}))
 .post( (req,res) => res.redirect('/inicio') )
 
 router.route('/cerrar-sesion')
@@ -28,5 +28,7 @@ router.route('/mi-perfil')
 
 router.route('/recuperar-contrasenia')
 .get( (req,res) => req.session.open === true ? res.redirect('/inicio') : res.render('recuperar-contrasenia.ejs', {session: false}))
+
+router.route('/*').get( (req, res) => res.redirect('/inicio') );    
 
 module.exports = router;

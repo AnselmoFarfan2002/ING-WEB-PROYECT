@@ -28,6 +28,10 @@ controllers.LISTAR_PUBLICACION = (req, res) => {
     if(req.query.idAutor){ 
         filters.push('PUBLI_AUTOR'); 
         values.push(req.query.idAutor); }
+    else if(req.query.self == true){ 
+        filters.push('PUBLI_AUTOR'); 
+        values.push(req.session.userId); }
+
     if(req.query.precio){ 
         filters.push('PUBLI_PRECIO'); 
         values.push(req.query.precio); }        
@@ -43,6 +47,8 @@ controllers.LISTAR_PUBLICACION = (req, res) => {
         filters.forEach((e, i) => {userQuery += ` ${e} = ? `; if(i < filters.length - 1) userQuery += 'AND';});
         userQuery = mysqlConnection.format(userQuery, values);
     }
+
+    if(req.query.self == false){ userQuery += ` AND PUBLI_AUTOR != ${req.session.userId} `; }
 
     if(req.query.fecha){ 
         userQuery += ` AND DATE(PUBLI_FECHA) = ? `;  
@@ -62,7 +68,6 @@ controllers.LISTAR_PUBLICACION = (req, res) => {
     } 
 
     mysqlConnection.query(userQuery, (err, rows, info) => {
-        console.log(userQuery);
         if (err) {
             console.log(err);
             res.send({ msg: 'Solicitud inválida', status: -1 } )
