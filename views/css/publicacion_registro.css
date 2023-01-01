@@ -1,0 +1,18 @@
+#sub_contenido{
+    width: 100%;
+    max-width: 800px;
+    height: 840px;
+    margin-right: 180px;
+    margin-bottom: 40px auto;
+    padding: 40px;
+}
+
+#contenido{
+    justify-content: center;   
+}
+
+.for .caja_centrada{
+    justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
+}
