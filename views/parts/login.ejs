@@ -35,6 +35,9 @@
         pass: document.querySelector('#pass').value  
       }),
       headers: { 'Content-Type': 'application/json' }
-    }).then( resHTTP => resHTTP.json() ).then( resJSON => {document.getElementById('respuesta').innerHTML = resJSON.msg;})
+    }).then( resHTTP => resHTTP.json() ).then( resJSON => {
+      if(resJSON.status == 1) window.location.reload();
+      else document.getElementById('respuesta').innerHTML = resJSON.msg;
+    })
   }
 </script>

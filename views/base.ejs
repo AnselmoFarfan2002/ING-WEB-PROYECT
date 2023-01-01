@@ -18,11 +18,19 @@
         <a class="nav-link" href="registrar-publicacion">Crear publicacion</a>
       </li>
       <li class="nav-item">
-        <a id="linkExit" class="nav-link" href="cerrar-sesion">Cerrar sesion</a>
+        <a id="linkExit" class="nav-link" type="button" onclick="closeSession()">Cerrar sesion</a>
       </li>
     <% } %>
 </ul>
 
 <% if(!session) { %>
   <%- include('./parts/login.ejs') %>  
+<% } else { %>
+  <script type="text/javascript">
+    const closeSession = () => {
+      fetch('/sesiones', { method: 'DELETE' }).then(() => {
+        window.location.reload();
+      });
+    }
+  </script>
 <% } %>

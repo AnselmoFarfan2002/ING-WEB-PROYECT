@@ -29,7 +29,7 @@ controllers.INICIAR_SESION = (req, res) => {
                             req.session.userId = data[0].USU_ID;
                             req.session.empresa = data[0].USU_EMPRESA;
                             
-                            resolve({ msg, stauts: 1 });
+                            resolve({ msg, status: 1 });
                         }).catch( err => console.log(err) )
                     );
                 break;
