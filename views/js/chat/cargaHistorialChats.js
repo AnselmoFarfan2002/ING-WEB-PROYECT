@@ -31,7 +31,7 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 				<div class="userInfo btn-group dropup">
 					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
 					<i id="optionsChat-${chat.idChat}" class="optionsChat fa-solid fa-chevron-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
-					<ul class="dropdown-menu dropdown-menu-lg-end">
+					<ul class="dropdown-menu">
 						<li><button class="dropdown-item" type="button" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</button></li>
 					</ul>
 				</div>
@@ -60,7 +60,7 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 				<div class="userInfo btn-group dropup">
 					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
 					<i id="optionsChat-${chat.idChat}" class="optionsChat fa-solid fa-chevron-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
-					<ul class="dropdown-menu dropdown-menu-lg-end">
+					<ul class="dropdown-menu">
 						<li><button class="dropdown-item" type="button" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</button></li>
 					</ul>
 				</div>
@@ -72,16 +72,6 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		if(chat.notificacion == 1){
 			notifyObj.classList.remove('d-none');
 		}
-		//-----------MOSTRAR OPCIONES-----------
-		/*const optionsBtn = document.querySelector(`#optionsChat-${chat.idChat}`);
-		aux.addEventListener("mouseover", function (){
-			optionsBtn.classList.remove('d-none');
-			optionsBtn.classList.add('d-block');
-		});
-		aux.addEventListener("mouseout", function (){
-			optionsBtn.classList.add('d-none');
-			optionsBtn.classList.remove('d-block');
-		});*/
 	})
 });
 
@@ -196,12 +186,12 @@ const mostrarChat = idChat => {
 
 var userInfo = document.querySelector('.infoUsuario');
 const datosUsuario = idUsuario => {
-	fetch(`/info-usuario/${idUsuario}`).then( response => response.json()).then( data => {
+	fetch(`/chats/${idUsuario}/contacto`).then( response => response.json()).then( data => {
 		userInfo.setAttribute("id",`idBox-${idUsuario}`);
 		userInfo.innerHTML = `
-			<div class="headerrightSide d-flex align-items-center justify-content-evenly">
-				<span>Informacion del usuario</span>
+			<div class="headerrightSide">
 				<span><i id="closeInfo" class="fa-solid fa-xmark"></i></span>
+				<span>Informacion del usuario</span>
 			</div>
 
 			<div class="userImg">
@@ -221,6 +211,11 @@ const datosUsuario = idUsuario => {
 				<button type="button" class="btn btn-outline-danger" onclick="ocultarChat(${idUsuario})">Eliminar chat</button>
 			</div>
 		`; 
+		const closeBtn = document.querySelector('#closeInfo');
+		closeBtn.addEventListener('click',()=>{
+			document.querySelector('.infoUsuario').classList.toggle('active');
+			document.getElementById('mediumSide').classList.toggle('active');
+		});
 	});
 }
 
