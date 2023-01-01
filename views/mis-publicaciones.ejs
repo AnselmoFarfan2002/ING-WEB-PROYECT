@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Mis publicaciones</title>
+        <meta charset="UTF‐8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="css/publicacion_registro.css"> 
+    </head>
+    
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <%- include('base.ejs') %>
+
+        <div id="contenido" class="d-flex justify-content-left">
+            <div id="sub_contenido">
+
+                <!-- Título para entender que es el registro para crear publicación -->
+                <div class="caja_centrada py-3 pb-4" id="titulo">
+                    <p class="text-start fw-bold fs-1">Mis publicaciones</p>
+                </div>
+
+                <div class="mb-0" id="mis_publicaciones">
+                    <!-- dentro de este div, se colocarán las publicaciones -->
+                </div>
+            </div>
+        </div>
+    </body>
+
+    
+    <script type="text/javascript">
+        fetch('/publicaciones?self=1')
+        .then( res => res.json() )
+        .then( mis_publicaciones => {
+            //mis_publicaciones = Object.entries(mis-publicaciones);
+            //console.log(mis_publicaciones)
+    
+            mis_publicaciones.forEach( publicacion => {
+                console.log(publicacion)
+                //publicacion = publicacion[1];
+                publicacion.fotos = JSON.parse(publicacion.fotos);
+    
+                let fotos = "";
+                publicacion.fotos.forEach( foto => {
+                    fotos += `<img class="figure-img img-fluid rounded" style="width: 260px; height: 260px;" src="/images/posts-photos/${foto}">`;
+                } );
+    
+                publicacion = `
+                    <div class="mb-0">
+                        <div class="row row-cols-1 row-cols-sm-2">
+                            <div class="col">
+                                <div id="imagen" class="text-center">
+                                    ${fotos}
+                                </div>
+                            </div>
+        
+                            <div class="col">
+                                <ul class="list-group list-group-flush">
+                                    <li id="titulo" class="list-group-item">Nombre de publicación: ${publicacion.titulo} </li>
+                                    <li id="categoria" class="list-group-item">Categoría: ${publicacion.categoria}</li>
+                                    <li id="tipo" class="list-group-item">Subcategoría: ${publicacion.categoriaSuperior?publicacion.categoriaSuperior:"No se presenta"}</li>
+                                    <li id="negociabilidad" class="list-group-item">Negociable: 
+                                            <input class="form-check-input" type="checkbox" role="switch" ${publicacion.negociable?"checked":""} disabled>
+                                    </li>
+                                    <li id="precio" class="list-group-item">Precio: ${publicacion.precio}</li>
+                                    <li class="list-group-item"> 
+                                        <a href="#" class="link-primary">Editar</a> | 
+                                        <a href="#" class="link-primary">Eliminar</a> | 
+                                        <a href="#" class="link-primary">Ocultar</a> | 
+                                        <a href="#" class="link-primary">Refrescar</a>
+                                    </li>
+                                    <br><br>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                `; 
+                document.querySelector('#mis_publicaciones').innerHTML += publicacion;
+            }); 
+            
+        })
+    </script>
+</html>
