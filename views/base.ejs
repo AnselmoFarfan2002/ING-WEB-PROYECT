@@ -24,13 +24,7 @@
 </ul>
 
 <% if(!session) { %>
-  <%- include('./parts/login.ejs') %>  
+  <%- include('./parts/nav.login.ejs') %>  
 <% } else { %>
-  <script type="text/javascript">
-    const closeSession = () => {
-      fetch('/sesiones', { method: 'DELETE' }).then(() => {
-        window.location.reload();
-      });
-    }
-  </script>
+  <script type="text/javascript" src="./js/sesiones.js"></script>
 <% } %>
