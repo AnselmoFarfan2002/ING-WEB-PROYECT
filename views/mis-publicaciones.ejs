@@ -44,19 +44,34 @@
     
                 let fotos = "";
                 publicacion.fotos.forEach( foto => {
-                    fotos += `<img class="figure-img img-fluid rounded" style="width: 260px; height: 260px;" src="/images/posts-photos/${foto}">`;
+                    console.log(foto)
+                    fotos += `
+                    <div class="carousel-item active">
+                        <img src="/images/posts-photos/${foto}" style="height: 280px;" class="d-block w-100">
+                    </div>
+                    `;
                 } );
     
                 publicacion = `
                     <div class="mb-0">
                         <div class="row row-cols-1 row-cols-sm-2">
-                            <div class="col">
-                                <div id="imagen" class="text-center">
-                                    ${fotos}
+                            <div class="col-3">
+                                <div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+                                        ${fotos}
+                                    </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                                 </div>
                             </div>
         
-                            <div class="col">
+                            <div class="col-9">
                                 <ul class="list-group list-group-flush">
                                     <li id="titulo" class="list-group-item">Nombre de publicación: ${publicacion.titulo} </li>
                                     <li id="categoria" class="list-group-item">Categoría: ${publicacion.categoria}</li>
@@ -66,10 +81,49 @@
                                     </li>
                                     <li id="precio" class="list-group-item">Precio: ${publicacion.precio}</li>
                                     <li class="list-group-item"> 
-                                        <a href="#" class="link-primary">Editar</a> | 
-                                        <a href="#" class="link-primary">Eliminar</a> | 
-                                        <a href="#" class="link-primary">Ocultar</a> | 
-                                        <a href="#" class="link-primary">Refrescar</a>
+                                       
+                                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                                            <a href="/publicacion" type="button" class="btn btn-outline-primary">Editar</a>
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#Eliminar" class="link-primary">Eliminar</button>
+                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#Ocultar" class="link-primary">Ocultar</button>
+                                            <button type="button" class="btn btn-outline-primary">Refrescar</button>
+                                        </div>                                        
+
+                                        <div class="modal fade" id="Eliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Eliminar" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="Eliminar">Eliminar publicacion</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estás seguro de eliminar la publicación?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Eliminar</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" id="Ocultar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Ocultar" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="Ocultar">Ocultar publicacion</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estás seguro que quieres ocultar la publicación?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary">Ocultar</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </li>
                                     <br><br>
                                 </ul>
