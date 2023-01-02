@@ -8,7 +8,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="registrar-usuario">Registrarse</a>
+            <a class="nav-link" href="registrarse">Registrarse</a>
         </li>
     <% } else { %> 
       <li class="nav-item">
@@ -18,13 +18,14 @@
         <a class="nav-link" href="registrar-publicacion">Crear publicacion</a>
       </li>
       <li class="nav-item">
-        <a id="linkExit" class="nav-link" type="button" onclick="closeSession()">Cerrar sesion</a>
+        <a id="logOutBtn" class="nav-link" type="button">Cerrar sesion</a>
       </li>
     <% } %>
 </ul>
 
 <% if(!session) { %>
-  <%- include('./parts/nav.login.ejs') %>  
-<% } else { %>
-  <script type="text/javascript" src="./js/sesiones.js"></script>
+  <%- include('./nav.login.ejs') %>
+  <%- include('./nav.login.recovery.ejs') %>  
 <% } %>
+
+<script type="text/javascript" src="./js/sesiones.js"></script>

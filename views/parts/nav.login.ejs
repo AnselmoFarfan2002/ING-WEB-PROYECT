@@ -1,9 +1,9 @@
 <!-- Modal -->
-<div class="modal fade" id="login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="login" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Identificarse</h1>
+        <h1 class="modal-title fs-5" id="loginModalLabel">Identificarse</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -16,18 +16,15 @@
           <label for="pass">Contraseña</label>
         </div>
 
-        <div class="form-text text-align-end"><a href="" class="text-decoration-none">¿Olvidaste tu contraseña?</a></div>
+        <div class="form-text text-align-end"><a type="button" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#recovey">¿Olvidaste tu contraseña?</a></div>
         
         <div class="form-text text-danger" id="respuesta"></div>
       </div>
       <div class="modal-footer">
-        <div class="form-text me-auto">¿No tienes una cuenta? <a href="" class="text-decoration-none">¡Regístrate!</a></div>
-        <button type="button" class="btn btn-primary" onclick="iniciarSesion()">Iniciar sesión</button>
+        <div class="form-text me-auto">¿No tienes una cuenta? <a href="/registrarse" class="text-decoration-none">¡Regístrate!</a></div>
+        <button type="button" class="btn btn-primary" id="logInBtn">Iniciar sesión</button>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
       </div>
-
     </div>
   </div>
 </div>
-
-<script type="text/javascript" src="../js/sesiones.js"></script>

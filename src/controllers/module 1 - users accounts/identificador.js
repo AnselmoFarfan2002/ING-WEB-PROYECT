@@ -52,37 +52,43 @@ controllers.CERRAR_SESION = (req, res) => {
 controllers.RECUPERAR_CONTRASENIA = (req, res) => {
     let contentHTML;
     
-    mysqlConnection.query('call get_usu_contrasenia(?, ?)', [req.query.email, process.env.XLR8], (err, rows) => {
-        if( rows[0].length === 0 ) res.send({status: -1});
-        else {
-            contentHTML = `
-                <div style="width: 316px; height: 330px; background-color: #F6F6F6; border-color: #BEDCDF; border-width: 2px; border-style: solid;">
-                    <div style="padding-top: 24px">
-                        <p style="font-size: 24pt; margin: 0px; font-weight: bold; text-align: center; color: #30818A;">@ SOPORTE @</p>
-                    </div>
-
-                    <img src="https://www.nicepng.com/png/detail/404-4041054_ventas-png-funciones-de-las-ventas.png" style="height: 81px; width: 145px; padding-top: 16pt; padding-left: 86px;"> 
-
-                    <div style="margin-top: 21px; margin-left: 40px; width: 237px; height: 33px; background-color: #BEDCDF; border-radius: 10px; text-align: center; padding-top: 15px;">
-                        <b style="color: #30818A">Su contraseña es...</b>
-                    </div>
-
-                    <div style="margin-top: 15px; margin-left: 40px; width: 237px; height: 33px; background-color: #BEDCDF; border-radius: 10px; text-align: center; padding-top: 15px;">
-                        <b style="color: #30818A">${rows[0][0].pass}</b>
-                    </div>
-                </div>
-            `;
-
-            postman.sendMail({
-                from: "'Soporte app god' <soporte@takanasoft.tacna.shop>",
-                to: req.query.email,
-                subject: 'Olvide mi contraseña',
-                html: contentHTML
+    mysqlConnection.query('SELECT validarRecuperacion(?,?) as coincidencia', [req.query.email, req.query.ruc], (err, rows) => {
+        if(err) {res.send({msg: 'Ha ocurrido un error durante la solicitud.', status: -1});}
+        else if(rows[0].coincidencia == 1) {
+            mysqlConnection.query('call get_usu_contrasenia(?, ?)', [req.query.email, process.env.XLR8], (err, rows) => {
+                if( rows[0].length === 0 ) res.send({status: -1});
+                else {
+                    contentHTML = `
+                        <div style="width: 316px; height: 330px; background-color: #F6F6F6; border-color: #BEDCDF; border-width: 2px; border-style: solid;">
+                            <div style="padding-top: 24px">
+                                <p style="font-size: 24pt; margin: 0px; font-weight: bold; text-align: center; color: #30818A;">@ SOPORTE @</p>
+                            </div>
+        
+                            <img src="https://www.nicepng.com/png/detail/404-4041054_ventas-png-funciones-de-las-ventas.png" style="height: 81px; width: 145px; padding-top: 16pt; padding-left: 86px;"> 
+        
+                            <div style="margin-top: 21px; margin-left: 40px; width: 237px; height: 33px; background-color: #BEDCDF; border-radius: 10px; text-align: center; padding-top: 15px;">
+                                <b style="color: #30818A">Su contraseña es...</b>
+                            </div>
+        
+                            <div style="margin-top: 15px; margin-left: 40px; width: 237px; height: 33px; background-color: #BEDCDF; border-radius: 10px; text-align: center; padding-top: 15px;">
+                                <b style="color: #30818A">${rows[0][0].pass}</b>
+                            </div>
+                        </div>
+                    `;
+        
+                    postman.sendMail({
+                        from: "'Soporte app god' <soporte@takanasoft.tacna.shop>",
+                        to: req.query.email,
+                        subject: 'Olvide mi contraseña',
+                        html: contentHTML
+                    });
+        
+                    res.send({msg: 'Se ha enviado la contraseña al correo.', status: 1});
+                }
             });
-
-            res.send({status: 1});
-        }
-    });
+        } else res.send({msg: 'Lo sentimos, los datos no coinciden.', status: -1});
+    })
+    
 }
 
 module.exports = controllers;

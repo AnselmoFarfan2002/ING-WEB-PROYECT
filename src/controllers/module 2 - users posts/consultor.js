@@ -12,6 +12,13 @@ controllers.OBTENER_DATOS_PUBLICACION = (req, res) => {
     } else controllers.LISTAR_PUBLICACION(req, res);
 }
 
+controllers.OBTENER_CATEGORIAS = (req, res) => {
+    mysqlConnection.query('SELECT CAT_ID AS id, CAT_NOMBRE AS nombre, CAT_SUPERIOR AS categoriaSuperior FROM CATEGORIA', (err, rows) => {
+        if( err ) console.log(err); 
+        else res.send({...rows})
+    });
+}
+
 controllers.LISTAR_PUBLICACION = (req, res) => { 
     let userQuery = `SELECT 
         PUBLI_ID AS id, 

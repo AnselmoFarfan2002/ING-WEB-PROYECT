@@ -1,0 +1,31 @@
+<!-- Modal -->
+<div class="modal fade" id="recovey" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="recoveryModalLabel">Restablecer contraseña</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating">
+          <input type="email" class="form-control" id="rec-email" placeholder="name@example.com">
+          <label for="email">Correo electrónico</label>
+        </div>
+        <div class="form-text mb-3">Enviaremos la contraseña de este correo al mismo.</div>
+
+        <div class="form-floating">
+          <input type="text" class="form-control" id="rec-ruc" placeholder="2011223373">
+          <label for="recoveyRuc">R.U.C.</label>
+        </div>
+
+        <div class="form-text">Es necesario su RUC para validar su identidad</div>
+        
+        <div class="form-text mt-3" id="rec-response"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="recoveryBtn">Solicitar</button>
+        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#login">Volver</button>
+      </div>
+    </div>
+  </div>
+</div>
