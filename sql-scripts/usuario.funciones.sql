@@ -4,6 +4,7 @@ use LOCAL_DB;
 drop function if exists validar_credenciales;
 drop function if exists validar_registro;
 drop function if exists get_car_id;
+drop function if exists validarRecuperacion;
 
 DELIMITER $$ 
 create function validar_credenciales( email varchar(40), pass varchar(40), keyword varchar(25) ) returns tinyint begin
@@ -16,8 +17,17 @@ create function validar_credenciales( email varchar(40), pass varchar(40), keywo
 	else 
 		return -1;
     end if;
-end;
+end;$$
 
+DELIMITER $$ 
+create function validarRecuperacion( email varchar(40), ruc varchar(11) ) returns tinyint begin
+    -- don't match: 0
+    -- match: 1
+    
+	return (select COUNT( USU_ID ) from USUARIO where USU_CORREO = email AND USU_EMPRESA = ruc);
+end;$$
+
+DELIMITER $$ 
 create function validar_registro(email varchar(40), ruc varchar(11)) returns tinyint begin
 	-- failure: -1 
     -- successful: 1
@@ -31,11 +41,10 @@ create function validar_registro(email varchar(40), ruc varchar(11)) returns tin
 	end if;
 
 	return 1;
-end;
+end;$$
  -- select validar_registro('jamesrod19@gmail.com','09876543121');
  
+DELIMITER $$ 
 create function get_car_id() returns tinyint begin
     return (select CAR_ID FROM CARGO ORDER BY CAR_ID DESC LIMIT 1);
-end;
-
-$$
+end;$$

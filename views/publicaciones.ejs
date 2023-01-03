@@ -5,7 +5,7 @@
 	<%- include('./parts/html.head.bootstrap.ejs')%>
 </head>
 <body>
-	<%- include('base.ejs') %>
+	<%- include('./parts/nav.ejs') %>
 
 	<table class="table" id="publicaciones">
 	  <thead>
@@ -28,8 +28,6 @@
 	fetch('/publicaciones')
 	.then( res => res.json() )
 	.then( publicaciones => {
-		console.log(publicaciones)
-
 		publicaciones.forEach( publicacion => {
 			publicacion.fotos = JSON.parse(publicacion.fotos);
 
@@ -52,6 +50,9 @@
 		    document.querySelector('#publicaciones tbody').innerHTML += fila;
 		}); 
 		
-	})
+	});
+
+	fetch('/categorias').then( resHTTP => resHTTP.json() ).then( resJSON => { console.log(resJSON); } );
 </script>
+
 </html>
