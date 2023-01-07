@@ -207,11 +207,12 @@ body{
     align-items: center;
     position: relative;
     padding: 20px;
-    height: auto;
+    height: 63px;
     width: 100%;
     background-color: #D7DBE7;
 }
 .headermediumSide i{
+    margin-left: 10px;
     font-size: 23px;
     margin-right: 10px;
     color: #562acc;

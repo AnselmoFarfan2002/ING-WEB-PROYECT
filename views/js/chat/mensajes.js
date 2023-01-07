@@ -43,27 +43,41 @@ fetch('/usuarios', {method: 'GET'})
 
 enviarMensaje = (emailUsuarioReceptor, idChat) => {
 	let inputMsg = document.querySelector('#contenidoMensaje');
-	socket.emit( 'client:message', {
-		idEmisor: usuario.id,
-		idChat,
-		emailUsuarioReceptor,
-		contenido: inputMsg.value,
-		multimedia: []
-	})
+	let msg = document.querySelector('#contenidoMensaje').value;
 
-	let aux = document.createElement('div');
-	aux.classList.add('msg');
-	aux.classList.add('my-message');
-	aux.innerHTML =  `
-		<p class="placeholder-glow">
-		  ${inputMsg.value}
-		</p>
-	`;
+	if(msg == "" || msg == " "){
+		console.log("Vacio");
+	}else{
+		socket.emit( 'client:message', {
+			idEmisor: usuario.id,
+			idChat,
+			emailUsuarioReceptor,
+			contenido: inputMsg.value,
+			multimedia: []
+		})
 
-	inputMsg.value = '';
-	inputMsg.focus();
+		let aux = document.createElement('div');
+		aux.classList.add('msg');
+		aux.classList.add('frnd-message');
+		aux.innerHTML =  `
+			<p class="placeholder-glow">
+				${inputMsg.value}
+				<span class="timeL">${new Date().toLocaleTimeString()}</span>
+			</p>
+		`;
 
-	document.querySelector(`#chatsBoxes #idChat-${idChat}`).appendChild(aux);
+		inputMsg.value = '';
+		inputMsg.focus();
+	
+		fetch(`/interacciones/ultima-actividad/${idChat}`,{
+			method: "PATCH"
+		}).then((response) => response.json())
+		.then((json) => console.log(json));
+		hora = new Date();
+		document.querySelector(`#idChat-${idChat} .time`).innerHTML = hora.toLocaleDateString() + " - " + hora.toLocaleTimeString().slice(0,5);
+
+		document.querySelector(`#chatsBoxes #idChat-${idChat}`).appendChild(aux);
+	}
 }
 
 socket.on('server:message', mensaje => {
@@ -75,7 +89,8 @@ socket.on('server:message', mensaje => {
 		aux.classList.add('frnd-message');
 		aux.innerHTML =  `
 			<p class="placeholder-glow">
-			  ${mensaje.contenido}
+				${mensaje.contenido}
+				<span class="timeR">${new Date().toLocaleTimeString()}</span>
 			</p>
 		`;
 		notificar(mensaje.idChat);
