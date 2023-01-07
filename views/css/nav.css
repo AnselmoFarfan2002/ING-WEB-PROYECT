@@ -1,0 +1,20 @@
+.brandTitle{
+    width: 10%;
+}
+.linkItem{
+    width: 100%;
+}
+.linkItem i{
+    color: white;
+    background-color: #002bc6;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 5%;
+}
+.list-group-item:hover{
+    background-color: #e0e3ec;
+    cursor: pointer;
+}
+.navbar-nav i{
+    font-size: 20px;
+}

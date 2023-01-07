@@ -3,25 +3,35 @@
 <head>
 	<title></title>
 	<%- include('./parts/html.head.complements.ejs')%>
+	<link rel="stylesheet" href="css/footer.css">
 </head>
+<style>
+	body{
+		display: grid;
+		min-height: 100vh;
+		grid-template-rows: auto 1fr auto;
+	}
+</style>
 <body>
-	<%- include('./parts/nav.ejs') %>
-
-	<table class="table" id="publicaciones">
-	  <thead>
-	    <tr>
-	      <th scope="col">AUTOR</th>
-	      <th scope="col">FECHA</th>
-	      <th scope="col">TITULO</th>
-	      <th scope="col">PRECIO</th>
-	      <th scope="col">FOTOS</th>
-	      <th scope="col">ACCION</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-
-	  </tbody>
-	</table>
+	<%- include('./parts/nav.dashboard.ejs') %>
+	<div class="containerPublicaciones">
+		<table class="table" id="publicaciones">
+			<thead>
+			  <tr>
+				<th scope="col">AUTOR</th>
+				<th scope="col">FECHA</th>
+				<th scope="col">TITULO</th>
+				<th scope="col">PRECIO</th>
+				<th scope="col">FOTOS</th>
+				<th scope="col">ACCION</th>
+			  </tr>
+			</thead>
+			<tbody>
+	  
+			</tbody>
+		</table>
+	</div>
+	<%- include('./parts/footer.ejs') %>
 </body>
 
 <script type="text/javascript">
