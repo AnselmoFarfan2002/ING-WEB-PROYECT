@@ -32,7 +32,7 @@ $$
 DELIMITER $$
 create procedure post_car_cargo( 
 	idCargo tinyint unsigned ,
-	CAR_NOMBRE varchar(20)
+	CAR_NOMBRE varchar(100)
 ) begin
 	INSERT INTO CARGO VALUES (idCargo, CAR_NOMBRE, 1);
 end; $$

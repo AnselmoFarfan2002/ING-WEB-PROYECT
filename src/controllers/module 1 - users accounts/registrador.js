@@ -3,11 +3,11 @@ const request = require('request');
 const controllers = {};
 
 const validarCaptcha = (req) => new Promise((resolve, reject) => {   
-    request(`https://www.google.com/recaptcha/api/siteverify?
-        secret=${process.env.XLR7}
-        &response=${req.body['g-recaptcha-response']}
-        &remoteip=${req.connection.remoteAddress}`, 
-    (err, res, body) => {
+    request.post({url:'https://www.google.com/recaptcha/api/siteverify', form: {
+        secret: process.env.XLR7,
+        response: req.body['g-recaptcha-response'],
+        remoteip: req.connection.remoteAddress
+    }}, (err, res, body) => {
         body = JSON.parse(body);
         if(body.success !== undefined && !body.success) reject(err);
         else resolve();
@@ -20,14 +20,14 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
         let query = mysqlConnection.format('select validar_registro(?,?) as status', [req.body.correo, req.body.ruc]);
     
         mysqlConnection.query(query, (err, rows, ifield)=>{
-            let msg = ''; //Mensaje
-
             switch(rows[0].status) {
-                case -1: msg = 'La empresa ya ha sido registrada.'; break;
-                case  0: msg = 'El correo ya ha sido registrado'; break;
+                case -1: res.send({ status: -1, msg: 'La empresa ya ha sido registrada.' }); break;
+                case  0: res.send({ status: 0, msg: 'El correo ya ha sido registrado.' }); break;
                 case  1: 
                     mysqlConnection.query('SELECT CAR_NOMBRE FROM CARGO', (err, rows) => new Promise((resolve, reject) => {
+                        rows.forEach((row, i) => { rows[i] = row.CAR_NOMBRE });
                         let cargo = rows.indexOf(req.body.cargo);
+
                         if(cargo === -1) {
                             mysqlConnection.query('call post_car_cargo(?,?)', [rows.length + 1, req.body.cargo], (err) => {
                                 if(err) console.log(err)
@@ -57,15 +57,14 @@ controllers.REGISTRAR_CUENTA = (req, res) => {
                                 req.body.contrasenia,
                                 process.env.XLR8,
                                 'defaultUser.jpg'
-                            ]);
+                            ], err => {
+                                req.body = { email: req.body.correo, pass: req.body.contrasenia}
+                                require('../module 1 - users accounts/identificador').INICIAR_SESION(req, res);
+                            });
                         }).catch( err => console.log(err) ));
                     }));
-
-                    msg = 'Registro exitoso.';    
                 break;
             };
-
-            res.send({ status: rows[0].status, msg });
         });
     })
     .catch(() => {res.send({msg: 'Prueba de captcha fallida', status: -1})})

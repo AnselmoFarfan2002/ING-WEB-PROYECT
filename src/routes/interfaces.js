@@ -18,7 +18,7 @@ router.route('/cerrar-sesion')
 .get( (req,res) => res.redirect('/inicio') )
 
 router.route('/registrarse')
-.get( (req,res) => req.session.open === true ? res.redirect('/inicio') : res.render('registrar-usuario.ejs', {session: false}))
+.get( (req,res) => req.session.open === true ? res.redirect('/inicio') : res.render('registrarse.ejs', {session: false}))
 
 router.route('/registrar-publicacion')
 .get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('registrar-publicacion.ejs', {session: req.session.open}))

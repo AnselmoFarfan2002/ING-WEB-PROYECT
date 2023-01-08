@@ -16,7 +16,7 @@
           </div>
 
           <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="pass" placeholder="Password" required>
+            <input type="password" class="form-control" id="pass" placeholder="Password" pattern="^(?=.*\d)|(?=.*[a-z])|(?=.*[A-Z])|(?=.*[a-zA-Z]).{8,}$" required>
             <label for="pass">Contraseña</label>
             <div class="invalid-feedback"> Ingrese su contraseña. </div>
           </div>

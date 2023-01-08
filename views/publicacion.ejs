@@ -99,14 +99,14 @@
 	.then( res => res.json() )
 	.then( publicacion => {
 		console.log(publicacion)
-		publicacion.PUBLI_FOTOS = JSON.parse(publicacion.PUBLI_FOTOS);
-		document.querySelector('#titulo').innerHTML = publicacion.PUBLI_TITULO;
-		document.querySelector('#descripcion').innerHTML = publicacion.PUBLI_DESCRIPCION;
-		document.querySelector('#autor').innerHTML = publicacion.PUBLI_AUTOR;
-		document.querySelector('#correo').innerHTML = publicacion.PUBLI_EMAIL;
-		document.querySelector('#idUsuario').innerHTML = publicacion.PUBLI_USUID;
-		document.querySelector('#precio').innerHTML = publicacion.PUBLI_PRECIO;
-		document.querySelector('#categoria').innerHTML = publicacion.PUBLI_CATEGORIA;
+		publicacion.fotos = JSON.parse(publicacion.fotos);
+		document.querySelector('#titulo').innerHTML = publicacion.titulo;
+		document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
+		document.querySelector('#autor').innerHTML = publicacion.autor;
+		document.querySelector('#correo').innerHTML = publicacion.email;
+		document.querySelector('#idUsuario').innerHTML = publicacionID;
+		document.querySelector('#precio').innerHTML = publicacion.precio;
+		document.querySelector('#categoria').innerHTML = publicacion.categoria;
 		let fotos = "";
 		publicacion.PUBLI_FOTOS.forEach( foto => {
 			fotos += `

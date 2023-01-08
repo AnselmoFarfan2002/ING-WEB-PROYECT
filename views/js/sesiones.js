@@ -28,12 +28,11 @@ const logOut = () => fetch('/sesiones', { method: 'DELETE' }).then(() => window.
 
 const recovery = () => {
     dataPolice('recovery').then(() => {
-      let inputs = document.querySelectorAll('#recovery input');
-      inputs.forEach( input => { input.setAttribute('disabled','true'); });
+      dissableInputs('recovery');
 
       fetch(`/sesiones?email=${document.querySelector('#rec-email').value}&ruc=${document.querySelector('#rec-ruc').value}`)
       .then( resHTTP => resHTTP.json() ).then( resJSON => {
-        inputs.forEach( input => { input.removeAttribute('disabled'); });
+        enableInputs('recovery');
 
         let respuesta = document.querySelector('#recovery .serverResponse');
         respuesta.classList.remove('d-none');

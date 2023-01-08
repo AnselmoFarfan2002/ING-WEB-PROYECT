@@ -10,4 +10,11 @@ controllers.OBTENER_DATOS = (req, res) => {
     } else res.send({ msg: 'Necesita una iniciar sesión para visualizar su propio perfil.', status: -1 })
 }
 
+controllers.OBTENER_CARGOS = (req, res) => {
+    mysqlConnection.query('SELECT CAR_NOMBRE as cargo FROM CARGO', (err, rows) => {
+        if( err ) console.log(err);
+        else res.send(rows)
+    });
+}
+
 module.exports = controllers;
