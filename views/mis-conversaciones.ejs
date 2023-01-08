@@ -3,18 +3,18 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- CSS only -->
 	<%- include('./parts/html.head.complements.ejs')%>
 	<link rel="stylesheet" type="text/css" href="css/mis-conversaciones.css">
-
-	<title>Mis conversaciones | S4O</title>
+	<title>Mis conversaciones | Survey for Order</title>
 </head>
 <body>
 	<%- include('./parts/nav.ejs') %>
 	<div class="container-chat">
 		<div class="leftSide">
 			<div class="headerleftSide">
-				<div class="option option-active" id="botonTab1">Mis ventas</div>
-				<div class="option" id="botonTab2">Mis compras</div>
+				<div class="option option-active" id="botonTab1">Mis ventas<span class="d-none" id="notifyChats1"></span></div>
+				<div class="option" id="botonTab2">Mis compras<span class="d-none" id="notifyChats2"></span></div>
 			</div>
 
 			<div class="chatList">
@@ -30,13 +30,13 @@
 		<div id="mediumSide">
 			<div class="mainBox text-center d-flex align-items-center justify-content-center" id="contentChat1">
 				<div class="mainText">
-					<i class="fa-solid fa-comment"></i>
-					<p>Envie y reciba mensajes sobre sus ordenes de venta o de compras</p>
+					<i class="fa-regular fa-comment-dots"></i>
+					<p>Envie y reciba mensajes sobre sus ventas o compras</p>
 				</div>
 			</div>
 			<div class="mainBoxchat d-none">
 				<div class="headermediumSide">
-					<i class="fa-solid fa-circle-info" alt="Mostrar informacion del usuario" id="button-info"></i>
+					<!---->
 				</div>
 				<div class="tab-content" id="chatsBoxes">
 					<!-- aquí se generan los contenidos de los chats -->

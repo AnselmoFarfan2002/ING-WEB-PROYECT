@@ -1,27 +1,44 @@
-<ul class="nav justify-content-end">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="inicio">Inicio</a>
-    </li>
-    <% if(!session) { %>
-        <li class="nav-item">
-          <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Iniciar sesion</a>
+<nav class="navbar navbar-expand-lg" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="inicio">Survey<span style="color:red;">4</span>Order</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+      <ul class="navbar-nav">
+        <!--<li class="nav-item">
+          <a class="nav-link" href="#">Ordenes de compra</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Ordenes de venta</a>
+        </li>-->
+      </ul>
 
-        <li class="nav-item">
-            <a class="nav-link" href="registrarse">Registrarse</a>
-        </li>
-    <% } else { %> 
-      <li class="nav-item">
-        <a class="nav-link" href="mi-perfil">Perfil</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="registrar-publicacion">Crear publicacion</a>
-      </li>
-      <li class="nav-item">
-        <a id="logOutBtn" class="nav-link" type="button">Cerrar sesion</a>
-      </li>
-    <% } %>
-</ul>
+      <ul class="navbar-nav justify-content-end">
+        <% if(!session) { %>
+            <li class="nav-item">
+                <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Iniciar sesión</a>
+            </li>
+        <% } else { %> 
+            <li class="nav-item">
+                <a class="nav-link" href="registrar-publicacion"><i class="fa-solid fa-clipboard"></i></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="mis-conversaciones"><i class="fa-solid fa-comments"></i></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" href="mi-perfil"><i class="fa-solid fa-id-card"></i> Perfil</a></li>
+                    <li><a id="logOutBtn" class="dropdown-item" type="button"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></li>
+                </ul>
+            </li>
+        <% } %>
+    </ul>
+  </div>
+</nav>
 
 <% if(!session) { %>
   <%- include('./nav.login.ejs') %>
