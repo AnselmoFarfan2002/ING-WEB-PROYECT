@@ -13,7 +13,11 @@
 	}
 </style>
 <body>
-	<%- include('./parts/nav.dashboard.ejs') %>
+	<%if(session){%>
+		<%- include('./parts/nav.dashboard.ejs') %>
+	<%}else if(!session){%>
+		<%- include('./parts/nav.ejs') %>
+	<%}%>
 	<div class="containerPublicaciones">
 		<table class="table" id="publicaciones">
 			<thead>

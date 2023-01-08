@@ -4,7 +4,7 @@
             <i class="fa-solid fa-bars" style="margin-right:20px;"></i><span id="namePage"></span>
         </a>
         <a class="navbar-brand" href="inicio">Survey<span style="color:red;">4</span>Order</a>
-        <ul class="navbar-nav justify-content-end">
+        <ul class="navbar-nav d-flex flex-row">
             <% if(!session) { %>
                 <li class="nav-item">
                     <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Iniciar sesión</a>
@@ -57,6 +57,9 @@
     }
     else if(URLActual == '/mis-publicaciones'){
         document.getElementById('namePage').innerHTML = 'Mis publicaciones';
+    }
+    else if(URLActual == '/mis-conversaciones'){
+        document.getElementById('namePage').innerHTML = 'Mis conversaciones';
     }
 </script>
 

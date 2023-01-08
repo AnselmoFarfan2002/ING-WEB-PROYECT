@@ -11,7 +11,7 @@ router.route('/dashboard')
 .get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('dashboard.ejs', {session: req.session.open}) )
 
 router.route('/lista-publicaciones')
-.get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('publicaciones.ejs', {session: req.session.open}))
+.get( (req, res) => res.render('publicaciones.ejs', {session: req.session.open}))
 
 router.route('/publicacion')
 .get( (req, res) => res.render('publicacion.ejs', { session: req.session.open, id: req.query.id}) );
