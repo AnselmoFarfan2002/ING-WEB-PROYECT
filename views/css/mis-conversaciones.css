@@ -272,6 +272,7 @@ body{
 .my-message p{
     background: #C7D6E8;
     border-radius: 10px;
+    word-break:break-all;
 }
 .frnd-message{
     justify-content: flex-end;
@@ -279,6 +280,7 @@ body{
 .frnd-message p{
     background: #A3BDDC;
     border-radius: 10px;
+    word-break:break-all;
 }
 .chatInput{
     background: #D7DBE7;

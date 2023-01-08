@@ -96,8 +96,16 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 const mostrarChat = idChat => {
 	/*-----------MARCAR COMO LEIDO-----------*/
 	marcarLeido(idChat);
+	/*-----------CARGAR CHATS RELACIONADOS-----------*/
+	cargarChatsR(idChat);
 	/*-----------CARGAR DATOS DE USUARIO-----------*/
 	datosUsuario(idChat);
+	/*-----------MAS INFORMACION DE USUARIO-----------*/
+	const btn = document.querySelector('#button-info');
+	btn.addEventListener('click', function () {
+		document.querySelector('.infoUsuario').classList.toggle('active');
+		document.getElementById('mediumSide').classList.toggle('active');
+	});
 	// oculta aviso inicial
 	const mainBox = document.querySelector('.mainBox');
 	const mainBoxChat = document.querySelector('.mainBoxchat');
@@ -194,7 +202,20 @@ const mostrarChat = idChat => {
 			)`);
 		});
 
-	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
+	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none');
+}
+
+const cargarChatsR = idChat => {
+	var headerMedium = document.querySelector('.headermediumSide');
+	headerMedium.innerHTML = `
+		<div class="dropdown">
+			<i class="fa-solid fa-users" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">---</a></li>
+			</ul>
+		</div>
+		<i class="fa-solid fa-circle-info" alt="Mostrar informacion del usuario" id="button-info"></i>
+	`;
 }
 
 const datosUsuario = idUsuario => {
