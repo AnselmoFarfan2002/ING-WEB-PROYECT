@@ -9,7 +9,7 @@
 </head>
 
 <body>
-	<%- include('base.ejs') %>
+	<%- include('./parts/nav.ejs') %>
 
 	<div class="card text-center" style="width: 800px; margin:auto; margin-top: 240px;">
 		<div class="card-header">
@@ -17,8 +17,8 @@
 		</div>
 		<div class="card-body">
 			<div class="mb-0">
-				<div class="row row-cols-1 row-cols-sm-2">
-					<div class="col">
+				<div class="row g-0">
+					<div class="col-md-5">
 						<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner bg-dark">
 				
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 
-					<div class="col">
+					<div class="col-md-7">
 						<ul class="list-group list-group-flush">
 							<li class="list-group-item">Nombre de publicación: <a id="titulo"></a></li>
 							<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
@@ -99,16 +99,16 @@
 	.then( res => res.json() )
 	.then( publicacion => {
 		console.log(publicacion)
-		publicacion.PUBLI_FOTOS = JSON.parse(publicacion.PUBLI_FOTOS);
-		document.querySelector('#titulo').innerHTML = publicacion.PUBLI_TITULO;
-		document.querySelector('#descripcion').innerHTML = publicacion.PUBLI_DESCRIPCION;
-		document.querySelector('#autor').innerHTML = publicacion.PUBLI_AUTOR;
-		document.querySelector('#correo').innerHTML = publicacion.PUBLI_EMAIL;
-		document.querySelector('#idUsuario').innerHTML = publicacion.PUBLI_USUID;
-		document.querySelector('#precio').innerHTML = publicacion.PUBLI_PRECIO;
-		document.querySelector('#categoria').innerHTML = publicacion.PUBLI_CATEGORIA;
+		publicacion.PUBLI_fotos = JSON.parse(publicacion.fotos);
+		document.querySelector('#titulo').innerHTML = publicacion.titulo;
+		document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
+		document.querySelector('#autor').innerHTML = publicacion.autor;
+		document.querySelector('#correo').innerHTML = publicacion.email;
+		document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
+		document.querySelector('#precio').innerHTML = publicacion.precio;
+		document.querySelector('#categoria').innerHTML = publicacion.categoria;
 		let fotos = "";
-		publicacion.PUBLI_FOTOS.forEach( foto => {
+		publicacion.PUBLI_fotos.forEach( foto => {
 			fotos += `
 				<div class="carousel-item">
 			      <img src="/images/posts-photos/${foto}" style="height: 300px; margin:auto;" class="d-block w-100">

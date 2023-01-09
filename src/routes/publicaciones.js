@@ -27,7 +27,7 @@ router.route( '/publicaciones' )
 
 router.route( '/publicaciones/:id' )
 .put( m2.editor.EDITAR_DATOS_PUBLICACION )        
-.delete( m2.eliminador.ELIMINAR_PUBLICACION )     
+.delete( m2.eliminador.ELIMINAR_PUBLICACION )
 
 router.route( '/publicaciones/:id/tiempo' )      .patch( m2.refrescador.REFRESCAR_PUBLICACION )          
 router.route( '/publicaciones/:id/visibilidad' ) .patch( m2.editor.ALTERNAR_VISIBILIDAD_PUBLICACION )  

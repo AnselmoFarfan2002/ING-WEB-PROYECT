@@ -26,6 +26,9 @@ router.route('/registrar-publicacion')
 router.route('/mis-publicaciones')
 .get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('mis-publicaciones.ejs', {session: req.session.open}))
 
+router.route('/editar-publicacion')
+.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('editar-publicacion.ejs', { session: req.session.open, id: req.query.id}))
+
 router.route('/mi-perfil')
 .get( (req,res) => req.session.open === true ? res.render('perfil.ejs', {session: req.session.open}) : res.redirect('/inicio'))
 
