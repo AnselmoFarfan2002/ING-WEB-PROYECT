@@ -20,4 +20,14 @@ controllers.OCULTAR_CHAT = (req, res) => {
     } else res.send({msg: 'None session open', status: -1});
 }
 
+controllers.ACTUALIZAR_ACTIVIDAD = (req, res) => {
+    if(req.session.open === true){
+        let qry = "UPDATE chat SET CHAT_ULTIMA_ACTIVIDAD = ? WHERE CHAT_ID = ?";
+
+        mysqlConnection.query(qry, [new Date(), req.params.idChat], (err, rows) => {
+            console.log(rows);
+        })
+    } else res.send({msg: 'None session open', status: -1});
+}
+
 module.exports = controllers;

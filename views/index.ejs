@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <%- include('./parts/html.head.complements.ejs')%>
+    <title>Supplies for Order | API B2B</title>
+</head>
+<body>
+    <%- include('./parts/nav.ejs') %>
+    <div class="containerBody">
+        <section class="bodyInfo">
+            <div class="titleBody">
+                <span>Incrementa el alcance de tu negocio con Supplies for Order</span>
+            </div>
+            <div class="subInfo">
+                <span>
+                    Cientos de negocios emplean Supplies for Order para dar a conocer los distintos productos
+                    que ofrecen, construyendo relaciones empresariales con diversas entidades.
+                </span>
+            </div>
+            <div class="actionBtn">
+                <a class="btn btn-primary" href="registrarse" role="button">Inicie con nosotros</a>
+            </div>
+        </section>
+        <section class="bodyImages">
+            <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner" style="border-top-left-radius: 5%;border-bottom-left-radius: 5%;">
+                    <div class="carousel-item active">
+                        <img src="images/index-photos/imgIndex1.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/index-photos/imgIndex2.jpg" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="images/index-photos/imgIndex3.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <%- include('./parts/footer.ejs') %>
+</body>
+</html>

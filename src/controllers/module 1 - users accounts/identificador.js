@@ -15,7 +15,7 @@ controllers.INICIAR_SESION = (req, res) => {
             
             switch( rows[0].status ) {
                 case -1: msg = 'Usuario no registrado.'; reject({ msg, stauts: -1 }); break;
-                case  0: msg = 'Contraseña incorrecta.'; reject({ msg, stauts:  0 }); break;
+                case  0: msg = 'Usuario o contraseña incorrecta.'; reject({ msg, stauts:  0 }); break;
                 case  1: 
                     msg = 'ur session has already been opened'; 
                     mysqlConnection.query('SELECT USU_ID, USU_EMPRESA FROM USUARIO WHERE USU_CORREO = ?', req.body.email, 

@@ -1,5 +1,6 @@
 var cajaChats = document.querySelector('#chatListVenta');
 var cajaChatsC = document.querySelector('#chatListCompra');
+var contC=0, contV=0;
 
 fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	let aux;
@@ -9,6 +10,9 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		aux.setAttribute('id', `idChat-${chat.idChat}`);
 
 		if(usuario.id == chat.idAutor){
+			if(chat.notificacion == 1){
+				contV=contV+1;
+			}
 			aux.innerHTML = `
 				<div class="infoBlock" onclick="mostrarChat('${chat.idChat}')">
 					<div class="imgChat">
@@ -19,17 +23,18 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 					<div class="msgChat">
 						<div class="titleChat">
 							<b><span>${chat.titulo}</span></b>
-							<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
+							<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${new Date(chat.ultimaActividad).toLocaleTimeString().slice(0,5)}</span>
 						</div>
 						<div class="usernameChat">
 							<span>${chat.contacto.nombre}</span>
 							<div class="d-none correoContacto">${chat.contacto.correo}</div>
 							<div class="d-none idPublicacion">${chat.idPublicacion}</div>
+							<div class="d-none idListaChat">1</div>
 						</div>
 					</div>
 				</div>
 				<div class="userInfo btn-group dropup">
-					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
+					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="notifyPin visually-hidden">${chat.notificacion}</span></span>
 					<i id="optionsChat-${chat.idChat}" class="optionsChat fa-solid fa-chevron-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
 					<ul class="dropdown-menu">
 						<li><button class="dropdown-item" type="button" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</button></li>
@@ -38,6 +43,9 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 			`;
 			cajaChats.appendChild(aux);
 		}else{
+			if(chat.notificacion == 1){
+				contC=contC+1;
+			}
 			aux.innerHTML = `
 				<div class="infoBlock" onclick="mostrarChat('${chat.idChat}')">
 					<div class="imgChat">
@@ -48,17 +56,18 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 					<div class="msgChat">
 						<div class="titleChat">
 							<b><span>${chat.titulo}</span></b>
-							<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${chat.ultimaActividad.slice(11,16)}</span>
+							<span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${new Date(chat.ultimaActividad).toLocaleTimeString().slice(0,5)}</span>
 						</div>
 						<div class="usernameChat">
 							<span>${chat.contacto.nombre}</span>
 							<div class="d-none correoContacto">${chat.contacto.correo}</div>
 							<div class="d-none idPublicacion">${chat.idPublicacion}</div>
+							<div class="d-none idListaChat">2</div>
 						</div>
 					</div>
 				</div>
 				<div class="userInfo btn-group dropup">
-					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="visually-hidden">${chat.notificacion}</span></span>
+					<span class="notifyChat p-2 bg-primary rounded-circle d-none" id="notifyChat-${chat.idChat}"><span class="notifyPin visually-hidden">${chat.notificacion}</span></span>
 					<i id="optionsChat-${chat.idChat}" class="optionsChat fa-solid fa-chevron-down dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false"></i>
 					<ul class="dropdown-menu">
 						<li><button class="dropdown-item" type="button" id="deleteChat-${chat.idChat}" onclick="ocultarChat(${chat.idChat})">Eliminar chat</button></li>
@@ -73,18 +82,30 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 			notifyObj.classList.remove('d-none');
 		}
 	})
+	//-----------CANTIDAD DE CHATS NO LEIDOS-----------
+	if(contV>0){
+		document.getElementById("notifyChats1").classList.remove('d-none');
+		document.getElementById("notifyChats1").innerHTML = contV;
+	}
+	if(contC>0){
+		document.getElementById("notifyChats2").classList.remove('d-none');
+		document.getElementById("notifyChats2").innerHTML = contC;
+	}
 });
 
 const mostrarChat = idChat => {
 	/*-----------MARCAR COMO LEIDO-----------*/
-	const notifyObj = document.querySelector(`#notifyChat-${idChat}`);
-	socket.emit( 'client:notification:check', {
-		idUsuario: usuario.id,
-		idChat,
-	});
-	notifyObj.classList.add('d-none');
+	marcarLeido(idChat);
+	/*-----------CARGAR CHATS RELACIONADOS-----------*/
+	cargarChatsR(idChat);
 	/*-----------CARGAR DATOS DE USUARIO-----------*/
 	datosUsuario(idChat);
+	/*-----------MAS INFORMACION DE USUARIO-----------*/
+	const btn = document.querySelector('#button-info');
+	btn.addEventListener('click', function () {
+		document.querySelector('.infoUsuario').classList.toggle('active');
+		document.getElementById('mediumSide').classList.toggle('active');
+	});
 	// oculta aviso inicial
 	const mainBox = document.querySelector('.mainBox');
 	const mainBoxChat = document.querySelector('.mainBoxchat');
@@ -160,14 +181,14 @@ const mostrarChat = idChat => {
 					<div class="msg my-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
-						  <br><span>${mensaje.hora}</span>
+						  <span class="timeR">${mensaje.hora}</span>
 						</p>
 					</div>
 				`; else aux.innerHTML +=  `
 					<div class="msg frnd-message">
 						<p class="placeholder-glow">
 						  ${mensaje.contenido}
-						  <br><span>${mensaje.hora}</span>
+						  <span class="timeL">${mensaje.hora}</span>
 						</p>
 					</div>
 				`
@@ -181,11 +202,24 @@ const mostrarChat = idChat => {
 			)`);
 		});
 
-	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none'); 
+	} else document.querySelector(`#chatsBoxes #idChat-${idChat}`).classList.remove('d-none');
 }
 
-var userInfo = document.querySelector('.infoUsuario');
+const cargarChatsR = idChat => {
+	var headerMedium = document.querySelector('.headermediumSide');
+	headerMedium.innerHTML = `
+		<div class="dropdown">
+			<i class="fa-solid fa-users" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+			<ul class="dropdown-menu">
+				<li><a class="dropdown-item" href="#">---</a></li>
+			</ul>
+		</div>
+		<i class="fa-solid fa-circle-info" alt="Mostrar informacion del usuario" id="button-info"></i>
+	`;
+}
+
 const datosUsuario = idUsuario => {
+	var userInfo = document.querySelector('.infoUsuario');
 	fetch(`/chats/${idUsuario}/contacto`).then( response => response.json()).then( data => {
 		userInfo.setAttribute("id",`idBox-${idUsuario}`);
 		userInfo.innerHTML = `
@@ -217,6 +251,34 @@ const datosUsuario = idUsuario => {
 			document.getElementById('mediumSide').classList.toggle('active');
 		});
 	});
+}
+
+const marcarLeido = idChat => {
+	const notifyObj = document.querySelector(`#notifyChat-${idChat}`);
+	const chatBox = document.querySelector(`#idChat-${idChat} .idListaChat`).innerHTML;
+	const chatNotify = document.querySelector(`#notifyChat-${idChat} .notifyPin`).innerHTML;
+
+	socket.emit( 'client:notification:check', {
+		idUsuario: usuario.id,
+		idChat,
+	});
+	notifyObj.classList.add('d-none');
+
+	if(chatBox==1 && chatNotify==1){
+		contV=contV-1;
+		if(contV==0){
+			document.getElementById("notifyChats1").classList.add('d-none');
+		}else{
+			document.getElementById("notifyChats1").innerHTML = contV;
+		}
+	}else if(chatBox==2 && chatNotify==1){
+		contC=contC-1;
+		if(contC==0){
+			document.getElementById("notifyChats2").classList.add('d-none');
+		}else{
+			document.getElementById("notifyChats2").innerHTML = contC;
+		}
+	}
 }
 
 const ocultarChat = idChat => {

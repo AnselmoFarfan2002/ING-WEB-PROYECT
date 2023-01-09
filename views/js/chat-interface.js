@@ -34,9 +34,3 @@ btn2.addEventListener('click',()=>{
     changeContent();
 })
 
-/*-----------MAS INFORMACION DE USUARIO-----------*/
-const btn = document.querySelector('#button-info');
-btn.addEventListener('click', function () {
-    document.querySelector('.infoUsuario').classList.toggle('active');
-    document.getElementById('mediumSide').classList.toggle('active');
-});

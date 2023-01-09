@@ -1,3 +1,9 @@
+body{
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
 #sub_contenido{
     max-width: 800px;
     height: 100%;

@@ -5,7 +5,13 @@ router.route('/')
 .get( (req, res) => {res.redirect('/inicio');} );
 
 router.route('/inicio')
-.get( (req, res) => res.render('publicaciones.ejs', { session: req.session.open }) )
+.get( (req, res) => !req.session.open === true ? res.render('index.ejs', { session: req.session.open }) : res.redirect('/dashboard'))
+
+router.route('/dashboard')
+.get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('dashboard.ejs', {session: req.session.open}) )
+
+router.route('/lista-publicaciones')
+.get( (req, res) => res.render('publicaciones.ejs', {session: req.session.open}))
 
 router.route('/publicacion')
 .get( (req, res) => res.render('publicacion.ejs', { session: req.session.open, id: req.query.id}) );

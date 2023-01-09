@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="recovey" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true">
+<div class="modal fade" id="recovery" tabindex="-1" aria-labelledby="recoveryModalLabel" aria-hidden="true" novalidate>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,23 +8,25 @@
       </div>
       <div class="modal-body">
         <div class="form-floating">
-          <input type="email" class="form-control" id="rec-email" placeholder="name@example.com">
-          <label for="email">Correo electrónico</label>
+          <input type="email" class="form-control" id="rec-email" name="emai" placeholder="name@example.com" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+          <label for="rec-email">Correo electrónico</label>
+          <div class="invalid-feedback"> Ingrese un correo electrónico válido. </div>
         </div>
         <div class="form-text mb-3">Enviaremos la contraseña de este correo al mismo.</div>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="rec-ruc" placeholder="2011223373">
-          <label for="recoveyRuc">R.U.C.</label>
+          <input type="text" class="form-control" id="rec-ruc" name="ruc" placeholder="2011223373" required pattern="^(10|20|15|16|17)+[0-9]{9}$">
+          <label for="rec-ruc">R.U.C.</label>
+          <div class="invalid-feedback"> Ingrese un R.U.C. válido. </div>
         </div>
 
         <div class="form-text">Es necesario su RUC para validar su identidad</div>
         
-        <div class="form-text mt-3" id="rec-response"></div>
+        <div class="form-text mt-3 serverResponse"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="recoveryBtn">Solicitar</button>
-        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#login">Volver</button>
+        <input type="button" class="btn btn-primary" id="recoveryBtn" value="Solicitar">
+        <input type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#login" value="Volver">
       </div>
     </div>
   </div>

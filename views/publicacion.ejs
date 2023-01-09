@@ -3,12 +3,20 @@
 <head>
 	<title></title>
 	<!-- CSS only -->
+	<%- include('./parts/html.head.complements.ejs')%>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<!-- JavaScript Bundle with Popper -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </head>
-
+<style>
+	body{
+		display: grid;
+		min-height: 100vh;
+		grid-template-rows: auto 1fr auto;
+	}
+</style>
 <body>
+<<<<<<< HEAD
 	<%- include('./parts/nav.ejs') %>
 
 	<div class="card text-center" style="width: 800px; margin:auto; margin-top: 240px;">
@@ -22,16 +30,34 @@
 						<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner bg-dark">
 				
+=======
+	<%- include('./parts/nav.dashboard.ejs') %>
+
+	<div class="containerPublicacion">
+		<div class="card text-center" style="width: 800px; margin:auto; margin-top: 240px;">
+			<div class="card-header">
+				<h5 id="categoria" class="card-title"></h5>
+			</div>
+			<div class="card-body">
+				<div class="mb-0">
+					<div class="row row-cols-1 row-cols-sm-2">
+						<div class="col">
+							<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
+								<div class="carousel-inner bg-dark">
+					
+								</div>
+								<button class="carousel-control-prev" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="prev">
+								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								  <span class="visually-hidden">Previous</span>
+								</button>
+								<button class="carousel-control-next" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="next">
+								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+								  <span class="visually-hidden">Next</span>
+								</button>
+>>>>>>> e1b61d4f9e8eb81da995f9efd4a08875589880d2
 							</div>
-							<button class="carousel-control-prev" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="prev">
-							  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-							  <span class="visually-hidden">Previous</span>
-							</button>
-							<button class="carousel-control-next" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="next">
-							  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-							  <span class="visually-hidden">Next</span>
-							</button>
 						</div>
+<<<<<<< HEAD
 					</div>
 
 					<div class="col-md-7">
@@ -44,43 +70,58 @@
 							<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
 							<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
 						</ul>
+=======
+	
+						<div class="col">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Nombre de publicación: <a id="titulo"></a></li>
+								<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
+								<li class="list-group-item">Autor: <a id="autor"></a></li>
+								<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
+								<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>
+								<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
+								<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+							</ul>
+						</div>
+>>>>>>> e1b61d4f9e8eb81da995f9efd4a08875589880d2
 					</div>
 				</div>
 			</div>
+			<!--<div class="card-footer text-muted">
+			  2 days ago
+			</div>-->
 		</div>
-		<!--<div class="card-footer text-muted">
-		  2 days ago
-		</div>-->
-	  </div>
-	<br><br><br>
-
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-
-	      <div class="modal-body">
-			<div class="col-auto">
-				<label for="inputPassword2" class="visually-hidden">Password</label>
-				<input type="text" class="form-control" id="contenidoMensaje" >
+		<br><br><br>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			  </div>
+	
+			  <div class="modal-body">
+				<div class="col-auto">
+					<label for="inputPassword2" class="visually-hidden">Password</label>
+					<input type="text" class="form-control" id="contenidoMensaje" >
+				</div>
+	
+				<div class="col-auto">
+					<button class="btn btn-primary mb-3" id="iniciarInteraccionButton" onclick="sendMSG()">Enviar mensaje</button>
+				</div>
+			  </div>
+	
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Save changes</button>
+			  </div>
 			</div>
-
-			<div class="col-auto">
-				<button class="btn btn-primary mb-3" id="iniciarInteraccionButton" onclick="sendMSG()">Enviar mensaje</button>
-			</div>
-	      </div>
-
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Save changes</button>
-	      </div>
-	    </div>
-	  </div>
+		  </div>
+		</div>
 	</div>
+
 </body>
 
 <% if(session) { %>
