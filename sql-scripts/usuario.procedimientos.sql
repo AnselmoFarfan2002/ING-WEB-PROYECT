@@ -32,7 +32,7 @@ $$
 DELIMITER $$
 create procedure post_car_cargo( 
 	idCargo tinyint unsigned ,
-	CAR_NOMBRE varchar(20)
+	CAR_NOMBRE varchar(100)
 ) begin
 	INSERT INTO CARGO VALUES (idCargo, CAR_NOMBRE, 1);
 end; $$
@@ -97,7 +97,7 @@ end;$$
 
 DELIMITER $$
 create procedure get_usu_usuario( userId int unsigned ) begin
-	SELECT USU_ID as id, EMP_UBICACION as ubicacionEmpresa, EMP_ENTIDAD as nombreEmpresa, USU_EMPRESA as rucEmpresa, USU_TELEFONO as telefono, USU_CELULAR as celular, USU_NOMBRE as nombre, USU_APELLIDO1 as apellido1, USU_APELLIDO2 as apellido2, CAR_NOMBRE as cargo, USU_CORREO as correo, USU_FOTO as foto FROM USUARIO 
+	SELECT USU_ID as id, EMP_FOTO as fotoEmpresa,  EMP_UBICACION as ubicacionEmpresa, EMP_ENTIDAD as nombreEmpresa, USU_EMPRESA as rucEmpresa, USU_TELEFONO as telefono, USU_CELULAR as celular, USU_NOMBRE as nombre, USU_APELLIDO1 as apellido1, USU_APELLIDO2 as apellido2, CAR_NOMBRE as cargo, USU_CORREO as correo, USU_FOTO as foto FROM USUARIO 
     JOIN CARGO ON USU_CARGO = CAR_ID
     JOIN EMPRESA ON USU_EMPRESA = EMP_RUC WHERE USU_ID = userID;
 end;$$

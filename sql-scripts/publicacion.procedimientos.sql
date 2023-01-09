@@ -7,7 +7,6 @@ drop procedure if exists put_pub_fotos;
 drop procedure if exists put_pub_fecha;
 drop procedure if exists delete_pub_publicacion;
 drop procedure if exists get_pub_publicacion;
-drop procedure if exists get_pub_publicaciones;
 
 DELIMITER $$
 create procedure post_pub_publicacion( 
@@ -59,16 +58,23 @@ create procedure delete_pub_publicacion( id int unsigned ) begin
 end;
 
 create procedure get_pub_publicacion(pub_id int unsigned) begin
-	SELECT concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) AS autor, USU_ID AS idAutor, USU_CORREO AS email, PUBLI_FECHA AS fecha, PUBLI_TITULO AS titulo, PUBLI_TIEMPO AS tiempo, PUBLI_DESCRIPCION as descripcion, PUBLI_PRECIO as precio, PUBLI_FOTOS as fotos, CAT_NOMBRE AS categoria, CAT_SUPERIOR as categoriaSuperior FROM PUBLICACION
+	SELECT 
+		concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) AS autor,
+        USU_ID AS idAutor,
+        USU_CORREO AS email,
+        PUBLI_FECHA AS fecha,
+        PUBLI_TITULO AS titulo,
+        PUBLI_TIEMPO AS tiempo,
+        PUBLI_TIPO AS tipo,
+        PUBLI_TIPO AS tipo,
+        PUBLI_DESCRIPCION as descripcion,
+        PUBLI_PRECIO as precio,
+        PUBLI_FOTOS as fotos,
+        CAT_NOMBRE AS categoria,
+        CAT_SUPERIOR as categoriaSuperior 
+	FROM PUBLICACION
     JOIN USUARIO ON USU_ID = PUBLI_AUTOR
     JOIN CATEGORIA ON PUBLI_CATEGORIA = CAT_ID
     WHERE PUBLI_ID = pub_id;
-end;
-
-create procedure get_pub_publicaciones(lmt_inf int, lmt_sup int) begin
-	SELECT PUBLI_ID, concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) AS PUBLI_AUTOR, PUBLI_FECHA, PUBLI_TITULO, PUBLI_PRECIO, PUBLI_FOTOS FROM PUBLICACION
-    JOIN USUARIO ON USU_ID = PUBLI_AUTOR
-    JOIN CATEGORIA ON PUBLI_CATEGORIA = CAT_ID
-    LIMIT lmt_inf, lmt_sup;
 end;
 $$

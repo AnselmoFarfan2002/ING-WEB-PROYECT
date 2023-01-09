@@ -21,6 +21,9 @@ router.route( '/usuarios' )
 .get( m1.consultor.OBTENER_DATOS )
 .post( m1.registrador.REGISTRAR_CUENTA )   
 .patch( uploader.single('profile-photo'), m1.editor.ACTUALIZAR_FOTO_PERFIL )  
-.put( m1.editor.ACTUALIZAR_DATOS );                                         
+.put( m1.editor.ACTUALIZAR_DATOS );    
+
+router.route( '/cargos' )
+.get( m1.consultor.OBTENER_CARGOS );
 
 module.exports = router;

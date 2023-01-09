@@ -140,12 +140,20 @@
 	.then( res => res.json() )
 	.then( publicacion => {
 		console.log(publicacion)
+<<<<<<< HEAD
 		publicacion.PUBLI_fotos = JSON.parse(publicacion.fotos);
+=======
+		publicacion.fotos = JSON.parse(publicacion.fotos);
+>>>>>>> 7886bbb97d3eafb7f25a878d605ee1f48275663d
 		document.querySelector('#titulo').innerHTML = publicacion.titulo;
 		document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
 		document.querySelector('#autor').innerHTML = publicacion.autor;
 		document.querySelector('#correo').innerHTML = publicacion.email;
+<<<<<<< HEAD
 		document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
+=======
+		document.querySelector('#idUsuario').innerHTML = publicacionID;
+>>>>>>> 7886bbb97d3eafb7f25a878d605ee1f48275663d
 		document.querySelector('#precio').innerHTML = publicacion.precio;
 		document.querySelector('#categoria').innerHTML = publicacion.categoria;
 		let fotos = "";

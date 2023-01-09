@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>S4B - Registrarse</title>
+  <%- include('./parts/html.head.complements.ejs') %>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  <%- include('./parts/nav.ejs') %>
+  <div class="container">
+    <div class="container-sm tab-content" id="signInForm" novalidate style="max-width: 500px;">
+      <div class="h3 my-4 text-center">
+        Registro de usuario
+      </div>
+
+      <hr>
+        
+      <div class="tab-pane fade show active" id="formUser" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userName" type="text" placeholder="Nombre" pattern="^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,30}$" required>
+          <label for="userName">Nombre</label>
+          <div class="invalid-feedback"> Ingrese un nombre válido. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userLastName1" type="text" placeholder="Primer apellido" pattern="^[a-zA-Z-ñ\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,30}$" required>
+          <label for="userLastName1">Primer apellido</label>
+          <div class="invalid-feedback"> Asegúrese llenar correctamente el campo. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userLastName2" type="text" placeholder="Segundo apellido" pattern="^[a-zA-Z-ñ\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,30}$" required>
+          <label for="userLastName2">Segundo apellido</label>
+          <div class="invalid-feedback"> Asegúrese llenar correctamente el campo. </div>
+        </div>
+
+        <div class="input-group has-validation mb-3">
+          <span class="input-group-text" id="cellCode">+51</span>
+          <div class="form-floating">
+            <input class="form-control" id="userCellphone" type="text" placeholder="Número de celular" pattern="^((9)+[0-9]{8}$)|^((01|1)+[0-9]{7}$)|^((41|43|83|54|66|76|84|67|62|56|64|44|74|65|82|53|63|73|51|42|52|72|61)[0-9]{6})$" required>
+            <label for="userCellphone">Número de celular</label>
+          </div>
+          <div class="invalid-feedback"> Ingrese un número de celular válido. </div>
+        </div>
+
+        <hr>
+        
+        <div class="mb-3 d-flex justify-content-center">
+          <div class="px-1"><input class="btn btn-secondary" id="btnSignInCancel" type="button" value="Cancelar"></div>
+          <div class="px-1"><input class="btn btn-primary" id="btnSignInNext1" type="button" value="Continuar"></div>
+        </div>
+      </div> <!-- formUser -->
+
+      <div class="tab-pane fade" id="formBusiness" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userRuc" type="text" placeholder="R.U.C. de su empresa" pattern="^(10|20|15|16|17)+[0-9]{9}$" required>
+          <label for="userRuc">R.U.C. de su empresa</label>
+          <div class="invalid-feedback"> Ingrese un RUC válido. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="busiName" type="text" placeholder="Razón social (nombre) de su empresa" pattern="^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,100}$" required>
+          <label for="busiName">Razón social (nombre) de su empresa</label>
+          <div class="invalid-feedback"> Asegúrese llenar correctamente el campo. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="busiRole" type="text" placeholder="Actividad principal de la empresa" pattern="^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{5,20}$" required>
+          <label for="busiRole">Actividad principal de la empresa</label>
+          <div class="invalid-feedback"> Asegúrese llenar correctamente el campo. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="busiLocation" type="text" placeholder="Ubicación de la empresa" pattern="^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{5,40}$" required>
+          <label for="busiLocation">Ubicación de la empresa</label>
+          <div class="invalid-feedback"> Asegúrese llenar correctamente el campo. </div>
+        </div>
+
+        <div class="input-group has-validation mb-3">
+          <div class="form-floating" id="userRoleContainer">
+            <select class="form-select" id="userRole" type="text" pattern="^(?!defaultOption)[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,100}$" required>
+            </select> 
+            <label for="userRole">Su cargo en la empresa</label>
+          </div>
+
+          <button class="btn btn-outline-secondary" style="border-color: #dee2e6; border-left: none;" type="button" id="addUserRole" data-bs-placement="top" data-bs-title="¿No encuentra su cargo? ¡Haga click para indicarlo!"><i class="fa-solid fa-file-pen"></i></button>
+
+          <div class="invalid-feedback"> Debe indicarnos su cargo. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userPhone" type="text" placeholder="Teléfono de su área (opcional)" pattern="[0-9]{7}" required>
+          <label for="userPhone">Teléfono de su área (opcional)</label>
+          <div class="invalid-feedback"> Ingrese un número teléfono válido. </div>
+        </div>
+        
+        <hr>
+
+        <div class="mb-3 d-flex justify-content-center">
+          <div class="px-1"><input class="btn btn-secondary" id="btnSignInBack1" type="button" value="Volver"></div>
+          <div class="px-1"><input class="btn btn-primary" id="btnSignInNext2" type="button" value="Continuar"></div>
+        </div>
+      </div> <!-- formBusiness -->
+
+      <div class="tab-pane fade" id="formAccount" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+        <div class="form-text text-danger mb-3 d-none serverResponse"></div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userEmail" type="email" placeholder="name@example.com" pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" required>
+          <label for="userEmail">Correo electrónico</label>
+          <div class="invalid-feedback"> Ingrese un correo electrónico válido. </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userPass1" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required >
+          <label for="userPass1">Contraseña</label>
+          <div class="invalid-feedback"> La contraseña debe tener de 8 a 15 caracteres, mayúsculas y minúsculas </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userPass2" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
+          <label for="userPass2">Confirmación de contraseña</label>
+          <div class="invalid-feedback" id="passAlert"> Las contraseñas no coinciden </div>
+        </div>
+        
+        <hr>
+
+        <div class="mb-3 d-flex justify-content-center">
+            <div class="g-recaptcha" data-sitekey="6LewoVQgAAAAAOLgERaAT1onYf6kT51gQ70BDjOi"></div>
+        </div>
+
+        <div class="mb-3 d-flex justify-content-center">
+          <div class="px-1"><input class="btn btn-secondary" id="btnSignInBack2" type="button" value="Volver"></div>
+          <div class="px-1"><input class="btn btn-primary" id="btnSignIn" type="button" value="Registrarse"></div>
+        </div>
+      </div> <!-- formAccount -->
+
+      <ul class="nav nav-tabs d-none" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="loadFormUser" data-bs-toggle="tab" data-bs-target="#formUser" type="button" role="tab" aria-controls="formUser" aria-selected="false">a</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="loadFormBusiness" data-bs-toggle="tab" data-bs-target="#formBusiness" type="button" role="tab" aria-controls="formBusiness" aria-selected="false">b</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="loadFormAccount" data-bs-toggle="tab" data-bs-target="#formAccount" type="button" role="tab" aria-controls="formAccount" aria-selected="false">c</button>
+        </li>
+      </ul>
+    </div> 
+  </div>
+</body>
+</html>
+
+<script type="text/javascript" src="./js/usuario.registro.js"></script>
