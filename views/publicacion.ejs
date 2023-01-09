@@ -16,7 +16,6 @@
 	}
 </style>
 <body>
-<<<<<<< HEAD
 	<%- include('./parts/nav.ejs') %>
 
 	<div class="card text-center" style="width: 800px; margin:auto; margin-top: 240px;">
@@ -30,34 +29,8 @@
 						<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
 							<div class="carousel-inner bg-dark">
 				
-=======
-	<%- include('./parts/nav.dashboard.ejs') %>
-
-	<div class="containerPublicacion">
-		<div class="card text-center" style="width: 800px; margin:auto; margin-top: 240px;">
-			<div class="card-header">
-				<h5 id="categoria" class="card-title"></h5>
-			</div>
-			<div class="card-body">
-				<div class="mb-0">
-					<div class="row row-cols-1 row-cols-sm-2">
-						<div class="col">
-							<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
-								<div class="carousel-inner bg-dark">
-					
-								</div>
-								<button class="carousel-control-prev" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="prev">
-								  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-								  <span class="visually-hidden">Previous</span>
-								</button>
-								<button class="carousel-control-next" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="next">
-								  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-								  <span class="visually-hidden">Next</span>
-								</button>
->>>>>>> e1b61d4f9e8eb81da995f9efd4a08875589880d2
 							</div>
 						</div>
-<<<<<<< HEAD
 					</div>
 
 					<div class="col-md-7">
@@ -70,20 +43,6 @@
 							<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
 							<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
 						</ul>
-=======
-	
-						<div class="col">
-							<ul class="list-group list-group-flush">
-								<li class="list-group-item">Nombre de publicación: <a id="titulo"></a></li>
-								<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
-								<li class="list-group-item">Autor: <a id="autor"></a></li>
-								<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
-								<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>
-								<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
-								<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
-							</ul>
-						</div>
->>>>>>> e1b61d4f9e8eb81da995f9efd4a08875589880d2
 					</div>
 				</div>
 			</div>
@@ -140,20 +99,12 @@
 	.then( res => res.json() )
 	.then( publicacion => {
 		console.log(publicacion)
-<<<<<<< HEAD
-		publicacion.PUBLI_fotos = JSON.parse(publicacion.fotos);
-=======
 		publicacion.fotos = JSON.parse(publicacion.fotos);
->>>>>>> 7886bbb97d3eafb7f25a878d605ee1f48275663d
 		document.querySelector('#titulo').innerHTML = publicacion.titulo;
 		document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
 		document.querySelector('#autor').innerHTML = publicacion.autor;
 		document.querySelector('#correo').innerHTML = publicacion.email;
-<<<<<<< HEAD
 		document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
-=======
-		document.querySelector('#idUsuario').innerHTML = publicacionID;
->>>>>>> 7886bbb97d3eafb7f25a878d605ee1f48275663d
 		document.querySelector('#precio').innerHTML = publicacion.precio;
 		document.querySelector('#categoria').innerHTML = publicacion.categoria;
 		let fotos = "";
