@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SoR - Mi perfil</title>
+  <%- include('./parts/html.head.complements.ejs')%>
+  <link rel="stylesheet" href="/css/usuario.perfil.css" crossorigin="anonymous">
+</head>
+
+<body>
+  <%- include('./parts/nav.dashboard.ejs') %>
+
+  <div class="container text-center mt-5">
+    <div class="row align-items-middle">
+      <div class="col-sm-4">
+        <%- include('./parts/usuario.perfil.ownInfo.ejs') %>
+      </div>
+      <div class="col-sm-8">
+        <%- include('./parts/usuario.perfil.otherInfo.ejs') %>
+      </div>
+    </div>
+  </div>
+
+  <%- include('./parts/footer.ejs') %>
+</body>
+
+</html>
+
+<script type="text/javascript" src="./js/usuario.perfil.js"></script>
