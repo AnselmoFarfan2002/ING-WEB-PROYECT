@@ -12,13 +12,12 @@
 </head>
 
 <body>
-    <%- include('./parts/nav.register.ejs') %>
-
+    <%- include('./parts/nav.ejs') %>
         <div id="contenido" class="d-flex justify-content-left">
             <form id="sub_contenido" enctype="multipart/form-data" method="PUT" action="publicaciones">
 
                 <!-- Título para entender que es el registro para crear publicación -->
-                <div class="caja_centrada py-3 pb-4">
+                <div class="caja_centrada">
                     <p class="text-start fw-bold fs-1">Editar publicación</p>
                     <p class="text-start text-secondary fw-bold fs-6" >Rellene todos los espacios de este formulario ...</p>
                 </div>
@@ -146,7 +145,8 @@
                 </div>
             </form>
         </div>
-    </body>
+    <%- include('./parts/footer.ejs') %>
+</body>
 </html>
 
 <script type="text/javascript">

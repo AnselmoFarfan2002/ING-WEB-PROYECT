@@ -8,7 +8,7 @@ router.route('/inicio')
 .get( (req, res) => !req.session.open === true ? res.render('index.ejs', { session: req.session.open }) : res.redirect('/dashboard'))
 
 router.route('/dashboard')
-.get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('dashboard.ejs', {session: req.session.open}) )
+.get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('usuario.dashboard.ejs', {session: req.session.open}) )
 
 router.route('/lista-publicaciones')
 .get( (req, res) => res.render('publicaciones.ejs', {session: req.session.open}))
