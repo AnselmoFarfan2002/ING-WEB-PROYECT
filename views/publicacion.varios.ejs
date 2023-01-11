@@ -3,17 +3,9 @@
 <head>
 	<title>S4O - Publicaciones</title>
 	<%- include('./parts/html.head.complements.ejs')%>
-	<link rel="stylesheet" href="css/footer.css">
-
 </head>
-
 <body>
-	<%if(session){%>
-		<%- include('./parts/nav.dashboard.ejs') %>
-	<%}else if(!session){%>
-		<%- include('./parts/nav.ejs') %>
-	<%}%>
-
+	<%- include('./parts/nav.ejs') %>
 	<div id="contenido" class="d-flex justify-content-center">
 		<div id="sub_contenido">
 			<div class="caja_centrada py-3 pb-4">
@@ -21,19 +13,19 @@
 			</div>
 
 			<table class="table table-striped table-hover table-bordered align-middle" id="publicaciones" style="margin:auto;">
-			<thead>
-				<tr>
-				<th scope="col">AUTOR</th>
-				<th scope="col">FECHA</th>
-				<th scope="col">TITULO</th>
-				<th scope="col">PRECIO</th>
-				<th scope="col">FOTOS</th>
-				<th scope="col">ACCION</th>
-				</tr>
-			</thead class="table-group-divider">
-			<tbody>
+				<thead>
+					<tr>
+					<th scope="col">AUTOR</th>
+					<th scope="col">FECHA</th>
+					<th scope="col">TITULO</th>
+					<th scope="col">PRECIO</th>
+					<th scope="col">FOTOS</th>
+					<th scope="col">ACCION</th>
+					</tr>
+				</thead class="table-group-divider">
+				<tbody>
 
-			</tbody>
+				</tbody>
 			</table>
 		</div>
 	</div>

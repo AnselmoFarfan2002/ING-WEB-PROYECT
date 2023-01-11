@@ -1,3 +1,11 @@
+body{
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+.navbar{
+    margin-bottom: 1%;
+}
 .brandTitle{
     width: 10%;
 }
@@ -10,10 +18,6 @@
     padding: 5px;
     border-radius: 5px;
     margin-right: 5%;
-}
-.list-group-item:hover{
-    background-color: #e0e3ec;
-    cursor: pointer;
 }
 .navbar-nav i{
     font-size: 20px;

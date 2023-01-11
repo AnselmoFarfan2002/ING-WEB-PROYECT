@@ -1,21 +1,26 @@
-<nav class="navbar navbar-expand-lg" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
+<nav class="navbar navbar-expand-lg sticky-top bg-white" style="box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);">
   <div class="container-fluid">
-    <a class="navbar-brand" href="inicio">Supplies<span style="color:red;">4</span>Order</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <% if(session) { %>
+      <div class="brandTitle">
+          <a class="navbar-brand" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+            <i class="fa-solid fa-bars" style="margin-right:20px;"></i><span id="namePage"></span>
+          </a>
+      </div>
+    <% } %>
 
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-      <ul class="navbar-nav noneSession">
-        <li class="nav-item">
-          <a class="nav-link" href="lista-publicaciones">Ordenes de compra</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="lista-publicaciones">Ordenes de venta</a>
-        </li>
-      </ul>
+    <div class="d-flex">
+      <a class="navbar-brand" href="inicio">Survey<span style="color:red;">4</span>Order</a>
+      <% if(!session) { %>
+        <ul class="navbar-nav showPubli">
+          <li class="nav-item">
+            <a class="nav-link" href="lista-publicaciones">Ver publicaciones</a>
+          </li>
+        </ul>
+      <% } %>
+    </div>
 
-      <ul class="navbar-nav justify-content-end">
+    <div class="moreLinks">
+      <ul class="navbar-nav">
         <% if(!session) { %>
             <li class="nav-item">
                 <a class="nav-link" type="button" data-bs-toggle="modal" data-bs-target="#login">Iniciar sesión</a>
@@ -42,10 +47,28 @@
   </div>
 </nav>
 
+<div class="bg-light offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header border-bottom">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Acceso rápido</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+      <div>
+        <ul class="list-group linkItem list-group-flush">
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="inicio"><i class="fa-solid fa-house"></i>Inicio</a></li>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="#"><i class="fa-solid fa-truck-ramp-box"></i>Publicaciones de venta</a></li>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="lista-publicaciones"><i class="fa-solid fa-tag"></i>Publicaciones de compra</a></li>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="mis-publicaciones"><i class="fa-solid fa-box-archive"></i>Mis publicaciones</a></li>
+        </ul>           
+      </div>
+  </div>
+</div>
+
 <% if(!session) { %>
   <%- include('./nav.login.ejs') %>
-  <%- include('./nav.login.recovery.ejs') %>
+  <%- include('./nav.login.recovery.ejs') %>  
   <script type="text/javascript" src="./js/formsFunctions.js"></script>
 <% } %>
 
+<script type="text/javascript" src="../js/nav.functions.js"></script>
 <script type="text/javascript" src="./js/sesiones.js"></script>
