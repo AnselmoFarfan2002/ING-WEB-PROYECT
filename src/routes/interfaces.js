@@ -11,10 +11,10 @@ router.route('/dashboard')
 .get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('dashboard.ejs', {session: req.session.open}) )
 
 router.route('/lista-publicaciones')
-.get( (req, res) => res.render('publicaciones.ejs', {session: req.session.open}))
+.get( (req, res) => res.render('publicacion.varios.ejs', {session: req.session.open}))
 
 router.route('/publicacion')
-.get( (req, res) => res.render('publicacion.ejs', { session: req.session.open, id: req.query.id}) );
+.get( (req, res) => res.render('publicacion.singular.ejs', { session: req.session.open, id: req.query.id}) );
 
 router.route('/iniciar-sesion')
 .get( (req,res) =>  res.render('iniciar-sesion.ejs', {session: req.session.open}))
@@ -27,10 +27,10 @@ router.route('/registrarse')
 .get( (req,res) => req.session.open === true ? res.redirect('/inicio') : res.render('usuario.registro.ejs', {session: false}))
 
 router.route('/registrar-publicacion')
-.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('registrar-publicacion.ejs', {session: req.session.open}))
+.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('publicacion.registro.ejs', {session: req.session.open}))
 
 router.route('/mis-publicaciones')
-.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('mis-publicaciones.ejs', {session: req.session.open}))
+.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('publicacion.propio.ejs', {session: req.session.open}))
 
 router.route('/editar-publicacion')
 .get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('editar-publicacion.ejs', { session: req.session.open, id: req.query.id}))

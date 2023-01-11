@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>S4O - Publicaciones</title>
 	<%- include('./parts/html.head.complements.ejs')%>
 	<link rel="stylesheet" href="css/footer.css">
+
 </head>
-<style>
-	body{
-		display: grid;
-		min-height: 100vh;
-		grid-template-rows: auto 1fr auto;
-	}
-</style>
+
 <body>
 	<%if(session){%>
 		<%- include('./parts/nav.dashboard.ejs') %>
 	<%}else if(!session){%>
 		<%- include('./parts/nav.ejs') %>
 	<%}%>
+
 	<div id="contenido" class="d-flex justify-content-center">
 		<div id="sub_contenido">
 			<div class="caja_centrada py-3 pb-4">
@@ -56,12 +52,14 @@
 				fotos += `<img class="m-1" style="width: 50px; height: 50px;" src="/images/posts-photos/${foto}">`;
 			} );
 
+			Fecha = new Date (`${publicacion.fecha}`).toLocaleDateString()
+
 			fila = `
 				<tr >
 			      <th scope="row">${publicacion.autor}</th>
-			      <td>${publicacion.fecha}</td>
+			      <td>${Fecha}</td>
 			      <td>${publicacion.titulo}</td>
-			      <td>${publicacion.precio}</td>
+			      <td>S/. ${publicacion.precio}</td>
 			      <td>${fotos}</td>
 			      <td><a type="button" href="/publicacion?id=${publicacion.id}" class="btn btn-outline-dark">Ver detalles</a></td>
 			    </tr>
@@ -72,7 +70,7 @@
 		
 	});
 
-	fetch('/categorias').then( resHTTP => resHTTP.json() ).then( resJSON => { console.log(resJSON); } );
+	fetch('/categorias').then( resHTTP => resHTTP.json() ).then( resJSON => {  } );
 </script>
 
 </html>
