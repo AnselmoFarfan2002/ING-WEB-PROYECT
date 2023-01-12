@@ -33,7 +33,7 @@ router.route('/mis-publicaciones')
 .get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('publicacion.propio.ejs', {session: req.session.open}))
 
 router.route('/editar-publicacion')
-.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('editar-publicacion.ejs', { session: req.session.open, id: req.query.id}))
+.get( (req,res) => !req.session.open === true ? res.redirect('/inicio') : res.render('publicacion.editar.ejs', { session: req.session.open, id: req.query.id}))
 
 router.route('/mi-perfil')
 .get( (req,res) => req.session.open === true ? res.render('usuario.perfil.ejs', {session: req.session.open}) : res.redirect('/inicio'))

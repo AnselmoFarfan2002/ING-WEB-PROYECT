@@ -66,7 +66,7 @@ create procedure get_pub_publicacion(pub_id int unsigned) begin
         PUBLI_TITULO AS titulo,
         PUBLI_TIEMPO AS tiempo,
         PUBLI_TIPO AS tipo,
-        PUBLI_TIPO AS tipo,
+        PUBLI_NEGOCIABLE AS negociable,
         PUBLI_DESCRIPCION as descripcion,
         PUBLI_PRECIO as precio,
         PUBLI_FOTOS as fotos,
