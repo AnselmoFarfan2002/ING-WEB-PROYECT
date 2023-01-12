@@ -1,3 +1,70 @@
 .containterDashboard{
-    margin: 20px;
+    margin: 20px 30px;
+    display: grid;
+    grid-template-columns: 50% 2fr auto;
+}
+#userPub{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+}
+/*------------------------------*/
+.notRead{
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 323px;
+    overflow-y: auto;
+}
+.notRead .block{
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.notRead .infoBlock{   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.notRead .block .imgChat{
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    position: relative;
+    border-radius: 50%;
+}
+.notRead .block .imgChat .userProduct{
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid #562acc;
+}
+.notRead .block .msgChat {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.notRead .block .msgChat .titleChat{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.notRead .block .msgChat span {
+    display: block;
+}
+/*------------------------------*/
+.notChats{
+    display: grid;
+    padding: 20px;
+}
+.notChats i{
+    text-align: center;
+    font-size: 60px;
 }

@@ -11,12 +11,10 @@
 }
 .bodyInfo .titleBody{
     font-size: 45px;
-    text-align: justify;
     font-weight: 650;
 }
 .bodyInfo .subInfo{
     margin: 20px 0;
-    text-align: justify;
 }
 /*-----------------------------------*/
 .bodyImages{

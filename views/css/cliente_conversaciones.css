@@ -3,29 +3,24 @@
     padding: 0;
     box-sizing: border-box;
 }
-body{
-    display: grid;
-    min-height: 100vh;
-    grid-template-rows: auto 1fr auto;
-}
 .container-chat{
     display: flex;
     margin-top: 1px;
     width: 100%;
-    height: calc(100vh - 58px);
+    height: calc(100vh - 57px);
 }
 /*-----------LISTA DE CHATS-----------*/
 .container-chat .leftSide{
     position: relative;
     width: 30%;
-    background: #F4F6FA;
+    background: #f1f4fa;
     border-right: 1px solid rgba(0, 0, 0, 0.2);
 }
 .headerleftSide{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background: #D7DBE7;
+    background: #e2e4eb;
     width: 100%;
     font-size: 15px;
     height: auto;
@@ -44,11 +39,10 @@ body{
 #botonTab1:hover{
     cursor: pointer;
     transition: all 200ms linear;
-    color: white;
-    background: #562acc;
+    background:#a3b4f1;
 }
 #notifyChats1{
-    background-color: #4e0d68;
+    background-color: #2e67e2;
     margin-left: 5px;
     width: 14%;
     color: white;
@@ -58,7 +52,7 @@ body{
     border-radius: 50%;
 }
 #notifyChats2{
-    background-color: #4e0d68;
+    background-color: #2e67e2;
     margin-left: 5px;
     width: 14%;
     color: white;
@@ -77,9 +71,8 @@ body{
 }
 #botonTab2:hover{
     cursor: pointer;
-    color: white;
     transition: all 200ms linear;
-    background: #562acc;
+    background: #a3b4f1;
 }
 .chatList{
     position: relative;
@@ -90,8 +83,7 @@ body{
     font-size: 12px;
 }
 .option-active{
-    color: white;
-    background-color: #562acc;
+    background-color: #a3b4f1;
 }
 .content {
     display: none;
@@ -141,7 +133,7 @@ body{
 .chatList .block:hover{
     transition: all 200ms linear;
     cursor: pointer;
-    background: #b2bfec;
+    background: #cbd2ec;
 }
 .chatList .block .imgChat{
     display: block;

@@ -3,9 +3,6 @@ body{
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
 }
-.navbar{
-    margin-bottom: 1%;
-}
 .brandTitle{
     width: 10%;
 }

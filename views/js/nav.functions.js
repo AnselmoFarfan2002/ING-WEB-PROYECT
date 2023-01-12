@@ -3,7 +3,7 @@ if(URLActual == '/dashboard'){
     document.getElementById('namePage').innerHTML = 'Inicio';
 }
 else if(URLActual == '/lista-publicaciones'){
-    document.getElementById('namePage').innerHTML = 'Publicaciones de compra';
+    document.getElementById('namePage').innerHTML = 'Lista de publicaciones';
 }
 else if(URLActual == '/mis-publicaciones'){
     document.getElementById('namePage').innerHTML = 'Mis publicaciones';
