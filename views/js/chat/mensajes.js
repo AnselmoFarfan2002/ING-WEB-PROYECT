@@ -27,8 +27,8 @@ fetch('/usuarios', {method: 'GET'})
 			body: JSON.stringify({
 				emisor: usuario,
 				idPublicacion,
-				idUsuarioReceptor: document.querySelector('#idau').innerHTML,
-				emailUsuarioReceptor: document.querySelector('#corr').innerHTMLL,
+				idUsuarioReceptor: document.querySelector('#idUsuario').innerHTML,
+				emailUsuarioReceptor: document.querySelector('#correo').innerHTMLL,
 				contenido,
 				multimedia: []
 			}),

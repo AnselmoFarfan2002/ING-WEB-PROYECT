@@ -1,5 +1,113 @@
-.generateChat{
+.bodyChat{
+    width: 400px;
+    height: 450px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+}
+.userSpace{
     display: flex;
-    justify-content: right;
-    margin-right: 15px;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 15px;
+}
+.userInfo{
+    padding: 15px;
+}
+.userMsg{
+    width: 100%;
+    padding: 0 15px;
+    height: 335px;
+    position: relative;
+    overflow-y: auto;
+}
+.userMsg::-webkit-scrollbar {
+    width: 10px;
+}
+.userMsg::-webkit-scrollbar-track {
+    background-color: #D9D9D9;
+}
+.userMsg::-webkit-scrollbar-thumb {
+    background-color: #758DB0;
+}
+.userInput{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 65px;
+    padding: 15px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+}
+.btnChat{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    position: fixed;
+    background-color: #c0c8ec;
+    bottom: 40px;
+    right: 10px;
+}
+.btnChat i{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    font-size: 40px;
+    transition: 0.4s ease-in-out;
+}
+.msg{
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: 5px 0;
+}
+.msg p .timeR{
+    display: block;
+    margin-top: 5px;
+    text-align: left;
+    font-size: 0.85em;
+    opacity: 0.5;
+}
+.msg p .timeL{
+    display: block;
+    margin-top: 5px;
+    text-align: right;
+    font-size: 0.85em;
+    opacity: 0.5;
+}
+.msg p{
+    position: relative;
+    right: 0;
+    max-width: 65%;
+    padding: 12px;
+    font-size: 0.9em;
+}
+.my-message{
+    justify-content: flex-start;
+}
+.my-message p{
+    background: #C7D6E8;
+    border-radius: 10px;
+    word-break:break-all;
+}
+.frnd-message{
+    justify-content: flex-end;
+}
+.frnd-message p{
+    background: #A3BDDC;
+    border-radius: 10px;
+    word-break:break-all;
 }

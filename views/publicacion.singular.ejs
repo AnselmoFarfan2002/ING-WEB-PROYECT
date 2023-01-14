@@ -8,71 +8,87 @@
 <body>
 	<%- include('./parts/nav.ejs') %>
 
-	<div class="card text-center" style="width: 800px; margin:auto;">
-		<div class="card-header">
-			<h5 id="categoria" class="card-title"></h5>
-		</div>
-		<div class="card-body">
-			<div class="mb-0">
-				<div class="row g-0">
-					<div class="col-md-5">
-						<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
-							<div class="carousel-inner bg-dark">
-				
+	<div class="containerSingular d-flex">
+		<div class="card text-center mt-3" style="width: 800px; margin:auto;">
+			<div class="card-header">
+				<h5 id="categoria" class="card-title"></h5>
+			</div>
+			<div class="card-body">
+				<div class="mb-0">
+					<div class="row g-0">
+						<div class="col-md-5">
+							<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
+								<div class="carousel-inner bg-dark">
+					
+								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-md-7">
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item">Nombre de publicación: <a id="titulo"></a></li>
-							<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
-							<li class="list-group-item">Autor: <a id="autor"></a></li>
-							<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
-							<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>
-							<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
-							<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
-						</ul>
+	
+						<div class="col-md-7">
+							<ul class="list-group list-group-flush">
+								<li class="list-group-item">Nombre de publicación: <a id="titulo"></a></li>
+								<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
+								<li class="list-group-item">Autor: <a id="autor"></a></li>
+								<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
+								<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>
+								<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
+								<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
+				<!--<div class="card-footer text-muted">
+				  2 days ago
+				</div>-->
 			</div>
-			<!--<div class="card-footer text-muted">
-			  2 days ago
-			</div>-->
-		</div>
-		<br><br><br>
-	
-		<!-- Modal -->
-		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			  </div>
-	
-			  <div class="modal-body">
-				<div class="col-auto">
-					<label for="inputPassword2" class="visually-hidden">Password</label>
-					<input type="text" class="form-control" id="contenidoMensaje" >
+			<br><br><br>
+		
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Enviar mensaje a <span class="userNameModal"></span></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				  </div>
+		
+				  <div class="modal-body">
+					<div class="col-auto">
+						<label for="inputPassword2" class="visually-hidden">Password</label>
+						<input type="text" class="form-control" id="contenidoMensaje" >
+					</div>
+				  </div>
+		
+				  <div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+					<button class="btn btn-primary" id="iniciarInteraccionButton" onclick="sendMSG()">Enviar mensaje</button>
+				  </div>
 				</div>
-	
-				<div class="col-auto">
-					<button class="btn btn-primary mb-3" id="iniciarInteraccionButton" onclick="sendMSG()">Enviar mensaje</button>
-				</div>
-			  </div>
-	
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
 			  </div>
 			</div>
-		  </div>
 		</div>
-	</div>
+	
+		<div class="generateChat mt-3 mx-3">
+			<div class="bodyChat">
+				<div class="userSpace bg-light">
+					<div class="userInfo">
+						<h6 class="uName"></h6>
+					</div>
+				</div>
 
-	<div class="generateChat">
-		<button type="button" class="btn btn-primary btnChat">Iniciar interaccion <i class="fa-regular fa-comment-dots"></i></button>
+				<div class="userMsg">
+
+				</div>
+
+				<div class="userInput bg-light">
+					<input type="text" class="form-control mx-1" placeholder="Escriba un mensaje" aria-label="Recipient's username" aria-describedby="botonEnviar" id="contenidoMensaje">
+					<button class="btn btn-primary rounded-circle mx-3" type="button" id="botonEnviar"><i class="fa-solid fa-chevron-right"></i></button>
+				</div>
+			</div>
+		</div>
+		<div class="btnChat">
+			<i class="fa-regular fa-comment-dots"></i>
+		</div>
 	</div>
 
 	<%- include('./parts/footer.ejs') %>
@@ -82,6 +98,16 @@
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/chat/mensajes.js"></script>
 <% } %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(()=>{
+		$('.bodyChat').hide();
+		$('.btnChat').click(()=>{
+			$('.bodyChat').slideToggle("slow");
+		})
+	})
+</script>
 
 <script type="text/javascript">
 	let publicacionID = parseInt('<%= id %>');
@@ -112,6 +138,8 @@
 		} );
 	    document.querySelector('#fotosPublicacion .carousel-inner').innerHTML += fotos;
 		document.querySelector('#fotosPublicacion .carousel-item').classList.add('active');
+		document.querySelector('.userNameModal').innerHTML = publicacion.autor;
+		document.querySelector('.uName').innerHTML = publicacion.autor;
 	}); 
 </script>
 </html>
