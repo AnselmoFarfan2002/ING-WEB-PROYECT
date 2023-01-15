@@ -19,12 +19,15 @@
                 </div>
             </div>
         </div>
-
+        
         <%- include('./parts/footer.ejs') %>
     </body>
 
     
     <script type="text/javascript">
+
+        
+
         fetch('/publicaciones?self=1')
         .then( res => res.json() )
         .then( mis_publicaciones => {
@@ -77,13 +80,46 @@
                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
                                             <a type="button" class="btn btn-outline-dark" href="/publicacion?id=${publicacion.id}">Ver</a>
                                             <a type="button" class="btn btn-outline-dark" href="/editar-publicacion?id=${publicacion.id}">Editar</a>
-                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Eliminar" class="link-primary">Eliminar</button>
-                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Ocultar" class="link-primary">Ocultar</button>
-                                            <button type="button" id="btnRefresh" class="btn btn-outline-dark">Refrescar</button>
+                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Eliminar-${publicacion.id}" class="link-primary">Eliminar</button>
+                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Ocultar-${publicacion.id}" class="link-primary">Ocultar</button>
+                                            <a type="button" onclick="Refresh(${publicacion.id})" class="btn btn-outline-dark"> Refrescar </a>
                                         </div>                                        
 
-                                        <%- include('./parts/publicacion.propio.delete.ejs') %>
-                                        <%- include('./parts/publicacion.propio.hide.ejs') %>
+                                        <div class="modal fade" id="Eliminar-${publicacion.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Eliminar" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="Eliminar">Eliminar publicacion</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estás seguro de eliminar la publicación?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <input type="button" onclick="Delete(${publicacion.id})" id="btnDelete" class="btn btn-primary" value="Eliminar">
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" id="Ocultar-${publicacion.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Ocultar" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="Ocultar">Ocultar publicacion</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estás seguro que quieres ocultar la publicación?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                                    <input type="button" id="btnHide" onclick="Hide(${publicacion.id})" class="btn btn-primary" value="Ocultar">
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </li>
                                 </ul>
@@ -95,23 +131,21 @@
             }); 
             
         })
-        
-        function Delete(){
+
+        const Delete = publicacionID =>
             fetch(`/publicaciones/${publicacionID}`, 
-            { method: 'DELETE' }).then(() => window.location.reload());
-        }
-
-        //const Refresh = () => 
-        //    fetch(`/publicaciones?id=${publicacionID}?tiempo=${tiempo}`, 
-        //    { method: 'REFRESH' }).then(() => window.location.reload());
-
-        //if(document.querySelector('#btnDelete')) 
-        //    document.querySelector('#btnDelete').addEventListener('click', Delete);
+            { method: 'DELETE' }).then(res=>res.json())
+            .then(data=>console.log(data))
             
-        //if(document.getElementById('#btnRefresh')) 
-        //document.getElementById('btnRefresh').addEventListener('click',Delete);
+        const Refresh = publicacionID =>
+            fetch(`/publicaciones/${publicacionID}/tiempo`, 
+            { method: 'PATCH', }).then(res=>res.json())
+            .then(data=>console.log(data))
 
-        document.getElementById('btnRefresh').addEventListener('click',Delete);
-        
+        const Hide = publicacionID =>
+            fetch(`/publicaciones/${publicacionID}/visibilidad`, 
+            { method: 'PATCH', }).then(res=>res.json())
+            .then(data=>console.log(data))
+
     </script>
 </html>

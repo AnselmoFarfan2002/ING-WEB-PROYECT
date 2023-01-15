@@ -130,7 +130,7 @@
 </html>
 
 <script type="text/javascript">
-	let publicacionID = parseInt('<%= id %>');
+	let publicacionID = parseInt('<%=id%>');
 
 	fetch(`/publicaciones?id=${publicacionID}`)
 	.then( res => res.json() )
@@ -171,7 +171,7 @@
 
         console.log(data)
 
-        fetch(`/publicaciones/id=${publicacionID}`, {
+        fetch(`/publicaciones/${publicacionID}`, {
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {
