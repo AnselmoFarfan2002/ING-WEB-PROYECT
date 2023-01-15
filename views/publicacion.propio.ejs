@@ -11,13 +11,11 @@
 
         <div id="contenido" class="d-flex justify-content-left">
             <div id="sub_contenido">
-                <!-- Título para entender que es el registro para crear publicación -->
                 <div class="caja_centrada py-3 pb-4" id="titulo">
                     <p class="text-start fw-bold fs-1">Mis publicaciones</p>
                 </div>
 
                 <div class="mb-0" id="mis_publicaciones">
-                    <!-- dentro de este div, se colocarán las publicaciones -->
                 </div>
             </div>
         </div>
@@ -47,11 +45,11 @@
                     </div>
                     `;
                 } );
-    
+            
                 publicacion = `
                     <div class="mb-0">
-                        <div class="row row-cols-1 row-cols-sm-2">
-                            <div class="col-3">
+                        <div class="row row-cols-1 row-cols-sm-2" style="margin-bottom: 30px;">
+                            <div class="col-md-5" style="margin:auto;">
                                 <div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         ${fotos}
@@ -67,61 +65,29 @@
                                 </div>
                             </div>
         
-                            <div class="col-9">
+                            <div class="col-md-7" style="margin:auto">
                                 <ul class="list-group list-group-flush">
                                     <li id="titulo" class="list-group-item">Nombre de publicación: ${publicacion.titulo} </li>
-                                    <li id="categoria" class="list-group-item">Categoría: ${publicacion.categoria}</li>
-                                    <li id="tipo" class="list-group-item">Subcategoría: ${publicacion.categoriaSuperior?publicacion.categoriaSuperior:"No se presenta"}</li>
+                                    <li id="categoria" class="list-group-item">Categoría: ${publicacion.categoriaSuperior?publicacion.categoriaSuperior:"No se presenta"}</li>
+                                    <li id="tipo" class="list-group-item">Subcategoría: ${publicacion.categoria?publicacion.categoria:"No se presenta"}</li>
                                     <li id="negociabilidad" class="list-group-item">Negociable: 
                                             <input class="form-check-input" type="checkbox" role="switch" ${publicacion.negociable?"checked":""} disabled>
                                     </li>
-                                    <li id="precio" class="list-group-item">Precio: ${publicacion.precio}</li>
-                                    <li class="list-group-item"> 
-                                       
+                                    <li id="precio" class="list-group-item">Precio: S/.${publicacion.precio}</li>
+
+                                    <li class="list-group-item" style="margin:auto;">    
                                         <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                            <a type="button" class="btn btn-outline-primary" href="/editar-publicacion?id=${publicacion.id}">Editar</a>
-                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#Eliminar" class="link-primary">Eliminar</button>
-                                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#Ocultar" class="link-primary">Ocultar</button>
-                                            <button type="button" class="btn btn-outline-primary">Refrescar</button>
+                                            <a type="button" class="btn btn-outline-dark" href="/publicacion?id=${publicacion.id}">Ver</a>
+                                            <a type="button" class="btn btn-outline-dark" href="/editar-publicacion?id=${publicacion.id}">Editar</a>
+                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Eliminar" class="link-primary">Eliminar</button>
+                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Ocultar" class="link-primary">Ocultar</button>
+                                            <button type="button" class="btn btn-outline-dark">Refrescar</button>
                                         </div>                                        
 
-                                        <div class="modal fade" id="Eliminar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Eliminar" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="Eliminar">Eliminar publicacion</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Estás seguro de eliminar la publicación?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-primary">Eliminar</button>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <%- include('./parts/publicacion.propio.delete.ejs') %>
+                                        <%- include('./parts/publicacion.propio.hide.ejs') %>
 
-                                        <div class="modal fade" id="Ocultar" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Ocultar" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="Ocultar">Ocultar publicacion</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Estás seguro que quieres ocultar la publicación?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <button type="button" class="btn btn-primary">Ocultar</button>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </li>
-                                    <br><br>
                                 </ul>
                             </div>
                         </div>
@@ -131,5 +97,8 @@
             }); 
             
         })
+
+
+
     </script>
 </html>

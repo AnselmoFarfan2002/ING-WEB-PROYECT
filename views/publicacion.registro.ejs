@@ -13,32 +13,29 @@
         <div id="contenido" class="d-flex justify-content-left">
             <form id="sub_contenido" enctype="multipart/form-data" method="POST" action="publicaciones">
 
-                <!-- Título para entender que es el registro para crear publicación -->
                 <div class="caja_centrada py-3 pb-4">
                     <p class="text-start fw-bold fs-1">Crear publicación</p>
                     <p class="text-start text-secondary fw-bold fs-6" >Rellene todos los espacios de este formulario ...</p>
                 </div>
 
-
-                <!-- Todos los registros que se necesitará para las publicaciones -->
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Nombre de publicación: </label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="titulo" placeholder="ejemplo de ejemplos por ejemplos" required>
+                        <input type="text" class="form-control" name="titulo" placeholder="ejemplo de ejemplos por ejemplos" pattern="^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,50}$" required>
                     </div>
                 </div>
 
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Precio (por kilo): </label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" name="precio" placeholder="10.00" required>
+                        <input type="text" class="form-control" name="precio" placeholder="10.00"  required>
                     </div>
                 </div>
                 
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Descripción :</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" name="descripcion" rows="3" required></textarea>
+                        <textarea class="form-control" name="descripcion" rows="3"  required></textarea>
                     </div>
                 </div>
 
