@@ -32,13 +32,11 @@
             //console.log(mis_publicaciones)
     
             mis_publicaciones.forEach( publicacion => {
-                console.log(publicacion)
                 //publicacion = publicacion[1];
                 publicacion.fotos = JSON.parse(publicacion.fotos);
     
                 let fotos = "";
                 publicacion.fotos.forEach( foto => {
-                    console.log(foto)
                     fotos += `
                     <div class="carousel-item active">
                         <img src="/images/posts-photos/${foto}" style="height: 280px;" class="d-block w-100">
@@ -81,7 +79,7 @@
                                             <a type="button" class="btn btn-outline-dark" href="/editar-publicacion?id=${publicacion.id}">Editar</a>
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Eliminar" class="link-primary">Eliminar</button>
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Ocultar" class="link-primary">Ocultar</button>
-                                            <button type="button" class="btn btn-outline-dark">Refrescar</button>
+                                            <button type="button" id="btnRefresh" class="btn btn-outline-dark">Refrescar</button>
                                         </div>                                        
 
                                         <%- include('./parts/publicacion.propio.delete.ejs') %>
@@ -97,8 +95,23 @@
             }); 
             
         })
+        
+        function Delete(){
+            fetch(`/publicaciones/${publicacionID}`, 
+            { method: 'DELETE' }).then(() => window.location.reload());
+        }
 
+        //const Refresh = () => 
+        //    fetch(`/publicaciones?id=${publicacionID}?tiempo=${tiempo}`, 
+        //    { method: 'REFRESH' }).then(() => window.location.reload());
 
+        //if(document.querySelector('#btnDelete')) 
+        //    document.querySelector('#btnDelete').addEventListener('click', Delete);
+            
+        //if(document.getElementById('#btnRefresh')) 
+        //document.getElementById('btnRefresh').addEventListener('click',Delete);
 
+        document.getElementById('btnRefresh').addEventListener('click',Delete);
+        
     </script>
 </html>

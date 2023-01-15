@@ -34,16 +34,16 @@
 								<li class="list-group-item">Precio: S/<a id="precio"></a></li>
 								<li class="list-group-item">Fecha publicada: <a id="fecha"></a></li>
 								<li class="list-group-item">Caduca en <a id="tiempo"></a> días</li>
-								<%if(session){%>
-									<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
-								<%}%>
+
 							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="card-footer text-muted">
-				<li class="list-group-item"><a class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+				<%if(session){%>
+					<li class="list-group-item"><a class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+				<%}%>
 			</div>
 		
 			<!-- Modal -->

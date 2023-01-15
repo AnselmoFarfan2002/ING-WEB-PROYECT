@@ -26,7 +26,7 @@ router.route( '/publicaciones' )
 .post( uploader.array('photos', 12), m2.creador.CREAR_PUBLICACION )  
 
 router.route( '/publicaciones/:id' )
-.put( m2.editor.EDITAR_DATOS_PUBLICACION )        
+.put( m2.editor.EDITAR_DATOS_PUBLICACION )   
 .delete( m2.eliminador.ELIMINAR_PUBLICACION )
 
 router.route( '/publicaciones/:id/tiempo' )      .patch( m2.refrescador.REFRESCAR_PUBLICACION )          

@@ -9,7 +9,7 @@
 <body>
     <%- include('./parts/nav.ejs') %>
         <div id="contenido" class="d-flex justify-content-left">
-            <form id="sub_contenido" enctype="multipart/form-data" method="PUT" action="publicaciones">
+            <div id="sub_contenido" >
 
                 <!-- Título para entender que es el registro para crear publicación -->
                 <div class="caja_centrada">
@@ -57,36 +57,36 @@
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Subcategoría :</label>
                     <div class="col-sm-8">
-                        <select class="form-select" name="categoria" size="4" aria-label="size 3 select example">
+                        <select class="form-select" id="categoria" size="4" aria-label="size 3 select example">
                             <option value="2">Carnes rojas</option>
                             <option value="3">Carnes blancas</option>
                             <option value="4">Huevos</option>
                             <option value="5">Embutidos</option>
                         </select>
 
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
+                        <select class="form-select" id="categoria" size="2" aria-label="size 3 select example" style="display:none">
                             <option value="7">Pescados</option>
                             <option value="8">Mariscos</option>
                         </select>
 
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
+                        <select class="form-select" id="categoria" size="2" aria-label="size 3 select example" style="display:none">
                             <option value="10">Vegetales</option>
                             <option value="11">Hortalizas</option>
                         </select>
 
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
+                        <select class="form-select" id="categoria" size="2" aria-label="size 3 select example" style="display:none">
                             <option value="14">Dulces y semidulces</option>
                             <option value="15">Ácidas y semiácidas</option>
                         </select>
                         
-                        <select class="form-select" name="categoria" size="4" aria-label="size 3 select example" style="display:none">
+                        <select class="form-select" id="categoria" size="4" aria-label="size 3 select example" style="display:none">
                             <option value="17">Leche</option>
                             <option value="18">Yogures</option>
                             <option value="19">Quesos</option>
                             <option value="20">Otros</option>
                         </select>
                         
-                        <select class="form-select" name="categoria" size="3" aria-label="size 3 select example" style="display:none">
+                        <select class="form-select" id="categoria" size="3" aria-label="size 3 select example" style="display:none">
                             <option value="22">Legumbres</option>
                             <option value="23">tubérculos</option>
                             <option value="24">Frutos Secos</option>
@@ -100,24 +100,10 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label class="col-sm-4 col-form-label">Tipo :</label>
-                    <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipo" value="1">
-                                <label class="form-check-label" for="inlineRadio1">Orden de compra</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="tipo" value="2">
-                                <label class="form-check-label" for="inlineRadio2">Orden de venta</label>
-                            </div>
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Negociabilidad: </label>
                     <div class="col-sm-8">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" name="negociable" checked>
+                            <input class="form-check-input" type="checkbox" role="switch" id="negociable" checked>
                             <label class="form-check-label"></label>
                         </div>
                     </div>
@@ -127,17 +113,17 @@
                     <label class="col-sm-4 col-form-label">Foto de publicación: </label>
                     <div class="col-sm-8">
                         <div class="mb-3">
-                            <input class="form-control" type="file" name="photos" multiple>
+                            <input class="form-control" type="file" id="photos" multiple>
                         </div>
                     </div>
                 </div>
 
-                <input type="number" name="tiempo" value="30" style="display:none">
+                <input type="number" id="tiempo" value="30" style="display:none">
 
                 <div class="caja_centrada d-flex justify-content-left">
                     <button id="editar" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Cambiar</button>
                 </div>
-            </form>
+            </div>
         </div>
     <%- include('./parts/footer.ejs') %>
 </body>
@@ -145,10 +131,6 @@
 
 <script type="text/javascript">
 	let publicacionID = parseInt('<%= id %>');
-	
-	const sendMSG = () => {
-		iniciarInteraccion(publicacionID, document.getElementById('contenidoMensaje').value);
-	}
 
 	fetch(`/publicaciones?id=${publicacionID}`)
 	.then( res => res.json() )
@@ -167,9 +149,7 @@
 			`;
 		} );
 	}); 
-</script>
 
-<script type="text/javascript">
     document.getElementById('editar').addEventListener('click',EditarPub);
   
     function EditarPub(){
@@ -185,14 +165,13 @@
             descripcion: document.getElementById('descripcion').value,
             precio: document.getElementById('precio').value,
             categoria: document.getElementById('categoria').value,
-            tipo: document.getElementById('tipo').value,
             negociable: document.getElementById('negociable').value,
             fotos: photos
         }
 
         console.log(data)
 
-        fetch(`/publicaciones?id=${publicacionID}`, {
+        fetch(`/publicaciones/id=${publicacionID}`, {
             method: 'PUT',
             body: JSON.stringify(data),
             headers: {
@@ -201,5 +180,6 @@
         }).then(res=>res.json())
         .then(data=>console.log(data))
     }
+
   </script>
   
