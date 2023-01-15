@@ -32,7 +32,9 @@
 								<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
 								<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>
 								<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
-								<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+								<%if(session){%>
+									<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+								<%}%>
 							</ul>
 						</div>
 					</div>
@@ -86,9 +88,11 @@
 				</div>
 			</div>
 		</div>
-		<div class="btnChat">
-			<i class="fa-regular fa-comment-dots"></i>
-		</div>
+		<%if(session){%>
+			<div class="btnChat">
+				<i class="fa-regular fa-comment-dots"></i>
+			</div>
+		<%}%>
 	</div>
 
 	<%- include('./parts/footer.ejs') %>
