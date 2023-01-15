@@ -8,15 +8,15 @@
 <body>
 	<%- include('./parts/nav.ejs') %>
 
-	<div class="containerSingular d-flex">
-		<div class="card text-center mt-3" style="width: 800px; margin:auto;">
+	<div class="containerSingular d-flex" style="margin: auto;">
+		<div class="card text-center mt-3" style="width: 850px;">
 			<div class="card-header">
-				<h5 id="categoria" class="card-title"></h5>
+				<h3 id="titulo" class="card-title"></h3>
 			</div>
 			<div class="card-body">
 				<div class="mb-0">
 					<div class="row g-0">
-						<div class="col-md-5">
+						<div class="col-md-5" style="margin:auto">
 							<div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
 								<div class="carousel-inner bg-dark">
 					
@@ -24,24 +24,24 @@
 							</div>
 						</div>
 	
-						<div class="col-md-7">
+						<div class="col-md-6" style="margin:auto">
 							<ul class="list-group list-group-flush">
-								<li class="list-group-item">Nombre de publicación: <a id="titulo"></a></li>
+								<li class="list-group-item">Categoría: <a id="categoria"></a></li>
 								<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
 								<li class="list-group-item">Autor: <a id="autor"></a></li>
 								<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
-								<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>
-								<li class="list-group-item">Precio de publicación: <a id="precio"></a> soles</li>
-								<li class="list-group-item"><a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+								<!--<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>-->
+								<li class="list-group-item">Precio: S/<a id="precio"></a></li>
+								<li class="list-group-item">Fecha publicada: <a id="fecha"></a></li>
+								<li class="list-group-item">Caduca en <a id="tiempo"></a> días</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-				<!--<div class="card-footer text-muted">
-				  2 days ago
-				</div>-->
 			</div>
-			<br><br><br>
+			<div class="card-footer text-muted">
+				<li class="list-group-item"><a class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+			</div>
 		
 			<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -125,7 +125,9 @@
 		document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
 		document.querySelector('#autor').innerHTML = publicacion.autor;
 		document.querySelector('#correo').innerHTML = publicacion.email;
-		document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
+		//document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
+		document.querySelector('#fecha').innerHTML = new Date (publicacion.fecha).toLocaleDateString();
+		document.querySelector('#tiempo').innerHTML = publicacion.tiempo;
 		document.querySelector('#precio').innerHTML = publicacion.precio;
 		document.querySelector('#categoria').innerHTML = publicacion.categoria;
 		let fotos = "";
