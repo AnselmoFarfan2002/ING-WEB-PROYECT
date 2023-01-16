@@ -1,6 +1,6 @@
-const notificar = idChat => {
+var URLActual = window.location.pathname;
+const notificar = (idChat,inputMsg) => {
 	/*-----------NUEVA NOTIFICACION-----------*/
-	var URLActual = window.location.pathname
 	if(URLActual == '/dashboard'){
 		socket.emit( 'client:notification:new', {
 			idUsuario: usuario.id,
@@ -8,6 +8,17 @@ const notificar = idChat => {
 		})
 		cargarMsgNoLeidos();
 		document.querySelector('.alertBadge').classList.remove('d-none');
+	}if(URLActual == '/publicacion'){
+		let aux = document.createElement('div');
+		aux.classList.add('msg');
+		aux.classList.add('my-message');
+		aux.innerHTML =  `
+			<p class="placeholder-glow">
+				${inputMsg}
+				<span class="timeL">${new Date().toLocaleTimeString()}</span>
+			</p>
+		`;
+		document.querySelector(`.userMsg`).appendChild(aux);
 	}else{
 		const notifyObj = document.querySelector(`#notifyChat-${idChat}`);
 		const chatBox = document.querySelector(`#idChat-${idChat} .idListaChat`).innerHTML;
@@ -37,6 +48,12 @@ const notificar = idChat => {
 	}
 }
 
-document.querySelector('#contenidoMensaje').addEventListener('keydown', tecla => {
-	if (tecla.keyCode === 13) document.getElementById('botonEnviar').click();
-})
+if(URLActual == '/publicacion'){
+	document.querySelector('#contenidoMensajePub').addEventListener('keydown', tecla => {
+		if (tecla.keyCode === 13) document.getElementById('botonEnviar').click();
+	})
+}else{
+	document.querySelector('#contenidoMensaje').addEventListener('keydown', tecla => {
+		if (tecla.keyCode === 13) document.getElementById('botonEnviar').click();
+	})
+}

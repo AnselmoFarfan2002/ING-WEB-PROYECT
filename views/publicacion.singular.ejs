@@ -84,7 +84,7 @@
 				</div>
 
 				<div class="userInput bg-light">
-					<input type="text" class="form-control mx-1" placeholder="Escriba un mensaje" aria-label="Recipient's username" aria-describedby="botonEnviar" id="contenidoMensaje">
+					<input type="text" class="form-control mx-1" placeholder="Escriba un mensaje" aria-label="Recipient's username" aria-describedby="botonEnviar" id="contenidoMensajePub">
 					<button class="btn btn-primary rounded-circle mx-3" type="button" id="botonEnviar" onclick="enviarMSG()"><i class="fa-solid fa-chevron-right"></i></button>
 				</div>
 			</div>
@@ -117,9 +117,9 @@
 
 <script type="text/javascript">
 	const enviarMSG = () => {
-		iniciarInteraccion(publicacionID, document.getElementById('contenidoMensaje').value);
+		iniciarInteraccion(publicacionID, document.getElementById('contenidoMensajePub').value);
 		
-		let inputMsg = document.querySelector('#contenidoMensaje');
+		let inputMsg = document.querySelector('#contenidoMensajePub');
 		let aux = document.createElement('div');
 		aux.classList.add('msg');
 		aux.classList.add('frnd-message');
@@ -166,6 +166,7 @@
 		document.querySelector('#fotosPublicacion .carousel-item').classList.add('active');
 		//document.querySelector('.userNameModal').innerHTML = publicacion.autor;
 		document.querySelector('.uName').innerHTML = publicacion.autor;
+		//cargarPubChat();
 	}); 
 </script>
 </html>
