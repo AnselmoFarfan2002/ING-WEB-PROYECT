@@ -102,32 +102,49 @@
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Negociabilidad :</label>
                     <div class="col-sm-8">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="negociable" name="negociable" value="0">
-                            <label class="form-check-label" for="inlineRadio1">No está permitido</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="negociable" name="negociable" value="1">
-                            <label class="form-check-label" for="inlineRadio2">Permitido</label>
-                        </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input negociable" type="radio" name="negociable" value="0">
+                                <label class="form-check-label" for="inlineRadio1">No está permitido</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input negociable" type="radio" name="negociable" value="1">
+                                <label class="form-check-label" for="inlineRadio2">Permitido</label>
+                            </div>
                     </div>
                 </div>
-
-                <div class="mb-3 row">
-                    <label class="col-sm-4 col-form-label">Foto de publicación: </label>
-                    <div class="col-sm-8">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" id="photos" multiple>
-                        </div>
-                    </div>
-                </div>
-
-                <input type="number" id="tiempo" value="30" style="display:none">
 
                 <div class="caja_centrada d-flex justify-content-left">
                     <button id="editar" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Cambiar</button>
                 </div>
+                <br><br>
+                <div class="caja_centrada">
+                    <p class="text-start fw-bold fs-1">Editar imágenes</p>
+                    <p class="text-start text-secondary fw-bold fs-6" >Edición solamente de las imágenes de las publicaciones ...</p>
+                </div>
+
+                <form enctype="multipart/form-data" method="PATCH" action="publicaciones">
+                    <div class="mb-3 row">
+                        <label class="col-sm-4 col-form-label">Foto de publicación: </label>
+                        <div class="col-sm-8">
+                            <div class="mb-3">
+                                <input class="form-control" type="file" name="photos" multiple>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="publicaciones" style="margin:auto;">
+                        <tbody>
+
+                        </tbody>
+                    </div>
+
+                    <div class="caja_centrada d-flex justify-content-left">
+                        <button id="publicar" type="submit" class="btn btn-danger" style="padding-left:40px; padding-right: 40px;">Insertar fotos</button>
+                    </div>
+                </form>
             </div>
+
+            
         </div>
     <%- include('./parts/footer.ejs') %>
 </body>
@@ -139,20 +156,27 @@
 	fetch(`/publicaciones?id=${publicacionID}`)
 	.then( res => res.json() )
 	.then( publicacion => {
-		console.log(publicacion)
-		publicacion.PUBLI_FOTOS = JSON.parse(publicacion.fotos);
+
         document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
 		document.querySelector('#titulo').value = publicacion.titulo;
 		document.querySelector('#precio').value = publicacion.precio;
+
+		publicacion.fotos = JSON.parse(publicacion.fotos);
+
 		let fotos = "";
-		publicacion.PUBLI_FOTOS.forEach( foto => {
-			fotos += `
-				<div class="carousel-item">
-			      <img src="/images/posts-photos/${foto}" style="height: 300px; margin:auto;" class="d-block w-100">
-			    </div>
-			`;
+		publicacion.fotos.forEach( foto => {
+			fotos += `<img class="m-1" style="width: 200px; height: 200px;" src="/images/posts-photos/${foto}">`;
 		} );
-	}); 
+        console.log(fotos);
+
+        fila = `
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1">
+            <label class="form-check-label" for="inlineCheckbox1">${fotos}</label>
+        </div>    
+        `;
+            document.querySelector('#publicaciones').innerHTML += fila;         
+    });
 
     document.getElementById('editar').addEventListener('click',EditarPub);
   
@@ -169,7 +193,7 @@
             descripcion: document.getElementById('descripcion').value,
             precio: document.getElementById('precio').value,
             categoria: document.getElementById('categoria').value,
-            negociable: document.getElementById('negociable').value,
+            negociable: document.querySelector(".negociable").checked?"0":"1",
             fotos: photos
         }
 
@@ -184,6 +208,28 @@
         }).then(res=>res.json())
         .then(data=>console.log(data))
     }
+
+    function RegisterImagenes(){
+        let p = document.getElementById('photos');
+        let photos = [];
+
+        for(let i=0;i<p.files.length;i++){
+            photos.push(p.files[i].name) 
+        }
+
+        const info = {fotos: photos}
+        console.log(info);
+
+        fetch(`/publicaciones/${publicacionID}/fotos`, {
+            method: 'PATCH',
+            body: JSON.stringify(info),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }).then(res=>res.json())
+        .then(info=>console.log(info))
+    }
+
 
   </script>
   
