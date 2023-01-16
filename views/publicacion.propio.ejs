@@ -16,6 +16,12 @@
                 </div>
 
                 <div class="mb-0" id="mis_publicaciones">
+                    <div class="noHide">
+                        
+                    </div>
+                    <div class="Hidden">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,7 +34,7 @@
         .then( res => res.json() )
         .then( mis_publicaciones => {
             //mis_publicaciones = Object.entries(mis-publicaciones);
-            console.log(mis_publicaciones)
+            //console.log(mis_publicaciones)
             let cont=0;
             mis_publicaciones.forEach( publicacion => {
                 if(publicacion.id){
@@ -110,17 +116,26 @@
         const Delete = publicacionID =>
             fetch(`/publicaciones/${publicacionID}`, 
             { method: 'DELETE' }).then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data => {console.log(data)
+                if (data.status == 1)
+                    window.location.href = '/mis-publicaciones'
+            })
             
         const Refresh = publicacionID =>
             fetch(`/publicaciones/${publicacionID}/tiempo`, 
             { method: 'PATCH', }).then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data => {console.log(data)
+                if (data.status == 1)
+                    window.location.href = '/dashboard'
+            })
 
         const Hide = publicacionID =>
             fetch(`/publicaciones/${publicacionID}/visibilidad`, 
             { method: 'PATCH', }).then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data => {console.log(data)
+                if (data.status == 1)
+                    window.location.href = '/mis-publicaciones'
+            })
 
     </script>
 </html>
