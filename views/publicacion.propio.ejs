@@ -23,11 +23,7 @@
         <%- include('./parts/footer.ejs') %>
     </body>
 
-    
     <script type="text/javascript">
-
-        
-
         fetch('/publicaciones?self=1')
         .then( res => res.json() )
         .then( mis_publicaciones => {
@@ -50,15 +46,15 @@
                     <div class="mb-0">
                         <div class="row row-cols-1 row-cols-sm-2" style="margin-bottom: 30px;">
                             <div class="col-md-5" style="margin:auto;">
-                                <div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
+                                <div id="${publicacion.id}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         ${fotos}
                                     </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="prev">
+                                <button class="carousel-control-prev" type="button" data-bs-target="#${publicacion.id}" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="next">
+                                <button class="carousel-control-next" type="button" data-bs-target="#${publicacion.id}" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
