@@ -10,6 +10,10 @@
     justify-content: center;   
 }
 
+.Hidden{
+    opacity: .5;
+}
+
 .for .caja_centrada{
     justify-content: center;
     margin-right: auto;

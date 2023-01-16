@@ -2,15 +2,15 @@
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h1 class="modal-title fs-5" id="Ocultar">Ocultar publicacion</h1>
+            <h1 class="modal-title fs-5" id="Ocultar"> ${publicacion.visible?"Ocultar":"Mostrar"} publicacion</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            ¿Estás seguro que quieres ocultar la publicación?
+            ¿Estás seguro que quieres ${publicacion.visible?"ocultar":"mostrar"} la publicación?
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <input type="button" id="btnHide" onclick="Hide(${publicacion.id})" class="btn btn-primary" value="Ocultar">
+            <input type="button" id="btnHide" onclick="Hide(${publicacion.id})" class="btn btn-primary" value=${publicacion.visible?"Ocultar":"Mostrar"}>
         </div>
         </div>
     </div>

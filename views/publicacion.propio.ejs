@@ -16,11 +16,11 @@
                 </div>
 
                 <div class="mb-0" id="mis_publicaciones">
-                    <div class="noHide">
-                        
-                    </div>
-                    <div class="Hidden">
+                    <div id="noHide">
 
+                    </div>
+                    <div id="Hidden">
+                        
                     </div>
                 </div>
             </div>
@@ -34,7 +34,6 @@
         .then( res => res.json() )
         .then( mis_publicaciones => {
             //mis_publicaciones = Object.entries(mis-publicaciones);
-            //console.log(mis_publicaciones)
             let cont=0;
             mis_publicaciones.forEach( publicacion => {
                 if(publicacion.id){
@@ -54,8 +53,8 @@
                     </div>
                     `;
                 } );
-                publicacion = `
-                    <div class="mb-0">
+                publicaciona = `
+                    <div class="mb-0 ${publicacion.visible?"noHide":"Hidden"}">
                         <div class="row row-cols-1 row-cols-sm-2" style="margin-bottom: 30px;">
                             <div class="col-md-5" style="margin:auto;">
                                 <div id="${publicacion.id}" class="carousel slide" data-bs-ride="carousel">
@@ -88,19 +87,23 @@
                                             <a type="button" class="btn btn-outline-dark" href="/publicacion?id=${publicacion.id}">Ver</a>
                                             <a type="button" class="btn btn-outline-dark" href="/editar-publicacion?id=${publicacion.id}">Editar</a>
                                             <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Eliminar-${publicacion.id}" class="link-primary">Eliminar</button>
-                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Ocultar-${publicacion.id}" class="link-primary">Ocultar</button>
+                                            <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#Ocultar-${publicacion.id}" class="link-primary">${publicacion.visible? "Ocultar":"Mostrar"}</button>
                                             <a type="button" onclick="Refresh(${publicacion.id})" class="btn btn-outline-dark"> Refrescar </a>
                                         </div>                                        
-
-                                        <%- include('./parts/publicacion.propio.hide.ejs') %>
-                                        <%- include('./parts/publicacion.propio.delete.ejs') %>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    <%- include('./parts/publicacion.propio.hide.ejs') %>
+                    <%- include('./parts/publicacion.propio.delete.ejs') %>
                 `; 
-                document.querySelector('#mis_publicaciones').innerHTML += publicacion;
+                //document.querySelector('#mis_publicaciones').innerHTML += publicaciona;
+                if (publicacion.visible == 0){
+                    document.querySelector('#Hidden').innerHTML += publicaciona;
+                }else{
+                    document.querySelector('#noHide').innerHTML += publicaciona;
+                }
             }); 
             }else{
                 document.querySelector('#mis_publicaciones').innerHTML = `
