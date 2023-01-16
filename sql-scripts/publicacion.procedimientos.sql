@@ -75,6 +75,6 @@ create procedure get_pub_publicacion(pub_id int unsigned) begin
 	FROM PUBLICACION
     JOIN USUARIO ON USU_ID = PUBLI_AUTOR
     JOIN CATEGORIA ON PUBLI_CATEGORIA = CAT_ID
-    WHERE PUBLI_ID = pub_id;
+    WHERE PUBLI_ID = pub_id AND PUBLI_ACTIVA = true;
 end;
 $$

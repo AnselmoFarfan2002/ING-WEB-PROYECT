@@ -26,6 +26,7 @@ controllers.LISTAR_PUBLICACION = (req, res) => {
         PUBLI_FECHA as fecha, CAT_NOMBRE as categoria, CAT_SUPERIOR as categoriaSuperior, 
         PUBLI_TITULO as titulo, 
         PUBLI_PRECIO as precio, 
+        PUBLI_VISIBLE as visible, 
         PUBLI_NEGOCIABLE as negociable, 
         PUBLI_FOTOS as fotos `;
     userQuery += ` FROM PUBLICACION JOIN USUARIO ON USU_ID = PUBLI_AUTOR JOIN CATEGORIA ON PUBLI_CATEGORIA = CAT_ID `;
@@ -64,7 +65,9 @@ controllers.LISTAR_PUBLICACION = (req, res) => {
 
     if(req.query.titulo) userQuery += ` AND PUBLI_TITULO LIKE '%${req.query.titulo}%' `;  
     if(req.query.autor) userQuery += ` AND concat(USU_NOMBRE,' ',USU_APELLIDO1,' ',USU_APELLIDO2) LIKE '%${req.query.autor}%' `;
-
+    
+    userQuery += `AND PUBLI_ACTIVA = true`
+    
     if(req.query.fechaDesc == true || req.query.fechaDesc == 'true' || req.query.fechaDesc == 'TRUE') userQuery += ' ORDER BY PUBLI_FECHA DESC ';
     else userQuery += ' ORDER BY PUBLI_FECHA ASC ';
 
