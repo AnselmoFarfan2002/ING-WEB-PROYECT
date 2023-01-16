@@ -15,6 +15,6 @@ const uploader_ = multer({
 const editor = require( '../controllers/module 1 - users accounts/editor-datos' );
 
 router.route( '/empresas' )
-.patch( uploader_.single('business-photo'), editor.ACTUALIZAR_FOTO_EMPRESA )   // MODULO 1 : EDITOR DATOS
+.post( uploader_.single('business-photo'), editor.ACTUALIZAR_FOTO_EMPRESA )   // MODULO 1 : EDITOR DATOS
 
 module.exports = router;

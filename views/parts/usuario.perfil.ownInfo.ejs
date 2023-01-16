@@ -76,8 +76,12 @@
   </div>
 
   <div class="mb-5">
-    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changePass">
+    <button type="button" class="btn btn-secondary  mt-3" data-bs-toggle="modal" data-bs-target="#changePass">
       <i class="fa-solid fa-key"></i> Cambiar contraseña 
+    </button>
+
+    <button type="button" class="btn btn-secondary mt-3" data-bs-toggle="modal" data-bs-target="#changePhotos">
+      Cambiar fotos de perfil 
     </button>
   </div>
 </div>
@@ -107,6 +111,36 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary btnCloseChangePass" id="changePassBtn">Cambiar contraseña</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="changePhotos" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cambiar fotos de perfil</h1>
+        <button type="button" class="btn-close btnCloseChangePass" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-text mb-3 d-none serverResponse"></div>
+
+        <form class="input-group mb-3" action="/usuarios/foto" method="post" enctype="multipart/form-data">
+          <label class="input-group-text" for="fotoUsuario">Usuario</label>
+          <input type="file" class="form-control" name="profile-photo" required="">
+          <button class="btn btn-outline-secondary" type="submit">Enviar</button>
+        </form>
+
+        <form class="input-group mb-3" action="/empresas" method="post" enctype="multipart/form-data">
+          <label class="input-group-text" for="fotoEmpresa">Empresa</label>
+          <input type="file" class="form-control" name="business-photo" required>
+          <button class="btn btn-outline-secondary" type="submit">Enviar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
       </div>
     </div>
   </div>

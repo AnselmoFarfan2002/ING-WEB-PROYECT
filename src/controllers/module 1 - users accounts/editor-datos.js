@@ -7,7 +7,7 @@ controllers.ACTUALIZAR_FOTO_PERFIL = (req, res) => {
     if( req.session.open !== true ) res.send( { msg: 'u must have an opened session', status: -1 } );
     else{
         mysqlConnection.query('call put_usu_photo(?,?)', [req.session.userId, 'photo-' + req.session.userId + '.png'] );
-        res.send( { msg: 'Su foto ha sido actualizada.', status: 1 } );
+        res.redirect('/mi-perfil');
     } 
 }
 
@@ -15,12 +15,11 @@ controllers.ACTUALIZAR_FOTO_EMPRESA = (req, res) => {
     if( req.session.open !== true ) res.send( { msg: 'u must have an opened session', status: -1 } );
     else {
         mysqlConnection.query('call put_emp_photo(?,?)', [req.session.empresa, 'photo-' + req.session.empresa + '.png'] );
-        res.send( { msg: 'La foto de su empresa ha sido actualizada.', status: 1 } )
+        res.redirect('/mi-perfil');
     };
 }
 
 controllers.ACTUALIZAR_DATOS = (req, res) => {
-    console.log(req.body, req.session.email);
     if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
     else if( req.session.email == req.body.correo ){
         INDEX_CARGO(req.body.cargo).then( idCargo => { mysqlConnection.query( 'call put_usu_usuario(?,?,?,?,?,?,?,?)', [
