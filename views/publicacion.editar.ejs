@@ -268,7 +268,7 @@
 		publicacion.fotos.forEach( foto => {
 			fotos += `
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" id="${foto}" checked>
+                <input class="form-check-input" type="checkbox" id="${foto}" name="fotos" value="${foto}" checked>
                 <label class="form-check-label" for="${foto}">
                 <img class="m-1" style="width: 180px; height: 180px;" src="/images/posts-photos/${foto}"></label>
             </div>
@@ -308,26 +308,26 @@
         .then(data=>console.log(data))
     }
 
-    function RegisterImagenes(){
-        let p = document.getElementById('photos');
-        let photos = [];
+    // function RegisterImagenes(){
+    //     let p = document.getElementById('photos');
+    //     let photos = [];
         
-        for(let i=0;i<p.files.length;i++){
-            photos.push(p.files[i].name) 
-        }
+    //     for(let i=0;i<p.files.length;i++){
+    //         photos.push(p.files[i].name) 
+    //     }
 
-        const info = {fotos: photos}
-        console.log(info);
+    //     const info = {fotos: photos}
+    //     console.log(info);
 
-        fetch(`/publicaciones/${publicacionID}/fotos`, {
-            method: 'PATCH',
-            body: JSON.stringify(info),
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        }).then(res=>res.json())
-        .then(info=>console.log(info))
-    }
+    //     fetch(`/publicaciones/${publicacionID}/fotos`, {
+    //         method: 'PATCH',
+    //         body: JSON.stringify(info),
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         }
+    //     }).then(res=>res.json())
+    //     .then(info=>console.log(info))
+    // }
 
   </script>
   

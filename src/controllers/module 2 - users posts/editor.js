@@ -44,9 +44,17 @@ controllers.ALTERNAR_VISIBILIDAD_PUBLICACION = (req, res) => {
 }
 
 controllers.ACTUALIZAR_FOTOS_PUBLICACION = (req, res) => {
-    if ( req.session.open === true ){        
-        let newFotos = req.body.fotos;
+    if ( req.session.open === true ){     
+        let newFotos;
 
+        if(req.body.fotos) 
+            if(Array.isArray(req.body.fotos)) newFotos = req.body.fotos;
+            else {
+                newFotos = [];
+                newFotos.push(req.body.fotos);
+            } 
+        else newFotos = [];
+        
         req.files.forEach( e => { newFotos.push( e.filename ) } ); //Se inserta los nombres de las nuevas fotos
         let query = mysqlConnection.format('call put_pub_fotos(?,?)', [req.params.id, JSON.stringify( newFotos )]);
 
@@ -63,7 +71,10 @@ controllers.ACTUALIZAR_FOTOS_PUBLICACION = (req, res) => {
                 else resolve({ msg: 'Edición exitosa.', status: 1 }); //Se realiza la edicion
             })
 
-            .then( resp => res.send(resp) )
+            .then( resp =>{
+                // res.send(resp)
+                res.redirect('/editar-publicacion?id='+req.params.id);
+            })
             .catch( resp => {
                 res.send({ msg: resp.msg, status: resp.status });
                 console.log( resp.error );
