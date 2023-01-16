@@ -41,6 +41,16 @@
     transition: all 200ms linear;
     background:#a3b4f1;
 }
+.notChats{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.notChats i{
+    text-align: center;
+    font-size: 60px;
+}
 #notifyChats1{
     background-color: #2e67e2;
     margin-left: 5px;
