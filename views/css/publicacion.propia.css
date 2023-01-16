@@ -15,3 +15,17 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+.notChats{
+    display: grid;
+    height: 280px;
+    text-align: center;
+}
+.notChats i{
+    display: grid;
+    justify-content: center;
+    align-items: end;
+    padding: 10px;
+    text-align: center;
+    font-size: 60px;
+}

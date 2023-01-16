@@ -7,7 +7,6 @@
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <%- include('./parts/nav.ejs') %>
 
         <div id="contenido" class="d-flex justify-content-left">
@@ -42,66 +41,167 @@
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Categoría :</label>
                     <div class="col-sm-8">
-                        <select class="form-select" id="pre_categoria" size="5" aria-label="size 3 select example">
-                            <option value="1" selected>Carnes y huevos</option>
-                            <option value="2">Pescados y mariscos</option>
-                            <option value="3">Vegetales y hortalizas</option>
-                            <option value="4">Frutas</option>
-                            <option value="5">Lácteos y derivados</option>
-                            <option value="6">Legumbres, tubérculos	y frutos secos</option>
-                            <option value="7">Cereales y derivados</option>
-                        </select>
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Carnes y huevos
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="2">
+                                        <label class="form-check-label" for="inlineRadio2">Carnes rojas</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="3">
+                                        <label class="form-check-label" for="inlineRadio3">Carnes blancas</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="4" >
+                                        <label class="form-check-label" for="inlineRadio4">Huevos</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="5" >
+                                        <label class="form-check-label" for="inlineRadio5">Embutidos</label>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                Pescados y mariscos
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="7">
+                                        <label class="form-check-label" for="inlineRadio7">Pescados</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="8">
+                                        <label class="form-check-label" for="inlineRadio8">Mariscos</label>
+                                    </div>
+                                </div> 
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                Vegetales y hortalizas
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="10">
+                                        <label class="form-check-label" for="inlineRadio10">Vegetales</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="11">
+                                        <label class="form-check-label" for="inlineRadio11">Hortalizas</label>
+                                    </div>
+                                </div> 
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                Frutas
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="14">
+                                        <label class="form-check-label" for="inlineRadio14">Dulces y semidulces</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="15">
+                                        <label class="form-check-label" for="inlineRadio15">Ácidas y semiácidas</label>
+                                    </div>
+                                </div> 
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingFive">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">
+                                Lácteos y derivados
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFive" class="accordion-collapse collapse" aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="17">
+                                        <label class="form-check-label" for="inlineRadio17">Leche</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="18">
+                                        <label class="form-check-label" for="inlineRadio18">Yogures</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="19">
+                                        <label class="form-check-label" for="inlineRadio19">Quesos</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="20">
+                                        <label class="form-check-label" for="inlineRadio20">Otros</label>
+                                    </div>
+                                </div> 
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingSix">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSix" aria-expanded="false" aria-controls="flush-collapseSix">
+                                Legumbres, tubérculos y frutos secos
+                                </button>
+                            </h2>
+                            <div id="flush-collapseSix" class="accordion-collapse collapse" aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="22">
+                                        <label class="form-check-label" for="inlineRadio22">Legumbres</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="23">
+                                        <label class="form-check-label" for="inlineRadio23">tubérculos</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="24">
+                                        <label class="form-check-label" for="inlineRadio24">Frutos Secos</label>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingSeven">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseSeven" aria-expanded="false" aria-controls="flush-collapseSeven">
+                                Cereales y derivados
+                                </button>
+                            </h2>
+                            <div id="flush-collapseSeven" class="accordion-collapse collapse" aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="26">
+                                        <label class="form-check-label" for="inlineRadio26">Cereales</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input subcategoria" type="radio" name="categoria" value="27">
+                                        <label class="form-check-label" for="inlineRadio27">Derivados</label>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <div class="mb-3 row">
-                    <label class="col-sm-4 col-form-label">Subcategoría :</label>
-                    <div class="col-sm-8">
-                        <select class="form-select" name="categoria" size="4" aria-label="size 3 select example">
-                            <option value="2">Carnes rojas</option>
-                            <option value="3">Carnes blancas</option>
-                            <option value="4">Huevos</option>
-                            <option value="5">Embutidos</option>
-                        </select>
-
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
-                            <option value="7">Pescados</option>
-                            <option value="8">Mariscos</option>
-                        </select>
-
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
-                            <option value="10">Vegetales</option>
-                            <option value="11">Hortalizas</option>
-                        </select>
-
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
-                            <option value="14">Dulces y semidulces</option>
-                            <option value="15">Ácidas y semiácidas</option>
-                        </select>
-                        
-                        <select class="form-select" name="categoria" size="4" aria-label="size 3 select example" style="display:none">
-                            <option value="17">Leche</option>
-                            <option value="18">Yogures</option>
-                            <option value="19">Quesos</option>
-                            <option value="20">Otros</option>
-                        </select>
-                        
-                        <select class="form-select" name="categoria" size="3" aria-label="size 3 select example" style="display:none">
-                            <option value="22">Legumbres</option>
-                            <option value="23">tubérculos</option>
-                            <option value="24">Frutos Secos</option>
-                        </select>
-                        
-                        <select class="form-select" name="categoria" size="2" aria-label="size 3 select example" style="display:none">
-                            <option value="26">Cereales</option>
-                            <option value="27">Derivados</option>
-                        </select>
-                    </div>
-                </div>
-
+ 
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Tipo :</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8" style="margin:auto;">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="tipo" value="0">
                                 <label class="form-check-label" for="inlineRadio1">Orden de compra</label>
@@ -112,10 +212,10 @@
                             </div>
                     </div>
                 </div>
- 
+
                 <div class="mb-3 row">
                     <label class="col-sm-4 col-form-label">Negociabilidad :</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8" style="margin:auto;">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="negociable" value="0">
                                 <label class="form-check-label" for="inlineRadio1">No está permitido</label>
@@ -151,6 +251,8 @@
 <script type="text/javascript">
     //document.getElementById('publicar').addEventListener('click',RegisterPub);
   
+    
+
     function RegisterPub(){
         let p = document.getElementById('photos');
         let photos = [];
@@ -182,4 +284,3 @@
         .then(data=>console.log(data))
     }
   </script>
-  

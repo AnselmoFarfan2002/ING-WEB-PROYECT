@@ -16,6 +16,12 @@
                 </div>
 
                 <div class="mb-0" id="mis_publicaciones">
+                    <div class="noHide">
+                        
+                    </div>
+                    <div class="Hidden">
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,18 +29,20 @@
         <%- include('./parts/footer.ejs') %>
     </body>
 
-    
     <script type="text/javascript">
-
-        
-
         fetch('/publicaciones?self=1')
         .then( res => res.json() )
         .then( mis_publicaciones => {
             //mis_publicaciones = Object.entries(mis-publicaciones);
-            console.log(mis_publicaciones)
-    
+            //console.log(mis_publicaciones)
+            let cont=0;
             mis_publicaciones.forEach( publicacion => {
+                if(publicacion.id){
+                    cont = cont + 1;
+                }
+            })
+            if(cont>0){
+                mis_publicaciones.forEach( publicacion => {
                 //publicacion = publicacion[1];
                 publicacion.fotos = JSON.parse(publicacion.fotos);
     
@@ -50,15 +58,15 @@
                     <div class="mb-0">
                         <div class="row row-cols-1 row-cols-sm-2" style="margin-bottom: 30px;">
                             <div class="col-md-5" style="margin:auto;">
-                                <div id="fotosPublicacion" class="carousel slide" data-bs-ride="carousel">
+                                <div id="${publicacion.id}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
                                         ${fotos}
                                     </div>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="prev">
+                                <button class="carousel-control-prev" type="button" data-bs-target="#${publicacion.id}" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#fotosPublicacion" data-bs-slide="next">
+                                <button class="carousel-control-next" type="button" data-bs-target="#${publicacion.id}" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
@@ -94,23 +102,40 @@
                 `; 
                 document.querySelector('#mis_publicaciones').innerHTML += publicacion;
             }); 
+            }else{
+                document.querySelector('#mis_publicaciones').innerHTML = `
+                    <div class="notChats text-secondary">
+                        <i class="fa-regular fa-face-frown"></i>
+                        <h2 class="text-center">No tiene productos publicados</h2>
+                    </div>
+                `
+            }
             
         })
 
         const Delete = publicacionID =>
             fetch(`/publicaciones/${publicacionID}`, 
             { method: 'DELETE' }).then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data => {console.log(data)
+                if (data.status == 1)
+                    window.location.href = '/mis-publicaciones'
+            })
             
         const Refresh = publicacionID =>
             fetch(`/publicaciones/${publicacionID}/tiempo`, 
             { method: 'PATCH', }).then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data => {console.log(data)
+                if (data.status == 1)
+                    window.location.href = '/dashboard'
+            })
 
         const Hide = publicacionID =>
             fetch(`/publicaciones/${publicacionID}/visibilidad`, 
             { method: 'PATCH', }).then(res=>res.json())
-            .then(data=>console.log(data))
+            .then(data => {console.log(data)
+                if (data.status == 1)
+                    window.location.href = '/mis-publicaciones'
+            })
 
     </script>
 </html>

@@ -1,6 +1,6 @@
 var cajaChats = document.querySelector('#chatListVenta');
 var cajaChatsC = document.querySelector('#chatListCompra');
-var contC=0, contV=0;
+var contC=0, contV=0, chatC=0, chatV=0;
 
 fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	let aux;
@@ -12,6 +12,9 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		if(usuario.id == chat.idAutor){
 			if(chat.notificacion == 1){
 				contV=contV+1;
+			}
+			if(chat.idChat){
+				chatC=chatC+1;
 			}
 			aux.innerHTML = `
 				<div class="infoBlock" onclick="mostrarChat('${chat.idChat}')">
@@ -45,6 +48,9 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 		}else{
 			if(chat.notificacion == 1){
 				contC=contC+1;
+			}
+			if(chat.idChat){
+				chatV=chatV+1;
 			}
 			aux.innerHTML = `
 				<div class="infoBlock" onclick="mostrarChat('${chat.idChat}')">
@@ -90,6 +96,23 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 	if(contC>0){
 		document.getElementById("notifyChats2").classList.remove('d-none');
 		document.getElementById("notifyChats2").innerHTML = contC;
+	}
+
+	if(chatC == 0){
+		cajaChats.innerHTML = `
+			<div class="notChats text-secondary">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+				<h2 class="text-center">Aun no tiene interacciones</h2>
+			</div>
+		`;
+	}
+	if(chatV == 0){
+		cajaChatsC.innerHTML = `
+			<div class="notChats text-secondary">
+				<i class="fa-solid fa-triangle-exclamation"></i>
+				<h2 class="text-center">Aun no tiene interacciones</h2>
+			</div>
+		`;
 	}
 });
 
