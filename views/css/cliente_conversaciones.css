@@ -9,6 +9,19 @@
     width: 100%;
     height: calc(100vh - 57px);
 }
+.notChats{
+    display: grid;
+    height: 280px;
+    text-align: center;
+}
+.notChats i{
+    display: grid;
+    justify-content: center;
+    align-items: end;
+    padding: 10px;
+    text-align: center;
+    font-size: 60px;
+}
 /*-----------LISTA DE CHATS-----------*/
 .container-chat .leftSide{
     position: relative;
@@ -40,16 +53,6 @@
     cursor: pointer;
     transition: all 200ms linear;
     background:#a3b4f1;
-}
-.notChats{
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-.notChats i{
-    text-align: center;
-    font-size: 60px;
 }
 #notifyChats1{
     background-color: #2e67e2;
