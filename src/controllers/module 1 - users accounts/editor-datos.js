@@ -1,6 +1,7 @@
 const mysqlConnection = require( '../../config/db-connection' );
 
 const controllers = {};
+const { INDEX_CARGO } = require('./registrador');
 
 controllers.ACTUALIZAR_FOTO_PERFIL = (req, res) => {
     if( req.session.open !== true ) res.send( { msg: 'u must have an opened session', status: -1 } );
@@ -19,25 +20,29 @@ controllers.ACTUALIZAR_FOTO_EMPRESA = (req, res) => {
 }
 
 controllers.ACTUALIZAR_DATOS = (req, res) => {
+    console.log(req.body, req.session.email);
     if( req.session.open === false ) res.send( { msg: 'u must have an opened session', status: -1 } );
-    else{
-        mysqlConnection.query( 'call put_usu_usuario(?,?,?,?,?,?,?,?)', [
+    else if( req.session.email == req.body.correo ){
+        INDEX_CARGO(req).then( idCargo => { mysqlConnection.query( 'call put_usu_usuario(?,?,?,?,?,?,?,?)', [
             req.body.nombre,
             req.body.apellido1,
             req.body.apellido2,
-            req.body.cargo,
-            req.body.email,
+            idCargo,
+            req.session.email,
             req.session.userId,
             req.body.celular,
             req.body.telefono
         ], ( err ) => {
-            if( err ) res.send({ msg: 'Lo sentimos, ha ocurrido un error durante la edición.', status: -1 });
-            else {
+            if( err ) {
+                console.log(err);
+                res.send({ msg: 'Lo sentimos, ha ocurrido un error durante la edición.', status: -1 });
+            } else {
                 req.session.email = req.body.email;
                 res.send({ msg: 'Sus datos han sido actualizados.', status: 1 });
             }
-        })
-    };
+        })});
+        
+    } else res.send({ msg: "U don't have permission to do this", status: 0 });
 }
 
 controllers.ACTUALIZAR_CONTRASENIA = (req, res) => {

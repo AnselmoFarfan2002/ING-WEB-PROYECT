@@ -23,6 +23,8 @@ var originData = {};
 fetch('/usuarios', {})
 .then( resHTTP => resHTTP.json() )
 .then( resJSON => {
+	resJSON.celular = resJSON.celular.split(' ')[1];
+
 	usuarioHTML.foto.src = `/images/profile-photos/${resJSON.foto}`;
 	usuarioHTML.nombre.value = resJSON.nombre;
 	usuarioHTML.apellido1.value = resJSON.apellido1;
@@ -104,23 +106,16 @@ const hideDataControlsHandler = container => {
 }
 
 const loadEventField = element => element.addEventListener('keydown', e => {
-	if(e.keyCode == 13) {
-		dataPoliceOne(e.target.id).then( () => {
-			originData[e.target.id] = e.target.value;
-			saveChanges();
-			disableFormControlPlainText(element);	
-		}).catch(()=>{});
-		
-	} else if (e.keyCode == 27) abortEdit(element.parentNode.parentNode, e.target.id);
+	if(e.keyCode == 13) saveChanges(e.target);
+	else if (e.keyCode == 27) abortEdit(element.parentNode.parentNode, e.target.id);
 });
 
 const loadEventCheck = element => element.addEventListener('click', e => {
-	console.log(element, element.parentNode)
-	hideDataControlsHandler(element.parentNode);
+	saveChanges(document.getElementById(e.target.attributes.edit.value))
 });
 
 const loadEventAbort = element => element.addEventListener('click', e => {
-	hideDataControlsHandler(element.parentNode);
+	abortEdit(element.parentNode.parentNode, e.target.attributes.edit.value)
 });
 
 const abortEdit = (container, fieldName) => {
@@ -129,7 +124,27 @@ const abortEdit = (container, fieldName) => {
 	disableFormControlPlainText(container.querySelector('input'));
 }
 
-const saveChanges = () => {
-
+const saveChanges = element => {
+	dataPoliceOne(element.id).then( () => {
+		originData[element.id] = element.value;
+		updateData();
+		disableFormControlPlainText(element);
+		hideDataControlsHandler(element.parentNode.parentNode.querySelector('.data-controls'));
+	}).catch(()=>{});
 };
 
+const updateData = () => {
+	dissableInputs('profileContent');
+	fetch('/usuarios', {
+		method: 'PUT',
+		body: JSON.stringify({...originData}),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	}).then( resHTTP => resHTTP.json() )
+	.then( resJSON => {
+		console.log(resJSON)
+		if (resJSON.status == 1) enableInputs('profileContent');
+		// else if (resJSON.status == 0) window.location.reload();
+	}).catch( err => console.log(err) );
+};

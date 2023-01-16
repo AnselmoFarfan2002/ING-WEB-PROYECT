@@ -56,7 +56,7 @@ controllers.LISTAR_PUBLICACION = (req, res) => {
         userQuery = mysqlConnection.format(userQuery, values);
     }
 
-    if(req.query.self == false){ userQuery += ` AND PUBLI_AUTOR != ${req.session.userId} `; }
+    if(req.query.self == false){ userQuery += ` AND PUBLI_AUTOR != ${req.session.userId} AND PUBLI_VISIBLE = true`; }
 
     if(req.query.fecha){ 
         userQuery += ` AND DATE(PUBLI_FECHA) = ? `;  
