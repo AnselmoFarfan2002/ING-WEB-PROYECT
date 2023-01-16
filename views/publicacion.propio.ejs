@@ -32,7 +32,7 @@
         .then( res => res.json() )
         .then( mis_publicaciones => {
             //mis_publicaciones = Object.entries(mis-publicaciones);
-            //console.log(mis_publicaciones)
+            console.log(mis_publicaciones)
     
             mis_publicaciones.forEach( publicacion => {
                 //publicacion = publicacion[1];
@@ -46,7 +46,6 @@
                     </div>
                     `;
                 } );
-            
                 publicacion = `
                     <div class="mb-0">
                         <div class="row row-cols-1 row-cols-sm-2" style="margin-bottom: 30px;">
@@ -72,7 +71,7 @@
                                     <li id="categoria" class="list-group-item">Categoría: ${publicacion.categoriaSuperior?publicacion.categoriaSuperior:"No se presenta"}</li>
                                     <li id="tipo" class="list-group-item">Subcategoría: ${publicacion.categoria?publicacion.categoria:"No se presenta"}</li>
                                     <li id="negociabilidad" class="list-group-item">Negociable: 
-                                            <input class="form-check-input" type="checkbox" role="switch" ${publicacion.negociable?"checked":""} disabled>
+                                        <input class="form-check-input" type="checkbox" role="switch" ${publicacion.negociable?"checked":""} disabled>
                                     </li>
                                     <li id="precio" class="list-group-item">Precio: S/.${publicacion.precio}</li>
 
@@ -85,42 +84,8 @@
                                             <a type="button" onclick="Refresh(${publicacion.id})" class="btn btn-outline-dark"> Refrescar </a>
                                         </div>                                        
 
-                                        <div class="modal fade" id="Eliminar-${publicacion.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Eliminar" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="Eliminar">Eliminar publicacion</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Estás seguro de eliminar la publicación?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <input type="button" onclick="Delete(${publicacion.id})" id="btnDelete" class="btn btn-primary" value="Eliminar">
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="modal fade" id="Ocultar-${publicacion.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="Ocultar" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="Ocultar">Ocultar publicacion</h1>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    ¿Estás seguro que quieres ocultar la publicación?
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                                    <input type="button" id="btnHide" onclick="Hide(${publicacion.id})" class="btn btn-primary" value="Ocultar">
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
+                                        <%- include('./parts/publicacion.propio.hide.ejs') %>
+                                        <%- include('./parts/publicacion.propio.delete.ejs') %>
                                     </li>
                                 </ul>
                             </div>
