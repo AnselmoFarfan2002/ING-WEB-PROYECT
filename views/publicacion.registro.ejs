@@ -113,14 +113,17 @@
                     </div>
                 </div>
  
-
                 <div class="mb-3 row">
-                    <label class="col-sm-4 col-form-label">Negociabilidad: </label>
+                    <label class="col-sm-4 col-form-label">Negociabilidad :</label>
                     <div class="col-sm-8">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" role="switch" name="negociable" checked>
-                            <label class="form-check-label"></label>
-                        </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="negociable" value="0">
+                                <label class="form-check-label" for="inlineRadio1">No está permitido</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="negociable" value="1">
+                                <label class="form-check-label" for="inlineRadio2">Permitido</label>
+                            </div>
                     </div>
                 </div>
 
