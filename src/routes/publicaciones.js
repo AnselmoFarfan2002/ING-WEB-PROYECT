@@ -33,6 +33,6 @@ router.route( '/publicaciones/:id/tiempo' )      .patch( m2.refrescador.REFRESCA
 router.route( '/publicaciones/:id/visibilidad' ) .patch( m2.editor.ALTERNAR_VISIBILIDAD_PUBLICACION )  
 
 router.route( '/publicaciones/:id/fotos' )      
-.POST( uploader.array('photos', 12), m2.editor.ACTUALIZAR_FOTOS_PUBLICACION )      
+.post( uploader.array('photos', 12), m2.editor.ACTUALIZAR_FOTOS_PUBLICACION )      
 
 module.exports = router;
