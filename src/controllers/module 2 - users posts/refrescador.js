@@ -4,7 +4,7 @@ const controllers = {}
 
 controllers.REFRESCAR_PUBLICACION = (req, res) => {
     if ( req.session.open === true ){
-        let query = mysqlConnection.format( 'select refrescador_publicaciones(?) as status', req.params.codigo );
+        let query = mysqlConnection.format( 'select refrescador_publicaciones(?) as status', req.params.id );
 
         mysqlConnection.query(query, (err,rows) => new Promise((resolve, reject) => {
             if( err ) reject({ msg: 'Ha ocurrido un error al refrescar la publicación.', status: -1, error: err });
