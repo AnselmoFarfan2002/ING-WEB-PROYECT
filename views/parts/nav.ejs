@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <% if(session) { %>
       <div class="brandTitle">
-          <a class="navbar-brand" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
+          <a class="navbar-brand" role="button" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
             <i class="fa-solid fa-bars" style="margin-right:20px;"></i><span id="namePage"></span>
           </a>
       </div>
@@ -30,7 +30,11 @@
                 <a class="nav-link" href="registrar-publicacion"><i class="fa-solid fa-clipboard"></i></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="mis-conversaciones"><i class="fa-solid fa-comments"></i></a>
+                <a class="nav-link iconConver position-relative" href="mis-conversaciones"><i class="fa-solid fa-comments"></i>
+                  <span class="d-none alertBadge position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+                    <span class="visually-hidden">New alerts</span>
+                  </span>
+                </a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,7 +51,7 @@
   </div>
 </nav>
 
-<div class="bg-light offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="bg-light offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
   <div class="offcanvas-header border-bottom">
       <h5 class="offcanvas-title" id="offcanvasExampleLabel">Acceso rápido</h5>
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -55,10 +59,15 @@
   <div class="offcanvas-body">
       <div>
         <ul class="list-group linkItem list-group-flush">
-          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="inicio"><i class="fa-solid fa-house"></i>Inicio</a></li>
-          <!--<li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="#"><i class="fa-solid fa-truck-ramp-box"></i>Publicaciones de venta</a></li>-->
-          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="lista-publicaciones"><i class="fa-solid fa-tag"></i>Lista de publicaciones</a></li>
-          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="mis-publicaciones"><i class="fa-solid fa-box-archive"></i>Mis publicaciones</a></li>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="inicio"><div class="iconLink"><i class="fa-solid fa-house"></i></div>Inicio</a></li>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="mis-publicaciones"><div class="iconLink"><i class="fa-solid fa-box-archive"></i></div>Mis publicaciones</a></li>
+          
+          <span class="list-group-item bg-light">Revisar las conversaciones</span>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="mis-conversaciones"><div class="iconLink"><i class="fa-solid fa-comments"></i></div>Mis conversaciones</a></li>
+
+          <span class="list-group-item bg-light">Explorar y crear publicaciones</span>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="lista-publicaciones"><div class="iconLink"><i class="fa-solid fa-tag"></i></div>Lista de publicaciones</a></li>
+          <li class="list-group-item bg-light"><a class="text-dark text-decoration-none" href="registrar-publicacion"><div class="iconLink"><i class="fa-solid fa-clipboard"></i></div>Registrar producto</a></li>
         </ul>           
       </div>
   </div>

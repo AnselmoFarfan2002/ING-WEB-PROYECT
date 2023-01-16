@@ -13,9 +13,12 @@
     <div class="containterDashboard">
         <div class="lastPub">
             <h2>Última publicación</h2>
-            <div id="userPub" style="width: 95%;">
+            <div id="userPub">
                 <div class="mb-0" id="last_pub">
-                    <!-- dentro de este div, se colocarán las publicaciones -->
+                    <div class="notChats text-secondary">
+                        <i class="fa-regular fa-face-frown"></i>
+                        <h2 class="text-center">No tiene productos publicados</h2>
+                    </div>
                 </div>
             </div>
         </div>
@@ -29,3 +32,6 @@
 </html>
 
 <script src="js/usuario.dashboard.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/js/chat/mensajes.js"></script>
+<script type="text/javascript" src="js/chat/funcionesInterfaz.js"></script>

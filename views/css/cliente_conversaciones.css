@@ -54,7 +54,7 @@
 #notifyChats1{
     background-color: #2e67e2;
     margin-left: 5px;
-    width: 14%;
+    width: 25px;
     color: white;
     display: flex;
     align-items: center;
@@ -64,7 +64,7 @@
 #notifyChats2{
     background-color: #2e67e2;
     margin-left: 5px;
-    width: 14%;
+    width: 25px;
     color: white;
     display: flex;
     align-items: center;
@@ -211,7 +211,7 @@
     padding: 20px;
     height: 63px;
     width: 100%;
-    background-color: #D7DBE7;
+    background-color: #e2e4eb;
 }
 .headermediumSide i{
     margin-left: 10px;
@@ -316,7 +316,7 @@
     height: 100%;
 }
 .headerrightSide{
-    background: #D7DBE7;
+    background-color: #e2e4eb;
     width: 100%;
     height: auto;
     padding: 20px;

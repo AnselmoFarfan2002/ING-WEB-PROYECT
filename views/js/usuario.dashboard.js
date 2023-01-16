@@ -8,7 +8,6 @@ fetch('/publicaciones?self=1')
 
         let fotos = "";
         publicacion.fotos.forEach( foto => {
-            console.log(foto)
             fotos += `
             <div class="carousel-item active">
                 <img src="/images/posts-photos/${foto}" style="height: 280px; border-radius:20px;" class="d-block w-100">
@@ -38,6 +37,7 @@ fetch('/publicaciones?self=1')
                     <div class="col-9">
                         <ul class="list-group list-group-flush">
                             <li id="titulo" class="list-group-item">Nombre de publicación: ${publicacion.titulo} </li>
+                            <li id="fecha" class="list-group-item">Fecha de la publicación: ${new Date (`${publicacion.fecha}`).toLocaleDateString()} </li>
                             <li id="categoria" class="list-group-item">Categoría: ${publicacion.categoria}</li>
                             <li id="tipo" class="list-group-item">Subcategoría: ${publicacion.categoriaSuperior?publicacion.categoriaSuperior:"No se presenta"}</li>
                             <li id="negociabilidad" class="list-group-item">Negociable: 
@@ -54,44 +54,48 @@ fetch('/publicaciones?self=1')
     });   
 })
 
-var blocknotRead = document.querySelector('.notRead');
-fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
-    let aux;
-    let cont = 0;
-    resJSON.chats.forEach(chat => {
-        if(chat.notificacion == 1){
-            cont=cont+1;
-        }
-    })
-    resJSON.chats.forEach(chat => {
-        if(chat.notificacion == 1){
-            aux = document.createElement('div');
-		    aux.classList.add('block');
+cargarMsgNoLeidos();
 
-            aux.innerHTML = `
-                <div class="infoBlock">
-                    <div class="imgChat">
-                        <img src="images/posts-photos/${chat.fotos}" class="userProduct">
-                    </div>
-                    <div class="msgChat">
-                        <div class="titleChat">
-                            <b><span>${chat.titulo}</span></b>
-                            <span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${new Date(chat.ultimaActividad).toLocaleTimeString().slice(0,5)}</span>
+function cargarMsgNoLeidos(){
+    var blocknotRead = document.querySelector('.notRead');
+    blocknotRead.innerHTML = '';
+    fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
+        let aux, cont = 0;
+        resJSON.chats.forEach(chat => {
+            if(chat.notificacion == 1){
+                cont=cont+1;
+            }
+        })
+        resJSON.chats.forEach(chat => {
+            if(chat.notificacion == 1){
+                aux = document.createElement('div');
+                aux.classList.add('block');
+    
+                aux.innerHTML = `
+                    <div class="infoBlock">
+                        <div class="imgChat">
+                            <img src="images/posts-photos/${chat.fotos}" class="userProduct">
                         </div>
-                        <div class="usernameChat">
-                            <span>${chat.contacto.nombre}</span>
+                        <div class="msgChat">
+                            <div class="titleChat">
+                                <b><span>${chat.titulo}</span></b>
+                                <span class="time">${(new Date(chat.ultimaActividad)).toLocaleDateString()} - ${new Date(chat.ultimaActividad).toLocaleTimeString().slice(0,5)}</span>
+                            </div>
+                            <div class="usernameChat">
+                                <span>${chat.contacto.nombre}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `;
-			blocknotRead.appendChild(aux);
-        }else if(chat.notificacion == 0 && cont==0){
-            blocknotRead.innerHTML = `
-                <div class="notChats text-secondary">
-                    <i class="fa-regular fa-face-frown"></i>
-                    <h2 class="text-center">No tiene nuevos mensajes</h2>
-                </div>
-            `;
-        }
-    })
-});
+                `;
+                blocknotRead.appendChild(aux);
+            }else if(chat.notificacion == 0 && cont==0){
+                blocknotRead.innerHTML = `
+                    <div class="notChats text-secondary">
+                        <i class="fa-regular fa-face-frown"></i>
+                        <h2 class="text-center">No tiene nuevos mensajes</h2>
+                    </div>
+                `;
+            }
+        })
+    });
+}
