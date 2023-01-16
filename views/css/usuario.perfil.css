@@ -8,6 +8,7 @@
 .input-group-btn:hover{
   opacity: 1;
   transition: .1s; 
+  cursor: pointer;
 }
 
 .form-control-plaintext, .form-control{

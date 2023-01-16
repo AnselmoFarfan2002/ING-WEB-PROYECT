@@ -18,68 +18,116 @@ var empresaHTML = {
 	ubicacion : document.querySelector('#ubicacionEmpresa')
 }
 
-var usuario = {};
-var empresa = {};
+var originData = {};
 
 fetch('/usuarios', {})
 .then( resHTTP => resHTTP.json() )
 .then( resJSON => {
-  console.log(resJSON)
+	usuarioHTML.foto.src = `/images/profile-photos/${resJSON.foto}`;
+	usuarioHTML.nombre.value = resJSON.nombre;
+	usuarioHTML.apellido1.value = resJSON.apellido1;
+	usuarioHTML.apellido2.value = resJSON.apellido2;
+	usuarioHTML.cargo.value = resJSON.cargo;
+	usuarioHTML.celular.value = resJSON.celular;
+	usuarioHTML.correo.value = resJSON.correo;
+	usuarioHTML.telefono.value = resJSON.telefono ? resJSON.telefono : 'Ninguno';
 
-  usuarioHTML.foto.src = `/images/profile-photos/${resJSON.foto}`;
-  usuarioHTML.nombre.value = resJSON.nombre;
-  usuarioHTML.apellido1.value = resJSON.apellido1;
-  usuarioHTML.apellido2.value = resJSON.apellido2;
-  usuarioHTML.cargo.value = resJSON.cargo;
-  usuarioHTML.celular.value = resJSON.celular;
-  usuarioHTML.correo.value = resJSON.correo;
-  usuarioHTML.telefono.value = resJSON.telefono ? resJSON.telefono : 'Ninguno';
+	empresaHTML.foto.src = `/images/business-photos/${resJSON.fotoEmpresa}`;
+	empresaHTML.nombre.value = resJSON.nombreEmpresa;
+	empresaHTML.ruc.value = resJSON.rucEmpresa;
+	empresaHTML.ubicacion.value = resJSON.ubicacionEmpresa;
 
-  usuario.foto = resJSON.foto;
-  usuario.nombre = resJSON.nombre;
-  usuario.apellido1 = resJSON.apellido1;
-  usuario.apellido2 = resJSON.apellido2;
-  usuario.cargo = resJSON.cargo;
-  usuario.celular = resJSON.celular;
-  usuario.correo = resJSON.correo;
-  usuario.telefono = resJSON.telefono;
-
-  empresaHTML.foto.src = `/images/business-photos/${resJSON.fotoEmpresa}`;
-  empresaHTML.nombre.value = resJSON.nombreEmpresa;
-  empresaHTML.ruc.value = resJSON.rucEmpresa;
-  empresaHTML.ubicacion.value = resJSON.ubicacionEmpresa;
-
-  empresa.foto = resJSON.fotoEmpresa;
-  empresa.nombre = resJSON.nombreEmpresa;
-  empresa.ruc = resJSON.rucEmpresa;
-  empresa.ubicacion = resJSON.ubicacionEmpresa;
-
+	originData = {...resJSON};
 }).catch( e => {console.log(e)});
 
-(() => {
+(() => { // load triggers 2 edit
 	inputs = document.querySelectorAll('.data-controls .edit');
 	for (var i = inputs.length - 1; i >= 0; i--) {
 		inputs[i].addEventListener('click', event => {
-			let linkedInput = event.target.parentNode.parentNode.parentNode.querySelector('input');
+			let linkedInput = document.getElementById(event.target.attributes.edit.value);
 			enableFormControlPlainText(linkedInput);
+			showDataControlsHandler(event.target.parentNode);
 
-			linkedInput.addEventListener('keydown', e => {
-				console.log(e.keyCode);
-				if(e.keyCode == 13) {
-					dataPoliceOne(e.target.id).then( () => {
-						usuario[e.target.id] = e.target.value;
-						saveChanges();
-						disableFormControlPlainText(linkedInput);	
-					}).catch(()=>{});
-					
-				} else if (e.keyCode == 27) disableFormControlPlainText(linkedInput);
-			})
+			if(!linkedInput.attributes.event) {
+				linkedInput.setAttribute('event','true');
+				linkedInput.addEventListener('keydown', e => {
+					if(e.keyCode == 13) {
+						dataPoliceOne(e.target.id).then( () => {
+							usuario[e.target.id] = e.target.value;
+							saveChanges();
+							disableFormControlPlainText(linkedInput);	
+						}).catch(()=>{});
+						
+					} else if (e.keyCode == 27) {
+						// console.log(e.target.parentNode.parentNode.querySelector('.data-controls')
+						hideDataControlsHandler(e.target.parentNode.parentNode.querySelector('.data-controls'));
+						disableFormControlPlainText(linkedInput);
+					}
+				});
+			}
 
 			linkedInput.focus();
 		})
 	}
 })();
 
+
+(() => { // load triggers 2 edit
+	trigger = document.querySelectorAll('.data-controls .edit');
+	for (var i = trigger.length - 1; i >= 0; i--) {
+		trigger[i].addEventListener('click', event => {
+			let linkedInput = document.getElementById(event.target.attributes.edit.value);
+			enableFormControlPlainText(linkedInput);
+			showDataControlsHandler(event.target.parentNode);
+
+			loadEventField(linkedInput);
+			loadEventCheck(linkedInput.parentNode.parentNode.querySelector('.data-controls .check'));
+			loadEventAbort(linkedInput.parentNode.parentNode.querySelector('.data-controls .abort'));
+
+			linkedInput.focus();
+		})
+	}
+})();
+
+const showDataControlsHandler = container => {
+	container.querySelector('.edit').classList.add('d-none');
+	container.querySelector('.check').classList.remove('d-none');
+	container.querySelector('.abort').classList.remove('d-none');
+	container.style.paddingTop = '18px';
+}
+
+const hideDataControlsHandler = container => {
+	container.querySelector('.edit').classList.remove('d-none');
+	container.querySelector('.check').classList.add('d-none');
+	container.querySelector('.abort').classList.add('d-none');
+	container.style.paddingTop = '27px';
+}
+
+const loadEventField = element => element.addEventListener('keydown', e => {
+	if(e.keyCode == 13) {
+		dataPoliceOne(e.target.id).then( () => {
+			originData[e.target.id] = e.target.value;
+			saveChanges();
+			disableFormControlPlainText(element);	
+		}).catch(()=>{});
+		
+	} else if (e.keyCode == 27) abortEdit(element.parentNode.parentNode, e.target.id);
+});
+
+const loadEventCheck = element => element.addEventListener('click', e => {
+	console.log(element, element.parentNode)
+	hideDataControlsHandler(element.parentNode);
+});
+
+const loadEventAbort = element => element.addEventListener('click', e => {
+	hideDataControlsHandler(element.parentNode);
+});
+
+const abortEdit = (container, fieldName) => {
+	container.querySelector('input').value = originData[fieldName];
+	hideDataControlsHandler(container.querySelector('.data-controls'));
+	disableFormControlPlainText(container.querySelector('input'));
+}
 
 const saveChanges = () => {
 
