@@ -23,7 +23,7 @@ var originData = {};
 fetch('/usuarios', {})
 .then( resHTTP => resHTTP.json() )
 .then( resJSON => {
-	resJSON.celular = resJSON.celular.split(' ')[1];
+	resJSON.celular = resJSON.celular.split(' ')[0];
 
 	usuarioHTML.foto.src = `/images/profile-photos/${resJSON.foto}`;
 	usuarioHTML.nombre.value = resJSON.nombre;
@@ -148,3 +148,6 @@ const updateData = () => {
 		// else if (resJSON.status == 0) window.location.reload();
 	}).catch( err => console.log(err) );
 };
+
+document.getElementById('changePassBtn').addEventListener('click', changePass);
+const changePass = 

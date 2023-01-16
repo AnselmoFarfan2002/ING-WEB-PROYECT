@@ -76,6 +76,36 @@
   </div>
 
   <div class="mb-5">
-    <button class="btn btn btn-secondary"><i class="fa-solid fa-key"></i> Cambiar contraseña </button>
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changePass">
+      <i class="fa-solid fa-key"></i> Cambiar contraseña 
+    </button>
+  </div>
+</div>
+
+<div class="modal fade" id="changePass" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Cambiar contraseña</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userPass1" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required >
+          <label for="userPass1">Contraseña anterior</label>
+          <div class="invalid-feedback"> La contraseña debe tener de 8 a 15 caracteres, mayúsculas y minúsculas </div>
+        </div>
+
+        <div class="form-floating mb-3">
+          <input class="form-control" id="userPass2" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
+          <label for="userPass2">Nueva contraseña</label>
+          <div class="invalid-feedback" id="passAlert"> Las contraseñas no coinciden </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="changePassBtn">Cambiar contraseña</button>
+      </div>
+    </div>
   </div>
 </div>

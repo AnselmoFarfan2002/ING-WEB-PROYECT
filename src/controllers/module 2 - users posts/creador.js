@@ -37,7 +37,7 @@ controllers.CREAR_PUBLICACION = (req, res) => {
                 });
         })
 
-        .then( msg => res.send( msg ) )
+        .then( msg => res.redirect('/mis-publicaciones') )
         .catch( msg => {
             res.send({ msg: msg.msg, status: msg.status });
             console.log( msg.error );
