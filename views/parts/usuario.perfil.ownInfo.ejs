@@ -1,16 +1,17 @@
 <div class="text-center mb-4">
   <div class="mb-3"> 
-    <img src="/images/profile-photos/defaultUser.jpg" id="foto" class="rounded" style="width: 150px; height: 150px">
+    <img src="/images/profile-photos/defaultUser.jpg" id="foto" class="rounded" style="width: 150px; height: 150px"  title="Foto de usuario">
   </div>
   <hr>
   <div id="datosUsuario">
     <div class="dato d-flex">
       <div class="data-value">
         <div class="form-text">Nombre de usuario</div>
-        <input class="form-control-plaintext" id="nombre" value="" readonly>                  
+        <input class="form-control-plaintext" id="nombre" value="" readonly pattern="^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,30}$" required>                  
+        <div class="invalid-feedback"> Ingrese un nombre válido. </div>
       </div>
       <div class="data-controls">
-        <button type="button" class="input-group-btn btn"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="input-group-btn btn edit"><i class="fa-solid fa-pen"></i></button>
         <button type="button" class="input-group-btn btn check d-none"><i class="fa-solid fa-floppy-disk"></i></button>
       </div>
     </div>
@@ -21,7 +22,7 @@
         <input class="form-control-plaintext" id="apellido1" value="" readonly>                  
       </div>
       <div class="data-controls">
-        <button type="button" class="input-group-btn btn"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="input-group-btn btn edit"><i class="fa-solid fa-pen"></i></button>
         <button type="button" class="input-group-btn btn check d-none"><i class="fa-solid fa-floppy-disk"></i></button>
       </div>
     </div>
@@ -32,7 +33,7 @@
         <input class="form-control-plaintext" id="apellido2" value="" readonly>                  
       </div>
       <div class="data-controls">
-        <button type="button" class="input-group-btn btn"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="input-group-btn btn edit"><i class="fa-solid fa-pen"></i></button>
         <button type="button" class="input-group-btn btn check d-none"><i class="fa-solid fa-floppy-disk"></i></button>
       </div>
     </div>
@@ -43,7 +44,7 @@
         <input class="form-control-plaintext" id="cargo" value="" readonly>                  
       </div>
       <div class="data-controls">
-        <button type="button" class="input-group-btn btn"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="input-group-btn btn edit"><i class="fa-solid fa-pen"></i></button>
         <button type="button" class="input-group-btn btn check d-none"><i class="fa-solid fa-floppy-disk"></i></button>
       </div>
     </div>
@@ -54,7 +55,7 @@
         <input class="form-control-plaintext" id="celular" value="" readonly>                  
       </div>
       <div class="data-controls">
-        <button type="button" class="input-group-btn btn"><i class="fa-solid fa-pen"></i></button>
+        <button type="button" class="input-group-btn btn edit"><i class="fa-solid fa-pen"></i></button>
         <button type="button" class="input-group-btn btn check d-none"><i class="fa-solid fa-floppy-disk"></i></button>
       </div>
     </div>

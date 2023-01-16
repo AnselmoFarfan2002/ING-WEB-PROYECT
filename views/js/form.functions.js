@@ -74,3 +74,15 @@ const enableInputs = (id) => {
   inputs = container.querySelectorAll('select');
   if (inputs) inputs.forEach( select => { select.removeAttribute('disabled'); });
 }
+
+const enableFormControlPlainText = input => {
+  input.classList.remove('form-control-plaintext');
+  input.classList.add('form-control');
+  input.removeAttribute('readonly');
+}
+
+const disableFormControlPlainText = input => {
+  input.classList.remove('form-control');
+  input.classList.add('form-control-plaintext');
+  input.setAttribute('readonly','true');
+}
