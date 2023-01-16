@@ -27,7 +27,7 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 						</div>
 						<div class="usernameChat">
 							<span>${chat.contacto.nombre}</span>
-							<div class="d-none correoContacto">${chat.contacto.correo}</div>
+							<div class="d-none correoContacto-${chat.idChat}">${chat.contacto.correo}</div>
 							<div class="d-none idPublicacion">${chat.idPublicacion}</div>
 							<div class="d-none idListaChat">1</div>
 						</div>
@@ -60,7 +60,7 @@ fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
 						</div>
 						<div class="usernameChat">
 							<span>${chat.contacto.nombre}</span>
-							<div class="d-none correoContacto">${chat.contacto.correo}</div>
+							<div class="d-none correoContacto-${chat.idChat}">${chat.contacto.correo}</div>
 							<div class="d-none idPublicacion">${chat.idPublicacion}</div>
 							<div class="d-none idListaChat">2</div>
 						</div>
@@ -197,7 +197,7 @@ const mostrarChat = idChat => {
 			document.querySelector('#botonEnviar').removeAttribute('disabled')
 			document.querySelector('#contenidoMensaje').removeAttribute('disabled')
 			document.querySelector('#botonEnviar').setAttribute('onclick', `enviarMensaje(
-				'${document.querySelector(`.chatList #idChat-${idChat} .correoContacto`).innerHTML}',
+				'${document.querySelector(`.chatList #idChat-${idChat} .correoContacto-${idChat}`).innerHTML}',
 				 ${idChat}
 			)`);
 		});
@@ -210,12 +210,27 @@ const cargarChatsR = idChat => {
 	headerMedium.innerHTML = `
 		<div class="dropdown">
 			<i class="fa-solid fa-users" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-			<ul class="dropdown-menu">
-				<li><a class="dropdown-item" href="#">---</a></li>
+			<ul class="dropdown-menu chatR">
 			</ul>
 		</div>
 		<i class="fa-solid fa-circle-info" alt="Mostrar informacion del usuario" id="button-info"></i>
 	`;
+
+	var listChats = document.querySelector(".chatR");
+	let reg = document.createElement('li');
+
+	var correo = document.querySelector(`.correoContacto-${idChat}`).innerHTML;
+
+	fetch(`/interacciones`).then( resHTTP => resHTTP.json() ).then( resJSON => {
+		resJSON.chats.forEach(chat => {
+			if(correo == chat.contacto.correo){
+				reg.innerHTML += `
+					<a class="dropdown-item" style="cursor:pointer;" onclick="mostrarChat(${chat.idChat})">${chat.titulo} - ${chat.contacto.nombre}</a>
+				`;
+				listChats.appendChild(reg);
+			}
+		});
+	})
 }
 
 const datosUsuario = idUsuario => {

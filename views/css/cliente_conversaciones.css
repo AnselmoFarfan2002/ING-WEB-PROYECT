@@ -41,10 +41,20 @@
     transition: all 200ms linear;
     background:#a3b4f1;
 }
+.notChats{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+.notChats i{
+    text-align: center;
+    font-size: 60px;
+}
 #notifyChats1{
     background-color: #2e67e2;
     margin-left: 5px;
-    width: 14%;
+    width: 25px;
     color: white;
     display: flex;
     align-items: center;
@@ -54,7 +64,7 @@
 #notifyChats2{
     background-color: #2e67e2;
     margin-left: 5px;
-    width: 14%;
+    width: 25px;
     color: white;
     display: flex;
     align-items: center;
@@ -201,7 +211,7 @@
     padding: 20px;
     height: 63px;
     width: 100%;
-    background-color: #D7DBE7;
+    background-color: #e2e4eb;
 }
 .headermediumSide i{
     margin-left: 10px;
@@ -306,7 +316,7 @@
     height: 100%;
 }
 .headerrightSide{
-    background: #D7DBE7;
+    background-color: #e2e4eb;
     width: 100%;
     height: auto;
     padding: 20px;

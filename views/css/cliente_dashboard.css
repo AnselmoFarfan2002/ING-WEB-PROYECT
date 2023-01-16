@@ -2,21 +2,22 @@
     margin: 20px 30px;
     display: grid;
     grid-template-columns: 50% 2fr auto;
+    gap: 20px;
 }
 #userPub{
     border: 1px solid rgba(0, 0, 0, 0.2);
+    height: 340px;
     border-radius: 20px;
     padding: 20px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
 /*------------------------------*/
 .notRead{
     border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     padding: 20px;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    height: 323px;
+    height: 340px;
     overflow-y: auto;
 }
 .notRead .block{
@@ -62,9 +63,14 @@
 /*------------------------------*/
 .notChats{
     display: grid;
-    padding: 20px;
+    height: 280px;
+    text-align: center;
 }
 .notChats i{
+    display: grid;
+    justify-content: center;
+    align-items: end;
+    padding: 10px;
     text-align: center;
     font-size: 60px;
 }

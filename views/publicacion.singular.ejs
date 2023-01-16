@@ -30,7 +30,7 @@
 								<li class="list-group-item">Descripción: <a id="descripcion"></a></li>
 								<li class="list-group-item">Autor: <a id="autor"></a></li>
 								<li class="list-group-item">Correo del autor: <a id="correo"></a></li>
-								<!--<li class="list-group-item">ID del usuario: <a id="idUsuario"></a></li>-->
+								<li class="list-group-item visually-hidden"><a id="idUsuario"></a></li>
 								<li class="list-group-item">Precio: S/<a id="precio"></a></li>
 								<li class="list-group-item">Fecha publicada: <a id="fecha"></a></li>
 								<li class="list-group-item">Caduca en <a id="tiempo"></a> días</li>
@@ -42,11 +42,11 @@
 			</div>
 			<div class="card-footer text-muted">
 				<%if(session){%>
-					<li class="list-group-item"><a class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">Enviar mensaje</a></li>
+					<li class="list-group-item"><a class="btn btn-outline-primary" id="buttonChat">Enviar mensaje</a></li>
 				<%}%>
 			</div>
 		
-			<!-- Modal -->
+			<!-- Modal 
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 				<div class="modal-content">
@@ -58,7 +58,7 @@
 				  <div class="modal-body">
 					<div class="col-auto">
 						<label for="inputPassword2" class="visually-hidden">Password</label>
-						<input type="text" class="form-control" id="contenidoMensaje" >
+						<input type="text" class="form-control" id="contenidoMensajeX" >
 					</div>
 				  </div>
 		
@@ -68,14 +68,14 @@
 				  </div>
 				</div>
 			  </div>
-			</div>
+			</div>-->
 		</div>
 	
 		<div class="generateChat mt-3 mx-3">
 			<div class="bodyChat">
 				<div class="userSpace bg-light">
 					<div class="userInfo">
-						<h6 class="uName"></h6>
+						<h5 class="uName"></h5>
 					</div>
 				</div>
 
@@ -85,15 +85,15 @@
 
 				<div class="userInput bg-light">
 					<input type="text" class="form-control mx-1" placeholder="Escriba un mensaje" aria-label="Recipient's username" aria-describedby="botonEnviar" id="contenidoMensaje">
-					<button class="btn btn-primary rounded-circle mx-3" type="button" id="botonEnviar"><i class="fa-solid fa-chevron-right"></i></button>
+					<button class="btn btn-primary rounded-circle mx-3" type="button" id="botonEnviar" onclick="enviarMSG()"><i class="fa-solid fa-chevron-right"></i></button>
 				</div>
 			</div>
 		</div>
-		<%if(session){%>
+		<!--<%if(session){%>
 			<div class="btnChat">
 				<i class="fa-regular fa-comment-dots"></i>
 			</div>
-		<%}%>
+		<%}%>-->
 	</div>
 
 	<%- include('./parts/footer.ejs') %>
@@ -102,16 +102,35 @@
 <% if(session) { %>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/chat/mensajes.js"></script>
+	<script type="text/javascript" src="js/chat/funcionesInterfaz.js"></script>
 <% } %>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(()=>{
 		$('.bodyChat').hide();
-		$('.btnChat').click(()=>{
+		$('#buttonChat').click(()=>{
 			$('.bodyChat').slideToggle("slow");
 		})
 	})
+</script>
+
+<script type="text/javascript">
+	const enviarMSG = () => {
+		iniciarInteraccion(publicacionID, document.getElementById('contenidoMensaje').value);
+		
+		let inputMsg = document.querySelector('#contenidoMensaje');
+		let aux = document.createElement('div');
+		aux.classList.add('msg');
+		aux.classList.add('frnd-message');
+		aux.innerHTML =  `
+			<p class="placeholder-glow">
+				${inputMsg.value}
+				<span class="timeL">${new Date().toLocaleTimeString()}</span>
+			</p>
+		`;
+		document.querySelector(`.userMsg`).appendChild(aux);
+	}
 </script>
 
 <script type="text/javascript">
@@ -130,7 +149,7 @@
 		document.querySelector('#descripcion').innerHTML = publicacion.descripcion;
 		document.querySelector('#autor').innerHTML = publicacion.autor;
 		document.querySelector('#correo').innerHTML = publicacion.email;
-		//document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
+		document.querySelector('#idUsuario').innerHTML = publicacion.idAutor;
 		document.querySelector('#fecha').innerHTML = new Date (publicacion.fecha).toLocaleDateString();
 		document.querySelector('#tiempo').innerHTML = publicacion.tiempo;
 		document.querySelector('#precio').innerHTML = publicacion.precio;
@@ -145,7 +164,7 @@
 		} );
 	    document.querySelector('#fotosPublicacion .carousel-inner').innerHTML += fotos;
 		document.querySelector('#fotosPublicacion .carousel-item').classList.add('active');
-		document.querySelector('.userNameModal').innerHTML = publicacion.autor;
+		//document.querySelector('.userNameModal').innerHTML = publicacion.autor;
 		document.querySelector('.uName').innerHTML = publicacion.autor;
 	}); 
 </script>

@@ -43,9 +43,8 @@ fetch('/usuarios', {method: 'GET'})
 
 enviarMensaje = (emailUsuarioReceptor, idChat) => {
 	let inputMsg = document.querySelector('#contenidoMensaje');
-	let msg = document.querySelector('#contenidoMensaje').value;
 
-	if(msg == "" || msg == " "){
+	if(inputMsg.value == "" || inputMsg.value == " "){
 		console.log("Vacio");
 	}else{
 		socket.emit( 'client:message', {
@@ -68,7 +67,7 @@ enviarMensaje = (emailUsuarioReceptor, idChat) => {
 
 		inputMsg.value = '';
 		inputMsg.focus();
-	
+
 		fetch(`/interacciones/ultima-actividad/${idChat}`,{
 			method: "PATCH"
 		}).then((response) => response.json())
