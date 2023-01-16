@@ -16,6 +16,7 @@ create procedure get_usu_contrasenia( email varchar(40), keyword varchar(25) ) b
 	select cast( aes_decrypt( USU_CONTRASENIA, keyword ) as char ) as pass from USUARIO where USU_CORREO = email;
 end;
 $$
+select cast(aes_decrypt( USU_CONTRASENIA, "unFzhzuOxruQMAjKavux59cF4" AS CHAR ) FROM USUARIO WHERE USU_CORREO = "afarfanp@unjbg.edu.pe";
 
 DELIMITER $$
 create procedure post_emp_empresa( 

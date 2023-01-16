@@ -149,5 +149,39 @@ const updateData = () => {
 	}).catch( err => console.log(err) );
 };
 
+const changePass = () => {
+	dataPolice('changePass').then( () => fetch('/sesiones', {
+		method: 'PATCH',
+		body: JSON.stringify({
+			'old-pass': document.querySelector('#oldPass').value, 
+			'new-pass': document.querySelector('#newPass').value
+		}),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})).then( resHTTP => resHTTP.json() )
+	.then( resJSON => {
+		console.log(resJSON);
+		if (resJSON.status == 1){
+			document.querySelector('#changePass').classList.remove('was-validated');
+			document.querySelector('#oldPass').value = '';
+			document.querySelector('#newPass').value = '';
+			document.querySelector('.serverResponse').classList.remove('text-danger');
+			document.querySelector('.serverResponse').classList.add('text-success');
+		} else {
+			document.querySelector('.serverResponse').classList.remove('text-success');
+			document.querySelector('.serverResponse').classList.add('text-danger')
+		}
+
+		document.querySelector('.serverResponse').classList.remove('d-none');
+		document.querySelector('.serverResponse').innerHTML = resJSON.msg;
+	})
+	.catch(()=>{});
+}
 document.getElementById('changePassBtn').addEventListener('click', changePass);
-const changePass = 
+
+document.querySelectorAll('.btnCloseChangePass').forEach( e => {
+	e.addEventListener('click', ev => {
+		document.querySelector('.serverResponse').classList.add('d-none');
+	})
+})

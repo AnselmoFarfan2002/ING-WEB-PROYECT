@@ -87,24 +87,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Cambiar contraseña</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btnCloseChangePass" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <div class="form-text mb-3 d-none serverResponse"></div>
+
         <div class="form-floating mb-3">
-          <input class="form-control" id="userPass1" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required >
+          <input class="form-control" id="oldPass" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required >
           <label for="userPass1">Contraseña anterior</label>
           <div class="invalid-feedback"> La contraseña debe tener de 8 a 15 caracteres, mayúsculas y minúsculas </div>
         </div>
 
         <div class="form-floating mb-3">
-          <input class="form-control" id="userPass2" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
+          <input class="form-control" id="newPass" type="password" placeholder="Contraseña" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" required>
           <label for="userPass2">Nueva contraseña</label>
-          <div class="invalid-feedback" id="passAlert"> Las contraseñas no coinciden </div>
+          <div class="invalid-feedback"> La contraseña debe tener de 8 a 15 caracteres, mayúsculas y minúsculas </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="changePassBtn">Cambiar contraseña</button>
+        <button type="button" class="btn btn-primary btnCloseChangePass" id="changePassBtn">Cambiar contraseña</button>
       </div>
     </div>
   </div>
