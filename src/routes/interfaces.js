@@ -10,6 +10,9 @@ router.route('/inicio')
 router.route('/dashboard')
 .get( (req, res) => !req.session.open === true ? res.redirect('/inicio') : res.render('usuario.dashboard.ejs', {session: req.session.open, userId : req.session.userId }) )
 
+router.route('/terminos-condiciones')
+.get( (req, res) => res.render('parts/terminos.ejs'))
+
 router.route('/lista-publicaciones')
 .get( (req, res) => res.render('publicacion.varios.ejs', {session: req.session.open}))
 
