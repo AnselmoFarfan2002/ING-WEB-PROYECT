@@ -29,8 +29,14 @@
         .then( mis_publicaciones => {
             //mis_publicaciones = Object.entries(mis-publicaciones);
             console.log(mis_publicaciones)
-    
+            let cont=0;
             mis_publicaciones.forEach( publicacion => {
+                if(publicacion.id){
+                    cont = cont + 1;
+                }
+            })
+            if(cont>0){
+                mis_publicaciones.forEach( publicacion => {
                 //publicacion = publicacion[1];
                 publicacion.fotos = JSON.parse(publicacion.fotos);
     
@@ -90,6 +96,14 @@
                 `; 
                 document.querySelector('#mis_publicaciones').innerHTML += publicacion;
             }); 
+            }else{
+                document.querySelector('#mis_publicaciones').innerHTML = `
+                    <div class="notChats text-secondary">
+                        <i class="fa-regular fa-face-frown"></i>
+                        <h2 class="text-center">No tiene productos publicados</h2>
+                    </div>
+                `
+            }
             
         })
 
