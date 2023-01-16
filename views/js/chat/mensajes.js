@@ -81,18 +81,18 @@ enviarMensaje = (emailUsuarioReceptor, idChat) => {
 
 socket.on('server:message', mensaje => {
 	chat = document.querySelector(`#chatsBoxes #idChat-${mensaje.idChat}`);
-	if (chat === null) notificar(mensaje.idChat);
+	if (chat === null) notificar(mensaje.idChat, mensaje.contenido);
 	else {
 		aux = document.createElement('div');
 		aux.classList.add('msg');
-		aux.classList.add('frnd-message');
+		aux.classList.add('my-message');
 		aux.innerHTML =  `
 			<p class="placeholder-glow">
 				${mensaje.contenido}
 				<span class="timeR">${new Date().toLocaleTimeString()}</span>
 			</p>
 		`;
-		notificar(mensaje.idChat);
+		notificar(mensaje.idChat, mensaje.contenido);
 
 		chat.appendChild(aux);
 	}
